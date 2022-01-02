@@ -1,4 +1,5 @@
-/* サイト全体 */
+/* common 共通スタイル */
+/* small screen モバイルサイト */
 body {
   font-family: "Helvetica Neue",
     Arial,
@@ -9,19 +10,76 @@ body {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none;  /* リンク下線消す */
 }
 
-li {
-  list-style-type: none;
+.container h1 {
+  font-size: 24px;
+  text-align: center;  /* h1を中央寄せ */
 }
 
+.container ul {
+  list-style-type: none; /* 丸点消す */
+  padding-left: 0; /* liを一旦左寄せ */
+  text-align: center;  /* liを中央寄せ */
+}
+
+/* 感情別夢全体コンテナ */
+.containers {
+  display: flex;
+  width: 300px;
+  margin: 0 auto;
+  flex-wrap: wrap; /* flex item折り返す*/
+  flex-direction: column; /*flex item縦並び*/
+  justify-content: center;  /*flex itemを主軸（縦）に沿って中央に揃える*/
+  align-items: center;  /*flex itemを交差軸（横）に沿って中央に揃える*/
+  background-color: blue;
+}
+
+
+/* 各感情コンテナ */
 .container {
   display: flex;
+  width: 100%;
+  flex-direction: column; /*flex item縦並び*/
+  justify-content: center;  /*flex itemを主軸（縦）に沿って中央に揃える */
+  align-items: center;  /*flex itemを交差軸（横）に沿って中央に揃える */
+  background-color: blueviolet;
 }
 
-.container div {
-  background-color: cadetblue;
-  padding: 32px;
-  margin: 8px;
+
+/* medium screen 中くらいのサイト */
+@media (min-width: 600px) {
+
+  /* 感情別全体コンテナ */
+  .containers {
+    display: flex;
+    width: 600px;
+    margin: 0 auto;
+    flex-wrap: wrap; /* flex item折り返す*/
+    flex-direction: row; /*flex item横並び*/
+    justify-content: center;  /*flex itemを主軸（縦）に沿って中央に揃える*/
+    align-items: center;  /*flex itemを交差軸（横）に沿って中央に揃える*/
+    background-color: blue;
+  }
+
+  /* 各感情コンテナ */
+  .container {
+    display: flex;
+    width: 50%;
+    flex-direction: column; /*flex item縦並び*/
+    justify-content: center;  /*flex itemを主軸（縦）に沿って中央に揃える */
+    align-items: center;  /*flex itemを交差軸（横）に沿って中央に揃える */
+    background-color: red;
+  }
+}
+
+
+/* large screen パソコンサイト */
+@media (min-width: 800px) {
+  /* 感情別全体コンテナ */
+  .containers {
+    width: 800px;
+    margin: 0 auto;
+  }
 }
