@@ -1,34 +1,44 @@
 /* common 共通スタイル */
-/* small screen モバイルサイト */
 body {
   font-family: "Helvetica Neue",
-    Arial,
-    "Hiragino Kaku Gothic ProN",
-    "Hiragino Sans",
-    Meiryo,
-    sans-serif;
+  Arial,
+  "Hiragino Kaku Gothic ProN",
+  "Hiragino Sans",
+  Meiryo,
+  sans-serif;
   margin: 0;
-  }
-  
+}
+
 a {
   text-decoration: none;  /* リンク下線消す */
 }
 
-.emoiton {
+
+/* small screen モバイルサイト */
+.emotion {
   font-size: 24px;
   text-align: center;  /* 中央寄せ */
-  margin: 40px 0px 0px; /* 上だけ余白 */
+  margin: 0px; /* 上だけ余白 */
+  padding: 16px;
+  border-radius: 8px;
+  background-color:rgba(6, 58, 58, 0.5);
+  box-shadow: 10px 5px 0px rgba(0, 0, 0, 0.65);
+  color: rgba(179, 176, 119, 0.9);
 }
 
-.emotion_dreams ul {
+.emotion_dreams > ul {
   list-style-type: none; /* 丸点消す */
   margin: 0; /* 余白なし */
   padding-left: 0; /* liを一旦左寄せ */
   text-align: center;  /* liを中央寄せ */
 }
 
-.emotion_dreams li {
+.emotion_dreams > ul > li {
   margin: 40px 0px; /*上下に余白*/
+}
+
+.emotion_dreams > ul > li > a {
+  color: rgba(250, 235, 215, 0.8);
 }
 
 
@@ -42,8 +52,7 @@ a {
   margin: 0 auto;
   flex-wrap: wrap; /* flexitem折り返す*/
   gap: 64px; /* flexitem間の余白 */
-
-
+  
   /* あとで消す */
   border-style: solid;
   border-color: blue;
@@ -59,9 +68,12 @@ a {
   flex-direction: column; /* flexitem縦並び */
   justify-content: center; /* flexitemを主軸（縦）に沿って中央揃え */
   align-items: center; /* flexitemを交差軸（横）に沿って中央揃え */
-
-  /* あとで消す */
-  background-color: blueviolet;
+  border-style: ridge;
+  border-width: 5px;
+  border-radius: 50%;
+  border-color: rgba(179, 176, 119, 0.9);
+  box-shadow: 10px 5px 1px rgba(0, 0, 0, 0.75);
+  background-color: rgba(10, 97, 97, 0.8);
 }
 
 
@@ -86,9 +98,6 @@ a {
     flex-direction: column; /*flexitem縦並び*/
     justify-content: center; /*flexitemを主軸（縦）に沿って中央揃え */
     align-items: center; /*flexitemを交差軸（横）に沿って中央揃え */
-
-    /* あとで消す */
-    background-color: red;
   }
 
 }
@@ -102,11 +111,5 @@ a {
     max-width: 1000px;
     flex-direction: row; /*flex item横並び*/
   }
-
-  /* 各感情 */
-  .emotion_dreams {
-
-    /* あとで消す */
-    background-color: yellow;
-  }
 }
+
