@@ -1,11 +1,11 @@
 /* common 共通スタイル */
 body {
   font-family: "Helvetica Neue",
-  Arial,
-  "Hiragino Kaku Gothic ProN",
-  "Hiragino Sans",
-  Meiryo,
-  sans-serif;
+    Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    Meiryo,
+    sans-serif;
   margin: 0;
 }
 
@@ -16,14 +16,17 @@ a {
 
 /* small screen モバイルサイト */
 .emotion {
-  font-size: 24px;
+  font-size: 16px;
+  font-weight: normal;
   text-align: center;  /* 中央寄せ */
-  margin: 0px; /* 上だけ余白 */
   padding: 16px;
+  
+  color: rgba(190, 176, 119, 1);
+  border-style: ridge;
   border-radius: 8px;
-  background-color:rgba(6, 58, 58, 0.5);
-  box-shadow: 10px 5px 0px rgba(0, 0, 0, 0.65);
-  color: rgba(179, 176, 119, 0.9);
+  border-color: rgba(179, 176, 119, 1);
+  background-color: rgba(243, 232, 220, 0.9);
+  box-shadow: 5px 2px rgba(0, 0, 0, 0.75);
 }
 
 .emotion_dreams > ul {
@@ -31,6 +34,7 @@ a {
   margin: 0; /* 余白なし */
   padding-left: 0; /* liを一旦左寄せ */
   text-align: center;  /* liを中央寄せ */
+  width: 100%;
 }
 
 .emotion_dreams > ul > li {
@@ -39,6 +43,17 @@ a {
 
 .emotion_dreams > ul > li > a {
   color: rgba(250, 235, 215, 0.8);
+  padding: 16px 8px;
+  border-radius: 8px;
+  background-color:rgba(6, 58, 58, 0.5);
+  box-shadow: 5px 2px rgba(0, 0, 0, 0.65);
+}
+
+.emotion_dreams > ul > li > a:hover {
+
+  /* color:  rgba(190, 176, 119, 1); */
+  color: rgba(250, 223, 188, 1);
+  box-shadow: none;
 }
 
 
@@ -53,26 +68,26 @@ a {
   flex-wrap: wrap; /* flexitem折り返す*/
   gap: 64px; /* flexitem間の余白 */
   
-  /* あとで消す */
+  /* あとで消す
   border-style: solid;
-  border-color: blue;
+  border-color: blue; */
 }
 
 
 /* 各感情 */
 .emotion_dreams {
   display: flex;
-  width: 100%; /* 小さい画面で横幅いっぱい表示 */
+  width: 90%; /* 小さい画面で横幅いっぱい表示 */
   max-width: 400px; /* 最大横幅 */
   height: 400px; /* 最大縦幅 */
   flex-direction: column; /* flexitem縦並び */
   justify-content: center; /* flexitemを主軸（縦）に沿って中央揃え */
   align-items: center; /* flexitemを交差軸（横）に沿って中央揃え */
   border-style: ridge;
-  border-width: 5px;
-  border-radius: 50%;
+  /* border-width: 2px; */
+  border-radius: 8px;
   border-color: rgba(179, 176, 119, 0.9);
-  box-shadow: 10px 5px 1px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 2px rgba(0, 0, 0, 0.75);
   background-color: rgba(10, 97, 97, 0.8);
 }
 
