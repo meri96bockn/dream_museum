@@ -1,4 +1,8 @@
 /* common 共通スタイル */
+*{
+  box-sizing: border-box;
+}
+
 body {
   font-family: "Helvetica Neue",
     Arial,
@@ -7,22 +11,93 @@ body {
     Meiryo,
     sans-serif;
   margin: 0;
-  background-color: rgba(255, 244, 232, .6);
-  ;
 }
 
 a {
   text-decoration: none;  /* リンク下線消す */
 }
 
-h1 {
-  text-align: center;
-}
 
 
 /* small screen モバイルサイト */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  margin: 80px auto;
+}
+
+.container > h1 {
+  text-align: center;
+  font-weight: normal;
+  font-size: 16px;
+  padding: 16px;
+  margin: 0px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translateX(-50%, -50%);
+  
+  color: rgba(190, 176, 119, 1);
+  border-style: ridge;
+  border-radius: 8px;
+  border-color: rgba(179, 176, 119, 1);
+  background-color: rgba(243, 232, 220);
+  /* box-shadow: 5px 2px rgba(0, 0, 0, 0.75); */
+}
+
+#emotions_area{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /*flexitem縦並び*/
+  width: 100%;
+  min-height: 100vh; /*最小表示画面いっぱいでフッター隠す*/
+  margin: 0px, 40px;
+  flex-wrap: wrap; /* flexitem折り返す*/
+  gap: 64px; /* flexitem間の余白 */
+  padding: 80px 0px;
+  background-color: rgba(255, 244, 232, .6);
+  
+  /* あとで消す
+  border-style: solid;
+  border-color: blue; */
+}
+
+
+.emotion_dreams {
+  display: flex;
+  position: relative;
+
+  width: 98%; /* 小さい画面で横幅いっぱい表示 */
+  max-width: 400px; /* 最大横幅 */
+  /* min-height: 300px; */
+  height: 400px; /* 最大縦幅 */
+  /* margin: 16px; */
+  flex-direction: column; /* flexitem縦並び */
+  justify-content: center; /* flexitemを主軸（縦）に沿って中央揃え */
+  align-items: center; /* flexitemを交差軸（横）に沿って中央揃え */
+  border-style: ridge;
+  border-radius: 8px;
+  border-color: rgba(179, 176, 119, 0.9);
+  box-shadow: 5px 2px rgba(0, 0, 0, 0.75);
+  background-color: rgba(2, 97, 97);
+}
+
 .emotion {
   display: flex;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translateX(-50%, -50%);
+
   margin: 0px;
   font-size: 16px;
   font-weight: normal;
@@ -33,23 +108,24 @@ h1 {
   border-radius: 8px;
   border-color: rgba(179, 176, 119, 1);
   background-color: rgba(243, 232, 220);
-  box-shadow: 5px 2px rgba(0, 0, 0, 0.75);
+  /* box-shadow: 5px 2px rgba(0, 0, 0, 0.75); */
 }
 
-.emotion_dreams > ul {
+.dreams {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-around;
+
   list-style-type: none; /* 丸点消す */
-  margin: 0; /* 余白なし */
-  padding-left: 0; /* liを一旦左寄せ */
+  margin: 48px 0; /* 余白なし */
+  padding: 0; /* liを一旦左寄せ */
   text-align: center;  /* liを中央寄せ */
   width: 100%;
+  height: 100%;
 }
 
-.emotion_dreams > ul > li {
-  margin: 40px 0px; /*上下に余白*/
-}
-
-.emotion_dreams > ul > li > a {
-
+.dreams > li > a {
   color: rgba(250, 235, 215, 0.8);
   padding: 16px 8px;
   border-radius: 8px;
@@ -60,44 +136,9 @@ h1 {
   box-shadow: 5px 2px rgba(0, 0, 0, 0.65);
 }
 
-.emotion_dreams > ul > li > a:hover {
+.dreams > li > a:hover {
   color: rgba(250, 223, 188, 1);
   box-shadow: none;
-}
-
-
-/* 夢全体 */
-#emotions_area{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column; /*flexitem縦並び*/
-  min-height: 100vh; /*最小表示画面いっぱいでフッター隠す*/
-  margin: 0 auto;
-  flex-wrap: wrap; /* flexitem折り返す*/
-  gap: 64px; /* flexitem間の余白 */
-  
-  /* あとで消す
-  border-style: solid;
-  border-color: blue; */
-}
-
-
-/* 各感情 */
-.emotion_dreams {
-  display: flex;
-  width: 90%; /* 小さい画面で横幅いっぱい表示 */
-  max-width: 400px; /* 最大横幅 */
-  height: 400px; /* 最大縦幅 */
-  margin: 16px;
-  flex-direction: column; /* flexitem縦並び */
-  justify-content: center; /* flexitemを主軸（縦）に沿って中央揃え */
-  align-items: center; /* flexitemを交差軸（横）に沿って中央揃え */
-  border-style: ridge;
-  border-radius: 8px;
-  border-color: rgba(179, 176, 119, 0.9);
-  box-shadow: 5px 2px rgba(0, 0, 0, 0.75);
-  background-color: rgba(2, 97, 97);
 }
 
 
@@ -130,9 +171,6 @@ h1 {
 /* large screen パソコンサイト */
 @media (min-width: 1000px) {
 
-  h1{
-    width: 1000px;
-  }
 
   /* 夢全体 */
   #emotions_area {
