@@ -1,17 +1,15 @@
 /* common */
-
-
 *{
   box-sizing: border-box;
-}
-
-body {
   font-family: "Helvetica Neue",
     Arial,
     "Hiragino Kaku Gothic ProN",
     "Hiragino Sans",
     Meiryo,
     sans-serif;
+}
+
+body {
   margin: 0;
 } 
 
@@ -28,111 +26,77 @@ a {
 }
 
 
-
-/* header */
+/* small screen */
 #topbar_container {
+  display: none;
+}
+
+#topbar_container_mobile {
+  display: flex;
   background-color: rgb(30, 90, 140, .2);
 }
 
-#topbar_inner_container {
+#topbar_nav_mobile {
   display: flex;
-  justify-content: center;
 }
 
-.topbar_title > a {
-  font-size: 16px;
-  color: rgb(80, 100, 140);
-}
-
-.topbar_nav {
-  display: flex;
-  justify-content: space-around;
-  padding: 16px;
-  gap: 16px;
-/* 
-  width: 95%;
-  height: 100%; */
-}
-
-.topbar_nav > li > a {
-  margin: 0 auto;
-  width: 50%;
-  padding: 16px;
-
-  border-radius: 8px;
-  color: rgb(80, 100, 140);
-  background-color: rgba(243, 232, 220);
-  box-shadow: 8px 4px 1px rgba(0, 0, 0, .5);
-}
-
-.topbar_nav > li > a.select {
-  box-shadow: none;
-  color: rgb(180, 100, 140);
-
-}
-
-
-/* small screen モバイルサイト */
-.dreams_container {
+#dreams_container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
-  max-width: 1200px;
-
   margin: 80px auto;
 }
 
-.dreams_container > h1 {
-  text-align: center;
-  font-size: 16px;
-  padding: 24px;
-  margin: 0px;
+#dreams_container > h1 {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
+  
+  text-align: center;
+  font-size: 16px;
+  padding: 16px;
+  margin: 0px;
 
+  border-style: ridge;
+  border-radius: 8px;
+  border-color: rgba(179, 176, 140, 1);
   color: rgba(243, 232, 220);
   background-color: rgb(30, 90, 140 , .7) ;
-
-  border-radius: 8px;
-  border-style: ridge;
-  border-color: rgba(179, 176, 140, 1);
 }
 
 #emotions_area{
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  flex-direction: column; /*flexitem縦並び*/
+  gap: 160px;
+
   width: 100%;
-  min-height: 100vh; /*最小表示画面いっぱいでフッター隠す*/
+  min-height: 100vh;
   margin: 0px, 40px;
-  flex-wrap: wrap; /* flexitem折り返す*/
-  gap: 160px; /* flexitem間の余白 */
-  padding: 160px 0px;
+  padding: 104px 0px;
   background-color: rgb(30, 90, 140, .2);
 }
-
 
 .emotion_dreams {
   display: flex;
   position: relative;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
 
-  width: 90%; /* 小さい画面で横幅いっぱい表示 */
-  max-width: 400px; /* 最大横幅 */
+  width: 90%;
+  max-width: 400px;
   height: 400px;
-  /* margin: 16px; */
-  flex-direction: column; /* flexitem縦並び */
-  justify-content: center; /* flexitemを主軸（縦）に沿って中央揃え */
-  align-items: center; /* flexitemを交差軸（横）に沿って中央揃え */
-  border-radius: 16px;
+
   border-style: ridge;
-  border-width: 4px;
+  border-radius: 16px;
   border-color: rgba(179, 176, 140, 0.9);
   background-color: rgb(80, 100, 140);
 }
@@ -147,14 +111,14 @@ a {
   -ms-transform: translateX(-50%, -50%);
 
   margin: 0px;
-  font-size: 16px;
   padding: 16px;
-  color: rgba(243, 232, 220);
 
-  border-radius: 8px;
   border-style: ridge;
+  border-radius: 8px;
   border-color: rgba(179, 176, 140);
   background-color: rgb(140, 90, 140, .7);
+  color: rgba(243, 232, 220);
+  font-size: 16px;
 }
 
 .dreams {
@@ -162,13 +126,12 @@ a {
   flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-around;
-
-  margin: 56px 0 32px;
-  padding: 16px;
-  text-align: center;
   
-  width: 95%;
+  width: 90%;
   height: 100%;
+  margin: 56px 0 32px;
+  padding: 0px;
+  text-align: center;
 }
 
 .dreams > li > a {
@@ -176,6 +139,7 @@ a {
   margin: 0 auto;
   width: 90%;
   padding: 16px 8px;
+
   border-radius: 8px;
   color: rgb(80, 100, 140);
   background-color: rgba(243, 232, 220);
@@ -188,36 +152,83 @@ a {
 }
 
 
-/* medium screen 中くらいのサイト */
+/* medium screen */
 @media (min-width: 600px) {
 
-  /* 夢全体 */
-  #emotions_area {
-    display: flex;
-    flex-wrap: wrap; /* flexitem折り返す */
-    justify-content: center; /* flexitemを主軸（縦）に沿って中央揃え */
-    align-items: center;  /* flexitemを交差軸（横）に沿って中央揃え*/
+  /* topbar */
+  #topbar_container_mobile {
+    display: none;
   }
 
-  /* 各感情 */
+  #topbar_container {
+    display: block;
+    padding: 40px;
+    margin-bottom: 160px;
+    background-color: rgb(30, 90, 140, .2);
+  }
+
+  #topbar_inner_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .topbar_nav {
+    display: flex;
+    justify-content: space-around;
+    gap: 40px;
+
+    margin: 0 auto;
+    padding: 0px;
+    text-align: center;
+  }
+
+  .topbar_nav > li > a {
+    margin: 0 auto;
+    padding: 16px;
+    border-radius: 8px;
+    color: rgb(80, 100, 140);
+    background-color: rgba(243, 232, 220);
+    box-shadow: 8px 4px 1px rgba(0, 0, 0, .2);
+  }
+
+  .topbar_nav > li > a:hover {
+    color: rgb(180, 100, 140);
+    box-shadow: none;
+  }
+
+  .topbar_nav > li > a.select {
+    box-shadow: none;
+    color: rgb(180, 100, 140);
+  }
+
+  /* dreams */
+  #dreams_container {
+    max-width: 640px;
+  }
+
+  #emotions_area {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    padding: 160px 0px;
+  }
+
   .emotion_dreams {
     display: flex;
-    flex-direction: column; /*flexitem縦並び*/
-    justify-content: center; /*flexitemを主軸（縦）に沿って中央揃え */
-    align-items: center; /*flexitemを交差軸（横）に沿って中央揃え */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
-
 }
 
-/* large screen パソコンサイト */
+
+/* large screen */
 @media (min-width: 1000px) {
-
-
-  /* 夢全体 */
   #emotions_area {
-    /* max-width: 1200px; */
-    flex-direction: row; /*flex item横並び*/
+    flex-direction: row;
+    width: 1200px;
   }
 }
-
-/* ナビメニュー選んだら */
