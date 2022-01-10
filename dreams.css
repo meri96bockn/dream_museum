@@ -1,6 +1,11 @@
 /* common */
 *{
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
   font-family: "Helvetica Neue",
     Arial,
     "Hiragino Kaku Gothic ProN",
@@ -9,44 +14,48 @@
     sans-serif;
 }
 
-body {
-  margin: 0;
-} 
-
 h1, h2 {
   font-weight: normal;
 }
 
-ul {
+ul, ol {
   list-style-type: none;
 }
 
 a {
   text-decoration: none;
+  color: rgb(80, 100, 140);
 }
 
 
 /* small screen */
+/* topbar */
 #topbar_container {
   display: none;
 }
 
 #topbar_container_mobile {
-  display: flex;
-  background-color: rgb(30, 90, 140, .2);
+  padding-bottom: 80px; /* heightを縮めても必ずキープされる余白 */
 }
 
 #topbar_nav_mobile {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 4vh;
+  background-color: rgb(30, 90, 140, .2);
 }
 
+#topbar_nav_mobile > li > a > i.bi {
+  font-size: 32px;
+}
+
+/* dream */
 #dreams_container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   position: relative;
-  margin: 80px auto;
 }
 
 #dreams_container > h1 {
@@ -56,44 +65,36 @@ a {
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
-  
-  text-align: center;
-  font-size: 16px;
-  padding: 16px;
-  margin: 0px;
 
   border-style: ridge;
   border-radius: 8px;
   border-color: rgba(179, 176, 140, 1);
+
+  font-size: 16px;
   color: rgba(243, 232, 220);
+
+  padding: 16px;
   background-color: rgb(30, 90, 140 , .7) ;
 }
 
 #emotions_area{
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
-  gap: 160px;
-
-  width: 100%;
+  row-gap: 120px;
   min-height: 100vh;
-  margin: 0px, 40px;
-  padding: 104px 0px;
   background-color: rgb(30, 90, 140, .2);
+  padding: 120px 0px;
 }
 
 .emotion_dreams {
   display: flex;
   position: relative;
   flex-direction: column; 
-  justify-content: center;
   align-items: center;
 
   width: 90%;
   max-width: 400px;
-  height: 400px;
 
   border-style: ridge;
   border-radius: 16px;
@@ -110,38 +111,30 @@ a {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
 
-  margin: 0px;
-  padding: 16px;
-
   border-style: ridge;
   border-radius: 8px;
   border-color: rgba(179, 176, 140);
   background-color: rgb(140, 90, 140, .7);
+  padding: 16px;
   color: rgba(243, 232, 220);
   font-size: 16px;
 }
 
 .dreams {
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
   justify-content: space-around;
-  
-  width: 90%;
-  height: 100%;
-  margin: 56px 0 32px;
-  padding: 0px;
-  text-align: center;
+  row-gap: 4vh; /* li間の余白 */
+
+  width: 80%;
+  margin: 64px 0; /* ul上下の余白 */
 }
 
 .dreams > li > a {
   display: block;
-  margin: 0 auto;
-  width: 90%;
-  padding: 16px 8px;
-
+  text-align: center;
   border-radius: 8px;
-  color: rgb(80, 100, 140);
+  padding: 16px 8px;
   background-color: rgba(243, 232, 220);
   box-shadow: 8px 4px 1px rgba(0, 0, 0, .5);
 }
@@ -149,6 +142,12 @@ a {
 .dreams > li > a:hover {
   color: rgb(180, 100, 140);
   box-shadow: none;
+}
+
+
+/* footer */
+#footer {
+  display: none;
 }
 
 
@@ -161,33 +160,28 @@ a {
   }
 
   #topbar_container {
-    display: block;
-    padding: 40px;
-    margin-bottom: 160px;
-    background-color: rgb(30, 90, 140, .2);
-  }
-
-  #topbar_inner_container {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    padding-bottom: 80px; /* heightを縮めても必ずキープされる余白 */
   }
-
+  
   .topbar_nav {
+    background-color: rgb(30, 90, 140, .2);
     display: flex;
-    justify-content: space-around;
-    gap: 40px;
-
-    margin: 0 auto;
-    padding: 0px;
-    text-align: center;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    min-width: 720px;
+    width: 100%;
+    padding: 40px 0;
   }
 
   .topbar_nav > li > a {
     margin: 0 auto;
     padding: 16px;
     border-radius: 8px;
-    color: rgb(80, 100, 140);
     background-color: rgba(243, 232, 220);
     box-shadow: 8px 4px 1px rgba(0, 0, 0, .2);
   }
@@ -204,31 +198,54 @@ a {
 
   /* dreams */
   #dreams_container {
-    max-width: 640px;
+    margin: 0 4vh;
   }
 
   #emotions_area {
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content: center;
-    align-items: center;
     border-radius: 8px;
-    padding: 160px 0px;
   }
 
-  .emotion_dreams {
+
+  /* footer */
+  #footer {
+    display: block;
+    padding-top: 80px;
+  }
+  
+  .footer_container {
+    padding: 40px;
+    background-color: rgb(30, 90, 140, .2);
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    gap: 40px;
+  }
+
+  .footer_container > .copyright {
+    width:100%;
+    text-align: center;
+    color: rgb(80, 100, 140, .4);
   }
 }
 
 
+
+
 /* large screen */
 @media (min-width: 1000px) {
+  #dreams_container {
+    max-width: 1200px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+
   #emotions_area {
     flex-direction: row;
-    width: 1200px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    gap: 80px;
+    margin: 0 4vh;
   }
 }
