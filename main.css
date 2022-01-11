@@ -29,9 +29,11 @@ a {
 
 a:hover {
   color: rgb(180, 100, 140);
-  box-shadow: none;
 }
 
+img {
+  vertical-align: bottom;
+}
 
 /* small screen */
 /* topbar */
@@ -79,7 +81,7 @@ a:hover {
   }
   
   .topbar_nav {
-    background-color: rgb(30, 90, 140, .2);
+    background-color: rgb(30, 90, 140, .4);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,13 +95,21 @@ a:hover {
     margin: 0 auto;
     padding: 16px;
     border-radius: 8px;
-    background-color: rgba(243, 232, 220);
     box-shadow: 8px 4px 1px rgba(0, 0, 0, .2);
+    background-color: 
+    rgb(241, 235, 227, .8);
   }
 
   .topbar_nav > li > a.select {
     box-shadow: none;
     color: rgb(180, 100, 140);
+    background-color:
+    rgb(241, 235, 227);
+  }
+
+  .topbar_nav > li > a:hover {
+    background-color: rgb(241, 235, 227);
+    box-shadow: none;
   }
 
 
@@ -111,7 +121,7 @@ a:hover {
   
   .footer_container {
     padding: 40px;
-    background-color: rgb(30, 90, 140, .2);
+    background-color: rgb(30, 90, 140, .4);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
