@@ -1,56 +1,4 @@
-/* common */
-*{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: "Helvetica Neue",
-    Arial,
-    "Hiragino Kaku Gothic ProN",
-    "Hiragino Sans",
-    Meiryo,
-    sans-serif;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul, ol {
-  list-style-type: none;
-}
-
-a {
-  text-decoration: none;
-  color: rgb(80, 100, 140);
-}
-
-
 /* small screen */
-/* topbar */
-#topbar_container {
-  display: none;
-}
-
-#topbar_container_mobile {
-  padding-bottom: 80px; /* heightを縮めても必ずキープされる余白 */
-}
-
-#topbar_nav_mobile {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 4vh;
-  background-color: rgb(30, 90, 140, .2);
-}
-
-#topbar_nav_mobile > li > a > i.bi {
-  font-size: 32px;
-}
-
 /* dream */
 #dreams_container {
   display: flex;
@@ -139,63 +87,9 @@ a {
   box-shadow: 8px 4px 1px rgba(0, 0, 0, .5);
 }
 
-.dreams > li > a:hover {
-  color: rgb(180, 100, 140);
-  box-shadow: none;
-}
-
-
-/* footer */
-#footer {
-  display: none;
-}
-
 
 /* medium screen */
 @media (min-width: 600px) {
-
-  /* topbar */
-  #topbar_container_mobile {
-    display: none;
-  }
-
-  #topbar_container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    padding-bottom: 80px; /* heightを縮めても必ずキープされる余白 */
-  }
-  
-  .topbar_nav {
-    background-color: rgb(30, 90, 140, .2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    min-width: 720px;
-    width: 100%;
-    padding: 40px 0;
-  }
-
-  .topbar_nav > li > a {
-    margin: 0 auto;
-    padding: 16px;
-    border-radius: 8px;
-    background-color: rgba(243, 232, 220);
-    box-shadow: 8px 4px 1px rgba(0, 0, 0, .2);
-  }
-
-  .topbar_nav > li > a:hover {
-    color: rgb(180, 100, 140);
-    box-shadow: none;
-  }
-
-  .topbar_nav > li > a.select {
-    box-shadow: none;
-    color: rgb(180, 100, 140);
-  }
-
   /* dreams */
   #dreams_container {
     margin: 0 4vh;
@@ -204,33 +98,7 @@ a {
   #emotions_area {
     border-radius: 8px;
   }
-
-
-  /* footer */
-  #footer {
-    display: block;
-    padding-top: 80px;
-  }
-  
-  .footer_container {
-    padding: 40px;
-    background-color: rgb(30, 90, 140, .2);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-  }
-
-  .footer_container > .copyright {
-    width:100%;
-    text-align: center;
-    color: rgb(80, 100, 140, .4);
-  }
 }
-
-
-
 
 /* large screen */
 @media (min-width: 1000px) {
