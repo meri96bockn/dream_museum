@@ -7,43 +7,68 @@
 
 .hero_container img {
   width: 100%;
-  height: 560px;
+  height: 400px;
   object-fit: cover;
 }
 
 .hero_message {
   position: absolute;
-  margin-left: 2vh;
-
   top: 40%;
-  left: 20%;
+  left: 30%;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
 
-  color: 
-  rgb(241, 235, 227, .9);
- 
+  color: rgb(241, 235, 227, .9);
 }
 
-.hero_title {
-
-  padding: 32px;
-  background-color: rgb(30, 90, 140 , .8) ;
-}
-  
 .join > a {
   display: block;
-  text-align: center;
   margin-top: 16px;
   padding: 16px;
+  text-align: center;
   border-radius: 8px;
-  background-color: 
-  rgb(241, 235, 227, .8);
-  box-shadow: 8px 4px 1px rgba(0, 0, 0, .9);
+  background-color: rgb(241, 235, 227, .8);
+  box-shadow: 8px 4px 1px rgba(0, 0, 0, .8);
 }
 
 .join > a:hover {
   background-color: rgb(241, 235, 227);
   box-shadow: none;
+}
+
+
+@media (min-width: 600px) {
+  /* hero */
+  .hero_container img {
+    height: 560px;
+  }
+
+  /* features */
+  .top_features {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 80px;
+  }
+
+  .top_feature {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin: 16px 0;
+  }
+
+  .top_feature_title, .top_feature_message {
+    color: rgb(80, 100, 140);
+    ;
+  }
+
+  .bi-image-fill, .bi-journal-richtext {
+    font-size: 120px;
+    color: rgb(30, 90, 140, .4);
+  }
+
+
 }
