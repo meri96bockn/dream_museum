@@ -1,3 +1,4 @@
+/* small screen */
 /* hero */
 .hero_container {
   display: flex;
@@ -37,6 +38,76 @@
   box-shadow: none;
 }
 
+  /* features */
+.top_features {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+  gap: 40px;
+}
+
+.top_feature {
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  grid-template-columns: auto;
+  grid-template-areas: 
+    "t"
+    "i"
+    "m"
+    "l";
+  margin: 0 2vh;
+}
+
+.top_feature_title {
+  grid-area: t;
+  text-align: center;
+  font-size: 12px;
+  margin: 16px;
+}
+
+.top_feature_message {
+  grid-area: m;
+  text-align: center;
+  margin: 16px;
+}
+
+.top_feature_icon {
+  grid-area: i;
+  text-align: center;
+}
+
+.top_feature_link {
+  grid-area: l;
+  margin: 16px;
+}
+
+.top_feature_link a {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 8px 4px 1px rgba(0, 0, 0, .2);
+  background-color: 
+  rgb(241, 235, 227, .8);
+}
+
+.top_feature_link a:hover {
+  background-color: rgb(241, 235, 227);
+  box-shadow: none;
+}
+
+.top_feature_title, .top_feature_message {
+  color: rgb(80, 100, 140);
+}
+
+.bi-image-fill, .bi-journal-richtext {
+  font-size: 160px;
+  color: rgb(30, 90, 140, .4);
+}
+
+
 
 @media (min-width: 600px) {
   /* hero */
@@ -44,31 +115,32 @@
     height: 560px;
   }
 
+
   /* features */
   .top_features {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     padding-top: 80px;
   }
 
   .top_feature {
-    display: flex;
-    justify-content: center;
-    width: 80%;
-    margin: 16px 0;
+    grid-template-rows: auto auto ;
+    grid-template-columns: auto auto auto;
+    grid-template-areas: 
+      "t i"
+      "m i"
+      "l l";
+    align-items: center;
+    width: 480px;
   }
 
-  .top_feature_title, .top_feature_message {
-    color: rgb(80, 100, 140);
-    ;
+  .top_feature_title {
+    text-align: start;
   }
 
-  .bi-image-fill, .bi-journal-richtext {
-    font-size: 120px;
-    color: rgb(30, 90, 140, .4);
+  .top_feature_message {
+    text-align: start;
   }
 
-
+  .top_feature_icon {
+    margin: 16px;
+  }
 }
