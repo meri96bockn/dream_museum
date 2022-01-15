@@ -1,0 +1,48 @@
+/* 新規登録 */
+.join {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  margin: 0 4vh;
+
+  background-color: rgb(30, 90, 140, .2);
+  padding: 120px 0px;
+}
+
+.join_title h1 {
+  font-size: 12px;
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translateX(-50%, -50%);
+
+  border-style: ridge;
+  border-radius: 8px;
+  border-color: rgba(179, 176, 140, 1);
+
+  font-size: 16px;
+  color: rgba(243, 232, 220);
+
+  padding: 16px;
+  background-color: rgb(30, 90, 140 , .7) ;
+}
+
+.join_form form {
+  padding: 16px;;
+  width: 400px;
+  text-align: center;
+}
+
+label {
+  display: block;
+}
+input {
+  padding: 8px 16px;
+  border-radius: 8px;
+  width: 100%;
+}
