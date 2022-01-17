@@ -47,27 +47,19 @@
     </div>
     <div class="join_form">
       <form action="process.php" method="post">
-        <dl>
-          <dt>
-            <label for="name">ユーザーネーム</label>
-          </dt>
-          <dd>
-            <input type="text" id="name" maxlength="255" placeholder="yume_miruko">
-          </dd>
-          <dt>
-            <label for="email">メールアドレス</label>
-          </dt>
-          <dd>
-            <input type="email" id="email" maxlength="255" placeholder="yumemiruko@gmail.com">
-          </dd>
-          <dt>
-            <label for="password">パスワード</label>
-          </dt>
-          <dd>
-            <input type="password" id="password" maxlength="20" placeholder="半角英数8文字以上">
-          </dd>
-        </dl>
-        <button disabled>登録</button>
+        <div class="form_item">
+          <label for="name">ユーザーネーム</label>
+          <input type="text" id="name" maxlength="255" placeholder="yume_miruko">
+        </div>
+        <div class="form_item">
+          <label for="email">メールアドレス</label>
+          <input type="email" id="email" maxlength="255" placeholder="yumemiruko@gmail.com">
+        </div>
+        <div class="form_item">
+          <label for="password">パスワード</label>
+          <input type="password" id="password" maxlength="20" placeholder="半角英数8文字以上">
+        </div>
+        <button>登録</button>
       </form>
     </div>
   </div>
