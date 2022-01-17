@@ -6,9 +6,9 @@
   position: relative;
 }
 
-#dreams_container > h1 {
+#dreams_container h1 {
   position: absolute;
-  top: 0;
+  top: 0%;
   left: 50%;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
@@ -25,12 +25,11 @@
   background-color: rgb(30, 90, 140 , .7) ;
 }
 
-#emotions_area{
+#emotions_area {
   display: flex;
   flex-direction: column;
   align-items: center;
   row-gap: 120px;
-  min-height: 100vh;
   background-color: rgb(30, 90, 140, .2);
   padding: 120px 0px;
 }
@@ -83,9 +82,19 @@
   text-align: center;
   border-radius: 8px;
   padding: 16px 8px;
-  background-color: rgba(243, 232, 220);
+  background-color: rgb(241, 235, 227);
   box-shadow: 8px 4px 1px rgba(0, 0, 0, .5);
+
+  transition-property: box-shadow color;
+  transition-duration: .3s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
 }
+
+.dreams> li > a:hover {
+  box-shadow: none;
+}
+
 
 
 /* medium screen */
@@ -115,5 +124,19 @@
     align-content: center;
     gap: 80px;
     margin: 0 4vh;
+  }
+
+  .dreams > li > a {
+    display: block;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px 8px;
+    background-color: rgb(241, 235, 227, .8);
+    box-shadow: 8px 4px 1px rgba(0, 0, 0, .5);
+  }
+
+  .dreams> li > a:hover {
+    background-color: rgb(241, 235, 227);
+    box-shadow: none;
   }
 }

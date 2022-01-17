@@ -29,8 +29,13 @@
   padding: 16px;
   text-align: center;
   border-radius: 8px;
-  background-color: rgb(241, 235, 227, .8);
-  box-shadow: 8px 4px 1px rgba(0, 0, 0, .8);
+  background-color: rgb(241, 235, 227, .9);
+  box-shadow: 8px 4px 1px rgba(0, 0, 0, .5);
+
+  transition-property: box-shadow color;
+  transition-duration: .3s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
 }
 
 .join > a:hover {
@@ -89,12 +94,15 @@
   padding: 16px;
   border-radius: 8px;
   box-shadow: 8px 4px 1px rgba(0, 0, 0, .2);
-  background-color: 
-  rgb(241, 235, 227, .8);
+  background-color: rgb(247, 239, 231);
+
+  transition-property: box-shadow color;
+  transition-duration: .3s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
 }
 
 .top_feature_link a:hover {
-  background-color: rgb(241, 235, 227);
   box-shadow: none;
 }
 
@@ -108,13 +116,11 @@
 }
 
 
-
 @media (min-width: 600px) {
   /* hero */
   .hero_container img {
     height: 560px;
   }
-
 
   /* features */
   .top_features {

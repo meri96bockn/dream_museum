@@ -1,4 +1,6 @@
 /* common */
+@import url(sanitize.css);
+
 *{
   box-sizing: border-box;
   margin: 0;
@@ -12,10 +14,12 @@ body {
     "Hiragino Sans",
     Meiryo,
     sans-serif;
+  min-height: 100vh;
 }
 
 h1, h2 {
   font-weight: normal;
+  margin: 0
 }
 
 ul, ol {
@@ -35,6 +39,7 @@ img {
   vertical-align: bottom;
 }
 
+
 /* small screen */
 /* topbar */
 #topbar_container {
@@ -42,7 +47,7 @@ img {
 }
 
 #topbar_container_mobile {
-  padding-bottom: 40px;
+  padding-bottom: 80px;
 }
 
 #topbar_nav_mobile {
@@ -50,17 +55,16 @@ img {
   justify-content: space-between;
   align-items: center;
   padding: 4vh;
-  background-color: rgb(30, 90, 140, .2);
+  background-color: rgb(30, 90, 140, .4);
 }
 
 .bi-list {
   font-size: 32px;
 }
 
-
 /* footer */
 #footer {
-  padding-top: 40px;
+  padding-top: 64px;
 }
 
 .footer_container {
@@ -81,10 +85,8 @@ img {
 }
 
 
-
 /* medium screen */
 @media (min-width: 600px) {
-
   /* topbar */
   #topbar_container_mobile {
     display: none;
@@ -114,22 +116,22 @@ img {
     padding: 16px;
     border-radius: 8px;
     box-shadow: 8px 4px 1px rgba(0, 0, 0, .2);
-    background-color: 
-    rgb(241, 235, 227, .8);
+    background-color:rgb(241, 235, 227);
+
+    transition-property: box-shadow color;
+    transition-duration: .3s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+  }
+
+  .topbar_nav > li > a:hover {
+    box-shadow: none;
   }
 
   .topbar_nav a.select {
     box-shadow: none;
     color: rgb(180, 100, 140);
-    background-color:
-    rgb(241, 235, 227);
   }
-
-  .topbar_nav > li > a:hover {
-    background-color: rgb(241, 235, 227);
-    box-shadow: none;
-  }
-
 
   /* footer */
   #footer {
@@ -146,4 +148,30 @@ img {
     gap: 40px;
   }
 
+  .footer_links a {
+  transition-property: color;
+  transition-duration: .3s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  }
+}
+
+
+@media (min-width: 1000px) {
+  .topbar_nav a {
+    margin: 0 auto;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 8px 4px 1px rgba(0, 0, 0, .2);
+    background-color: rgb(241, 235, 227);
+  }
+
+  .topbar_nav a.select {
+    box-shadow: none;
+    color: rgb(180, 100, 140);
+  }
+
+  .topbar_nav > li > a:hover {
+    box-shadow: none;
+  }
 }
