@@ -1,5 +1,5 @@
-/* 新規登録 */
-.join {
+/* 新規登録,ログイン,投稿,お問い合わせ */
+.forms {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -10,7 +10,7 @@
   background-color: rgb(30, 90, 140, .2);
 }
 
-.join_title h1 {
+.form_title h1 {
   position: absolute;
   top: 0%;
   left: 50%;
@@ -29,7 +29,7 @@
   background-color: rgba(30, 90, 140 , .7) ;
 }
 
-.join_form {
+.form {
   width: 100%;
   padding: 80px 0 48px;
 }
@@ -44,6 +44,7 @@
 label {
   display: block;
   margin-bottom: 8px;
+  cursor: pointer;
 }
 
 input, textarea {
@@ -67,6 +68,37 @@ textarea {
 input:focus, textarea:focus {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, .2);
   outline: 0;
+}
+
+.radio_label {
+  width: 250px;
+  margin: 0 auto;
+}
+
+.radio_label label {
+  text-align: start;
+}
+
+.radio_items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 200px;
+  margin: 0 auto;
+}
+
+.radio_item {
+  text-align: start;
+}
+
+.radio_item input {
+  width: auto;
+  box-shadow: none;
+  transition: none;
+}
+
+.radio_item label {
+  display: inline;
 }
 
 button {
@@ -97,22 +129,16 @@ button:hover {
 
 /* medium screen */
 @media (min-width: 600px) {
-  .join {
+  .form {
     max-width: 560px;
-    margin: 0 auto;
-  }
-
-  label {
-    cursor: pointer;
   }
 }
 
 
 /* large screen */
 @media (min-width: 1000px) {
-  .join {
+  .form {
     max-width: 800px;
-    margin: 0 auto;
   }
 
   .form_item {
@@ -120,7 +146,6 @@ button:hover {
     justify-content: center;
     align-items: center;
     gap: 16px;
-    width: 80%;
   }
 
   label {
@@ -130,4 +155,18 @@ button:hover {
   input, textarea {
     flex: 2;
   }
+  
+  .radio_label {
+    flex: 1;
+  }
+  
+  .radio_items {
+    flex: 2;
+    text-align: start;
+  }
+
+  .radio_items label {
+    margin-right: 16px;
+  }
+ 
 }
