@@ -18,13 +18,29 @@
         </li>
         <li>
           <a href="">
-            <i class="bi bi-list"></i>
+            <i class="bi bi-list" id="open"></i>
           </a>
         </li>
       </ul>
     </div>
 
-    <div id=topbar_container>
+    <div class="overlay">
+      <i class="bi bi-x-lg" id="close"></i>
+      <nav>
+        <ul>
+          <li><a href="dreams.html">きょうの夢</a></li>
+          <li><a href="howto.html">使い方</a></li>
+          <li><a href="login.html">ログイン</a></li>
+        </ul>
+        <ul>
+          <li><a href="user_policy.html">利用規約</a></li>
+          <li><a href="privacy.html">プライバシーポリシー</a></li>
+          <li><a href="contact.html">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <nav id=topbar_container>
       <ul class="topbar_nav">
         <li>
           <a href="index.html" class="select">DreamMuseum</a>
@@ -39,14 +55,14 @@
           <a href="login.html">ログイン</a>
         </li>
       </ul>
-    </div>
+    </nav>
   </header>
 
   <div class="hero_container">
     <img src="img/hero.png" alt="夢のような博物館">
     <div class="hero_message">
-        <h1>Dream<br>Museum</h1>
-        <p>夢を展示する博物館</p>
+      <h1>Dream<br>Museum</h1>
+      <p>夢を展示する博物館</p>
       <div class="join">
         <a href="join.html">新規登録</a>
       </div>
@@ -105,5 +121,6 @@
         <small class="copyright">(c) DreamMuseum</small>
       </div>
   </footer>
+  <script src="js/main.js"></script>
 </body>
 </html>
