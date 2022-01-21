@@ -1,0 +1,61 @@
+/* カレンダー */
+
+body{
+  /* font-family: 
+  "Courier New",
+  "Helvetica Neue",
+  Arial,
+  "Hiragino Kaku Gothic ProN",
+  "Hiragino Sans",
+  Meiryo,
+  sans-serif,
+  monospace; */
+  /* font-size: 14px; */
+}
+
+#date {
+  
+}
+
+
+table{
+  border-collapse: collapse;
+  border: 2px solid #eee;
+}
+
+thead,
+tfoot {
+  background: #eee;
+}
+
+th,
+td {
+  padding: 24px;
+  text-align: center;
+}
+
+td.disabled {
+  opacity: .3;
+}
+
+td.today {
+  font-weight: bold;
+}
+
+tr td {
+  cursor: pointer;
+  user-select: none;
+}
+
+#prev,
+#title,
+#next,
+#today {
+  font-size: 20px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dream {
+background-color: cadetblue;}
+
