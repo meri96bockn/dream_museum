@@ -14,9 +14,7 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
 
-  border-style: ridge;
-  border-radius: 8px;
-  border-color: rgba(179, 176, 140, 1);
+  border: ridge 8px rgba(179, 176, 140, 1);
 
   font-size: 16px;
   color: rgba(243, 232, 220);
@@ -43,9 +41,8 @@
   width: 90%;
   max-width: 400px;
 
-  border-style: ridge;
+  border: ridge rgba(179, 176, 140, 0.9);
   border-radius: 16px;
-  border-color: rgba(179, 176, 140, 0.9);
   background-color: rgb(80, 100, 140);
 }
 
@@ -58,9 +55,8 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
 
-  border-style: ridge;
+  border: ridge rgba(179, 176, 140);
   border-radius: 8px;
-  border-color: rgba(179, 176, 140);
   background-color: rgb(140, 90, 140, .7);
   padding: 16px;
   color: rgba(243, 232, 220);
