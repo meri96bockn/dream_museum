@@ -1,12 +1,12 @@
 /* small screen */
 /* dream */
-#dreams_container {
+.dreams_container {
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
-#dreams_container h1 {
+.dreams_container h1 {
   position: absolute;
   top: 0%;
   left: 50%;
@@ -14,7 +14,8 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
 
-  border: ridge 8px rgba(179, 176, 140, 1);
+  border: ridge rgba(179, 176, 140, 1);
+  border-radius: 8px;
 
   font-size: 16px;
   color: rgba(243, 232, 220);
@@ -23,7 +24,7 @@
   background-color: rgb(30, 90, 140 , .7) ;
 }
 
-#emotions_area {
+.emotions_area {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,13 +68,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  row-gap: 4vh; /* li間の余白 */
-
+  row-gap: 4vh;
   width: 80%;
-  margin: 64px 0; /* ul上下の余白 */
+  margin: 64px 0;
 }
 
-.dreams > li > a {
+.dreams a {
   display: block;
   text-align: center;
   border-radius: 8px;
@@ -87,52 +87,37 @@
   transition-delay: 0s;
 }
 
-.dreams> li > a:hover {
+.dreams a:hover {
   box-shadow: none;
 }
 
 
-
 /* medium screen */
 @media (min-width: 600px) {
-  /* dreams */
-  #dreams_container {
-    margin: 0 4vh;
+  .dreams_container {
+    width: 90%;
+    margin: 0 auto;
   }
-
-  #emotions_area {
+  
+  .emotions_area {
     border-radius: 8px;
   }
 }
 
+
 /* large screen */
 @media (min-width: 1000px) {
-  #dreams_container {
+  .dreams_container {
     max-width: 1200px;
     flex-wrap: wrap;
-    margin: 0 auto;
   }
 
-  #emotions_area {
+  .emotions_area {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
     gap: 80px;
     margin: 0 4vh;
-  }
-
-  .dreams > li > a {
-    display: block;
-    text-align: center;
-    border-radius: 8px;
-    padding: 16px 8px;
-    background-color: rgb(241, 235, 227, .8);
-    box-shadow: 8px 4px 1px rgba(0, 0, 0, .5);
-  }
-
-  .dreams> li > a:hover {
-    background-color: rgb(241, 235, 227);
-    box-shadow: none;
   }
 }

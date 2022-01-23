@@ -74,6 +74,12 @@
   margin: 16px;
 }
 
+.top_feature_message p {
+  margin-bottom: .4em;
+  border-bottom: dotted rgba(30, 90, 140, .1);
+  ;
+}
+
 .top_feature_icon {
   grid-area: i;
   text-align: center;

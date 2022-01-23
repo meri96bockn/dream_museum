@@ -77,7 +77,7 @@ a:hover {
 
 .overlay li {
   margin-top: 8vh;
-  border-bottom: .1em dashed rgb(80, 100, 140, .5);
+  border-bottom: dotted rgb(80, 100, 140, .1);
 }
 
 .overlay a {
