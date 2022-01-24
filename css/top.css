@@ -23,7 +23,7 @@
   color: rgb(241, 235, 227, .9);
 }
 
-.join > a {
+.join a {
   display: block;
   margin-top: 16px;
   padding: 16px;
@@ -31,12 +31,12 @@
   border-radius: 8px;
   background-color: rgb(241, 235, 227, .9);
   box-shadow: 8px 4px 1px rgba(0, 0, 0, .5);
-
 }
 
-.join > a:hover {
+.join a:hover {
   background-color: rgb(241, 235, 227);
   box-shadow: none;
+  transform: translate(4px, 2px);
 }
 
   /* features */
@@ -74,6 +74,12 @@
   margin: 16px;
 }
 
+.top_feature_message p {
+  margin-bottom: .4em;
+  border-bottom: dotted rgba(30, 90, 140, .1);
+  ;
+}
+
 .top_feature_icon {
   grid-area: i;
   text-align: center;
@@ -95,6 +101,7 @@
 
 .top_feature_link a:hover {
   box-shadow: none;
+  transform: translate(4px, 2px);
 }
 
 .top_feature_title, .top_feature_message {
