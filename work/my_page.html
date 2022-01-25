@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DreamMuseum</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/form.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+</head>
+
+<body>
+  <header>
+    <div class="topbar_container_mobile">
+      <ul class="topbar_nav_mobile">
+        <li>
+          <a href="index.html">DreamMuseum</a>
+        </li>
+        <li>
+          <a href="">
+            <i class="bi bi-list"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class=topbar_container_pc>
+      <ul class="topbar_nav">
+        <li>
+          <a href="/index.html" class="">DreamMuseum</a>
+        </li>
+        <li>
+          <a href="/dreams.html">きょうの夢</a>
+        </li>
+        <li>
+          <a href="howto.html" >使い方</a>
+        </li>
+        <li>
+          <a href="login.html">ログイン</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="forms">
+    <div class="form_title">
+      <h1>夢日記</h1>
+    </div>
+    <div class="form">
+      <form action="process.php" method="post">
+        <div class="form_item">
+          <label for="date">夢を見た日</label>
+          <input type="date" id="date" value="2022-01-18" >
+        </div>
+
+        <div class="form_item">
+          <label for="dream_title">タイトル</label>
+          <input type="text" id="dreamtitle" maxlength="255" placeholder="15字以内">
+        </div>
+
+        <div class="form_item">
+          <label for="message">夢の内容</label>
+          <textarea name="message" id="message" rows="10"></textarea>
+        </div>
+
+        <div class="form_item">
+          <div class="radio_label">
+            <label>「きょうの夢」に寄贈しますか？</label>
+          </div>
+          <div class="radio_items">
+            <div class="radio_item">
+              <input type="radio" name="tag" id="no_tag" value="no_tag">
+              <label for="no_tag" class="radio_title">寄贈しない</label>
+            </div>
+            <div class="radio_item">
+              <input type="radio" name="tag" id="yes_tag" value="yes_tag">
+              <label for="yes_tag" class="radio_title">タグをつけて寄贈する</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form_item">
+          <div class="radio_label">
+            <label>合うタグを選んでください。<br>どんな夢ですか？</label>
+          </div>
+          <div class="radio_items">
+              <div class="radio_item">
+                <input type="radio" name="emotion" id="emotion_1" value="fun">
+                <label for="emotion_1" class="radio_title">たのしい</label>
+              </div>
+              <div class="radio_item">
+                <input type="radio" name="emotion" id="emotion_2" value="happy">
+                <label for="emotion_2" class="radio_title">しあわせ</label>
+              </div>
+              <div class="radio_item">
+                <input type="radio" name="emotion" id="emotion_3" value="hard">
+                <label for="emotion_3" class="radio_title">しんどい</label>
+              </div>
+              <div class="radio_item">
+                <input type="radio" name="emotion" id="emotion_4" value="scary">
+                <label for="emotion_4" class="radio_title">こわい</label>
+              </div>
+              <div class="radio_item">
+                <input type="radio" name="emotion" id="emotion_5" value="forget">
+                <label for="emotion_5" class="radio_title">忘れたい</label>
+              </div>
+          </div>
+        </div>
+
+        <button>記録</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer">
+      <div class="footer_container">
+        <div class="footer_links">
+          <a href="user_policy.html">利用規約</a>
+          <a href="privacy.html">プライバシーポリシー</a>
+          <a href="contact.html">お問い合わせ</a>
+        </div>
+        <small class="copyright">(c) DreamMuseum</small>
+      </div>
+  </footer>
+</body>
+</html>
