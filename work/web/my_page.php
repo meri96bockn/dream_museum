@@ -33,7 +33,7 @@ include('../app/_parts/_header.php');
           </div>
           <div class="radio_items">
             <div class="radio_item">
-              <input type="radio" name="tag" id="no_tag" value="no_tag">
+              <input type="radio" name="tag" id="no_tag" value="no_tag" checked="checked">
               <label for="no_tag" class="radio_title">寄贈しない</label>
             </div>
             <div class="radio_item">
