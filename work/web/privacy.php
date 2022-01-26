@@ -1,6 +1,6 @@
 <?php
 
-$title = 'プライバシーポリシー';
+$title = 'プライバシーポリシー - ';
 $this_css = 'form';
 include('../app/_parts/_header.php');
 

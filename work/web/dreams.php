@@ -1,7 +1,11 @@
 <?php
 
-$title = 'きょうの夢';
+$title = 'きょうの夢 - ';
 $this_css = 'dreams';
+$index = '';
+$dreams = 'select';
+$howto = '';
+$login = '';
 include('../app/_parts/_header.php');
 
 ?>

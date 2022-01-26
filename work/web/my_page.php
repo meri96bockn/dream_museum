@@ -1,6 +1,6 @@
 <?php
 
-$title = 'マイページ';
+$title = 'マイページ - ';
 $this_css = 'form';
 include('../app/_parts/_header.php');
 

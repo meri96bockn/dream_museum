@@ -9,7 +9,7 @@ require('../app/functions.php');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= h($title); ?> - DreamMuseum</title>
+  <title><?= h($title); ?>DreamMuseum</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/<?= h($this_css); ?>.css">
@@ -46,16 +46,16 @@ require('../app/functions.php');
     <nav class="topbar_container_pc">
       <ul class="topbar_nav">
         <li>
-          <a href="index.php" class="select">DreamMuseum</a>
+          <a id="<?= h($index); ?>" href="index.php">DreamMuseum</a>
         </li>
         <li>
-          <a href="dreams.php">きょうの夢</a>
+          <a id="<?= h($dreams); ?>" href="dreams.php">きょうの夢</a>
         </li>
         <li>
-          <a href="howto.php" >使い方</a>
+          <a id="<?= h($howto); ?>" href="howto.php">使い方</a>
         </li>
         <li>
-          <a href="login.php">ログイン</a>
+          <a id="<?= h($login); ?>" href="login.php">ログイン</a>
         </li>
       </ul>
     </nav>

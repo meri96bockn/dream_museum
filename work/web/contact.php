@@ -1,6 +1,6 @@
 <?php
 
-$title = 'お問い合わせ';
+$title = 'お問い合わせ - ';
 $this_css = 'form';
 include('../app/_parts/_header.php');
 

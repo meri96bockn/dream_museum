@@ -1,7 +1,11 @@
 <?php
 
-$title = 'a';
+$title = '';
 $this_css = 'top';
+$index = 'select';
+$dreams = '';
+$howto = '';
+$login = '';
 include('../app/_parts/_header.php');
 
 ?>

@@ -1,7 +1,11 @@
 <?php
 
-$title = 'ログイン';
+$title = 'ログイン - ';
 $this_css = 'form';
+$index = '';
+$dreams = '';
+$howto = '';
+$login = 'select';
 include('../app/_parts/_header.php');
 
 ?>

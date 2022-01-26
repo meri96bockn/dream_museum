@@ -1,6 +1,6 @@
 <?php
 
-$title = '新規登録';
+$title = '新規登録 - ';
 $this_css = 'form';
 include('../app/_parts/_header.php');
 

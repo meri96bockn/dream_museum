@@ -1,6 +1,6 @@
 <?php
 
-$title = '利用規約';
+$title = '利用規約 - ';
 $this_css = 'form';
 include('../app/_parts/_header.php');
 
