@@ -45,7 +45,7 @@ include('../app/_parts/_header.php');
 
         <div class="form_item" id="tags">
           <div class="radio_label">
-            <label>合うタグを選んでください。<br>どんな夢ですか？</label>
+            <label>どんな夢ですか？<br>合うタグを1つ選んでください。</label>
           </div>
           <div class="radio_items">
               <div class="radio_item">

@@ -101,6 +101,10 @@ input:focus, textarea:focus {
   display: inline;
 }
 
+.radio_title {
+  user-select: none;
+}
+
 #tags {
   display: none;
 }
