@@ -6,6 +6,8 @@ include('../app/_parts/_header.php');
 
 ?>
 
+<!-- 夢日記 -->
+<div class="forms_container">
   <div class="forms">
     <div class="form_title">
       <h1>夢日記</h1>
@@ -27,7 +29,7 @@ include('../app/_parts/_header.php');
           <textarea name="message" id="message" rows="10"></textarea>
         </div>
 
-        <div class="form_item">
+        <div class="form_item radio">
           <div class="radio_label">
             <label>「きょうの夢」に寄贈しますか？</label>
           </div>
@@ -43,7 +45,7 @@ include('../app/_parts/_header.php');
           </div>
         </div>
 
-        <div class="form_item" id="tags">
+        <div class="form_item radio" id="tags">
           <div class="radio_label">
             <label>どんな夢ですか？<br>合うタグを1つ選んでください。</label>
           </div>
@@ -71,11 +73,20 @@ include('../app/_parts/_header.php');
           </div>
         </div>
 
-        <button>記録</button>
+        <button>内容を確認する</button>
       </form>
     </div>
   </div>
 
-  <?php
+  <!-- 過去の夢 -->
+  <div class="forms dreams_past">
+    <div class="form_title">
+      <h1>むかしの夢</h1>
+    </div>
+    <div class="form">
+    </div>
+  </div>
+</div>
+<?php
 
-  include('../app/_parts/_footer.php');
+include('../app/_parts/_footer.php');
