@@ -43,7 +43,7 @@ include('../app/_parts/_header.php');
           </div>
         </div>
 
-        <div class="form_item">
+        <div class="form_item" id="tags">
           <div class="radio_label">
             <label>合うタグを選んでください。<br>どんな夢ですか？</label>
           </div>

@@ -101,6 +101,14 @@ input:focus, textarea:focus {
   display: inline;
 }
 
+#tags {
+  display: none;
+}
+
+#tags.show {
+  display: flex;
+}
+
 button {
   display: block;
   margin: 0 auto;
