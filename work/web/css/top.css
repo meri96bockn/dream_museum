@@ -20,7 +20,7 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
 
-  color: rgb(241, 235, 227, .9);
+  color: rgba(243, 232, 220);
 }
 
 .join a {
