@@ -1,11 +1,4 @@
 /* 新規登録,ログイン,夢日記投稿,お問い合わせ */
-
-.forms_container {
-  display: flex;
-  flex-direction: column;
-  gap: 80px;
-}
-
 .forms {
   display: flex;
   flex-direction: column;
