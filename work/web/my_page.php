@@ -1,34 +1,41 @@
 <?php
 
 $title = 'マイページ - ';
-$this_css = 'form';
+$this_css = 'tab';
 include('../app/_parts/_header.php');
 
 ?>
 
-<!-- 夢日記 -->
-<div class="forms_container">
-  <div class="forms">
-    <div class="form_title">
-      <h1>夢日記</h1>
-    </div>
-    <div class="form">
+<!-- マイページ -->
+<div class="container">
+  <div class="container_title">
+    <h1>マイページ</h1>
+  </div>
+
+  <!-- タブメニュー夢日記 -->
+  <div class="tab">
+      <ul class="tab_title">
+        <li><a href="#" class="tab1 active">夢日記をつける</a></li>
+        <li><a href="#" class="tab2">むかしの夢を見る</a></li>
+      </ul>
+
+    <div class="tab_content1 active form">
       <form action="process.php" method="post">
         <div class="form_item">
           <label for="date">夢を見た日</label>
           <input type="date" id="date" value="2022-01-18" >
         </div>
-
+      
         <div class="form_item">
           <label for="dream_title">タイトル</label>
           <input type="text" id="dreamtitle" maxlength="255" placeholder="15字以内">
         </div>
-
+      
         <div class="form_item">
           <label for="message">夢の内容</label>
           <textarea name="message" id="message" rows="10"></textarea>
         </div>
-
+      
         <div class="form_item radio">
           <div class="radio_label">
             <label>「きょうの夢」に寄贈しますか？</label>
@@ -44,7 +51,7 @@ include('../app/_parts/_header.php');
             </div>
           </div>
         </div>
-
+      
         <div class="form_item radio" id="tags">
           <div class="radio_label">
             <label>どんな夢ですか？<br>合うタグを1つ選んでください。</label>
@@ -72,21 +79,19 @@ include('../app/_parts/_header.php');
               </div>
           </div>
         </div>
-
+      
         <button>内容を確認する</button>
       </form>
     </div>
-  </div>
 
-  <!-- 過去の夢 -->
-  <div class="forms dreams_past">
-    <div class="form_title">
-      <h1>むかしの夢</h1>
-    </div>
-    <div class="form">
+    <div class="tab_content2">
+      過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。
     </div>
   </div>
 </div>
+
+
+
 <?php
 
 include('../app/_parts/_footer.php');
