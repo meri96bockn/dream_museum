@@ -12,9 +12,24 @@ include('../app/_parts/_header.php');
     <h1>マイページ</h1>
   </div>
 
+
+
   <!-- タブメニュー夢日記 -->
   <div class="tab">
-      <ul class="tab_title">
+      <ul class="tab_title_mobile">
+        <li>
+          <a href="#" class="tab1 active">
+            <i class="bi bi-journal-richtext"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" class="tab2">
+            <i class="bi bi-image-fill"></i>
+          </a>
+        </li>
+      </ul>
+
+      <ul class="tab_title_pc">
         <li><a href="#" class="tab1 active">夢日記をつける</a></li>
         <li><a href="#" class="tab2">むかしの夢を見る</a></li>
       </ul>

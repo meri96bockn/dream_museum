@@ -1,13 +1,15 @@
 /* マイページタブ */
+.tab_title_pc {
+  display: none;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   position: relative;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
   margin: 0 auto;
-  width: 90%;
   background-color: rgb(30, 90, 140, .2);
 }
 
@@ -34,16 +36,19 @@
   padding: 80px 0 48px;
 }
 
-.tab_title {
+.tab_title_mobile {
   display: flex;
-  gap: 16px;
-  margin: 0 32px;
+  justify-content: center;
+  gap: 8px;
+}
+
+.tab1 .bi, .tab2 .bi {
+  font-size: 54px;
 }
 
 .tab1, .tab2 {
   display: block;
-  padding: 16px 32px;
-  font-size: 16px;
+  padding: 0 32px;
   border: ridge rgba(179, 176, 140, 0.9);
   margin-bottom: -3px;
 }
@@ -104,14 +109,13 @@
 }
 
 .form_item {
-  /* width: 90%; */
-  margin: 0 48px 48px;
+  margin: 0 auto 48px;
   text-align: center;
 }
 
 label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
   cursor: pointer;
   color: rgb(80, 100, 140);
 
@@ -130,7 +134,6 @@ input, textarea {
   transition-timing-function: ease;
   transition-delay: 0s;
   color: rgb(80, 100, 140);
-  background-color: rgb(241, 235, 227);
 }
 
 textarea {
@@ -146,9 +149,11 @@ input:focus, textarea:focus {
   align-items: flex-start;
 }
 
-.radio_label {
-  max-width: 250px;
-  margin: 0 auto;
+.form_item.radio, .form_item.radio.show {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto 48px;
+  max-width: 240px;
 }
 
 .radio_label label {
@@ -160,8 +165,8 @@ input:focus, textarea:focus {
   flex-direction: column;
   justify-content: center;
   max-width: 200px;
-  margin: 0 auto;
   gap: 8px;
+  margin-left: 2vh;
 }
 
 .radio_item {
@@ -193,7 +198,6 @@ input:focus, textarea:focus {
 
 #tags.show {
   display: flex;
-  flex-direction: column;
   animation-name: fade-in;
   animation-duration: .6s;
 }
@@ -222,18 +226,39 @@ button:hover {
 
 /* medium screen */
 @media (min-width: 600px) {
+  .tab_title_mobile {
+    display: none;
+    margin: 0 auto;
+  }
+  
+  .tab_title_pc {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .container {
+    width: 90%;
+    border-radius: 8px;
+  }
+  
   .tab {
-    max-width: 560px;
+    max-width: 640px;
     margin: 0 auto;
   }
 
+  .tab1, .tab2 {
+    display: block;
+    padding: 16px 32px;
+    font-size: 16px;
+    border: ridge rgba(179, 176, 140, 0.9);
+    margin-bottom: -3px;
+  }
 }
 
 
 /* large screen */
 @media (min-width: 1000px) {
-
-
   .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -244,11 +269,18 @@ button:hover {
     margin: 0 auto;
   }
 
-  .form_item{
+  .form_item {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 16px;
+    margin-right: 32px;
+  }
+
+  .form_item.radio, .form_item.radio.show {
+    max-width: 480px;
+    flex-direction: row;
+    align-items: flex-start;
   }
 
   label {
@@ -262,21 +294,15 @@ button:hover {
   
   .radio_label {
     flex: 1;
+    margin: 0;
   }
   
   .radio_items {
     flex: 1;
+    margin: 0;
   }
 
   .radio_items label {
     margin-right: 16px;
-  }
-  
-  .radio_label label {
-    text-align: right;
-  }
-
-  #tags.show {
-    flex-direction: row;
   }
 }
