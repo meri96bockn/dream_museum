@@ -1,7 +1,7 @@
 'use strict';
 
 {
-  // ハンバーガーメニューの表示切り替え
+  // ハンバーガーメニュー 切り替え
   const open = document.getElementById('open')
   const overlay = document.querySelector('.overlay');
   const close = document.getElementById('close');
@@ -17,7 +17,7 @@
   });
 
 
-// 夢日記タグづけの表示切り替え
+// 夢日記タグづけ 切り替え
   const no_tag = document.getElementById('no_tag');
   const yes_tag = document.getElementById('yes_tag');
   const tags = document.getElementById('tags');
@@ -36,5 +36,47 @@
       emotion.disabled = false;
     })
   });
+
+
+  // マイページタブメニュー 切り替え
+  const tab_titles = document.querySelectorAll('.tab li a');
+  const contents = document.querySelectorAll('.content1, .content2')
+
+  tab_titles.forEach(tab_title => {
+    tab_title.addEventListener('click', e => {
+      e.preventDefault();
+
+      tab_titles.forEach(tab_title => {
+        tab_title.classList.remove('active')
+      });
+      tab_title.classList.add('active');
+
+      contents.forEach(content => {
+        content.classList.remove('active');
+      });
+      document.getElementById(tab_title.dataset.id).classList.add('active')
+    });
+  });
+
+
+
+  // むかしの夢 揺れる矢印
+  window.onload=function(){
+    const scroll = document.querySelector('.scroll');
+
+    const Animation = function() {
+      const triggerMargin = 100;
+      if (window.innerHeight > scroll.getBoundingClientRect().top + triggerMargin) {
+      scroll.classList.add('show');
+      }
+    }
+
+    window.addEventListener('scroll', Animation);
+
+    function fadeOut() {
+      scroll.classList.add('fade-out');
+    }
+    setTimeout(fadeOut, 2000);
+  }
 
 }

@@ -12,29 +12,27 @@ include('../app/_parts/_header.php');
     <h1>マイページ</h1>
   </div>
 
-
-
   <!-- タブメニュー夢日記 -->
   <div class="tab">
-      <ul class="tab_title_mobile">
-        <li>
-          <a href="#" class="tab1 active">
-            <i class="bi bi-journal-richtext"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#" class="tab2">
-            <i class="bi bi-image-fill"></i>
-          </a>
-        </li>
-      </ul>
+    <ul class="tab_title_mobile">
+      <li>
+        <a href="#" class="tab1 active" data-id="diary">
+          <i class="bi bi-journal-richtext"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#" class="tab2" data-id="dreams">
+          <i class="bi bi-image-fill"></i>
+        </a>
+      </li>
+    </ul>
 
-      <ul class="tab_title_pc">
-        <li><a href="#" class="tab1 active">夢日記をつける</a></li>
-        <li><a href="#" class="tab2">むかしの夢を見る</a></li>
-      </ul>
+    <ul class="tab_title_pc">
+      <li><a href="#" class="tab1 active" data-id="diary">夢日記をつける</a></li>
+      <li><a href="#" class="tab2" data-id="dreams">むかしの夢を見る</a></li>
+    </ul>
 
-    <div class="tab_content1 active form">
+    <div class="content1 form" id="diary">
       <form action="process.php" method="post">
         <div class="form_item">
           <label for="date">夢を見た日</label>
@@ -99,10 +97,43 @@ include('../app/_parts/_header.php');
       </form>
     </div>
 
-    <div class="tab_content2">
-      過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。過去の夢。
-    </div>
-  </div>
+    <!-- タブメニューむかしの夢 -->
+    <div class="content2 active" id="dreams">
+      <div class="dreams_container">
+        <h2 class="dreams_title">むかしの夢</h2>
+        <div class="dreams">
+          <ul class="dream_items">
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+          </ul>
+        </div>  <!-- dreams -->
+        <i class="bi bi-hand-index scroll"></i> 
+      </div>  <!-- dreams_container -->
+    </div> <!-- content2 -->
 </div>
 
 
