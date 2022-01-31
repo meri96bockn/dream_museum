@@ -32,7 +32,7 @@ include('../app/_parts/_header.php');
       <li><a href="#" class="tab2" data-id="dreams">むかしの夢を見る</a></li>
     </ul>
 
-    <div class="content1 form" id="diary">
+    <div class="content1 form active" id="diary">
       <form action="process.php" method="post">
         <div class="form_item">
           <label for="date">夢を見た日</label>
@@ -98,7 +98,7 @@ include('../app/_parts/_header.php');
     </div>
 
     <!-- タブメニューむかしの夢 -->
-    <div class="content2 active" id="dreams">
+    <div class="content2" id="dreams">
       <div class="dreams_container">
         <h2 class="dreams_title">むかしの夢</h2>
         <div class="dreams">
