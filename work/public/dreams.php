@@ -1,4 +1,6 @@
 <?php
+require_once(__DIR__ . '/../app/config.php');
+require(__DIR__ . '/../app/functions.php');
 
 $title = 'きょうの夢 - ';
 $this_css = 'dreams';
@@ -60,4 +62,9 @@ include('../app/_parts/_header.php');
 
   <?php
 
-  include('../app/_parts/_footer.php');
+include('../app/_parts/_footer.php');
+
+?>
+<script src="js/main.js"></script>
+</body>
+</html>

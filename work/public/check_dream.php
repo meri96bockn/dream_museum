@@ -1,4 +1,6 @@
 <?php
+require_once(__DIR__ . '/../app/config.php');
+require(__DIR__ . '/../app/functions.php');
 
 $title = '夢日記の内容確認 - ';
 $this_css = 'form';
@@ -78,4 +80,10 @@ include('../app/_parts/_header.php');
 
   <?php
 
-  include('../app/_parts/_footer.php');
+include('../app/_parts/_footer.php');
+
+?>
+<script src="js/main.js"></script>
+<script src="js/my_page.js"></script>
+</body>
+</html>

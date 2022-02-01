@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . '/../app/config.php');
-require('../app/functions.php');
+require(__DIR__ . '/../app/functions.php');
 
 $form = [
   'name' => '',
@@ -81,3 +81,8 @@ include('../app/_parts/_header.php');
   <?php
 
   include('../app/_parts/_footer.php');
+
+  ?>
+  <script src="js/main.js"></script>
+</body>
+</html>

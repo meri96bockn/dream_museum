@@ -146,7 +146,12 @@ include('../app/_parts/_header.php');
 </div>
 
 
-
 <?php
-$this_js = "my_page";
+
 include('../app/_parts/_footer.php');
+
+?>
+<script src="js/main.js"></script>
+<script src="js/my_page.js"></script>
+</body>
+</html>

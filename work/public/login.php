@@ -1,4 +1,6 @@
 <?php
+require_once(__DIR__ . '/../app/config.php');
+require(__DIR__ . '/../app/functions.php');
 
 $title = 'ログイン - ';
 $this_css = 'form';
@@ -15,7 +17,7 @@ include('../app/_parts/_header.php');
       <h1>ログイン</h1>
     </div>
     <div class="form">
-      <form action="process.php" method="post">
+      <form action="my_page.php" method="post">
         <div class="form_item">
           <label for="name">ユーザーネーム</label>
           <input type="text" id="name" maxlength="255" placeholder="（例）yume_miruko">
@@ -36,3 +38,8 @@ include('../app/_parts/_header.php');
   <?php
 
   include('../app/_parts/_footer.php');
+
+  ?>
+  <script src="js/main.js"></script>
+</body>
+</html>
