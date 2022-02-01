@@ -1,4 +1,13 @@
 <?php
+require_once(__DIR__ . '/../app/config.php');
+require('../app/functions.php');
+
+if (isset($_SESSION['form'])) {
+  $form = $_SESSION['form'];
+} else {
+  header('Location: login.php');
+  exit;
+}
 
 $title = 'マイページ - ';
 $this_css = 'tab';
@@ -139,5 +148,5 @@ include('../app/_parts/_header.php');
 
 
 <?php
-
+$this_js = "my_page";
 include('../app/_parts/_footer.php');
