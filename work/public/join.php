@@ -58,41 +58,40 @@ var_dump($re_password);
       <div class="form_item">
         <label for="name">ユーザーネーム</label>
         <input type="text" name="name" id="name" maxlength="255" placeholder="（例）yume3" value="<?= h($form['name']); ?>" >
+      </div>
           <div class="error">
             <?php if (isset($error['name']) && $error['name'] === 'alphanumeric'):?>
-              <p class="error">* ユーザーネームは半角英数で入力してください</p>
+              <p>* ユーザーネームは半角英数で入力してください</p>
             <?php endif; ?>
         </div>
-      </div>
       <div class="form_item">
         <label for="email">メールアドレス</label>
         <input type="email" name="email" id="email" maxlength="255" placeholder="（例）yumemi@gmail.com" value="<?= h($form['email']); ?>">
+      </div>
         <div class="error">
           <?php if(isset($error['email']) && $error['email'] === 'blank'): ?>
-          <p class="error">* メールアドレスを入力してください</p>
+          <p>* メールアドレスを入力してください</p>
           <?php endif; ?>
-          <p class="error">* ご指定のメールアドレスはすでに登録されています</p>
+          <p>* ご指定のメールアドレスはすでに登録されています</p>
         </div>
-      </div>
       <div class="form_item">
         <label for="password">パスワード</label>
         <input type="password" name="password" id="password" placeholder="（例）yume36ko" value="<?= h($form['password']); ?>">
+      </div>
         <div class="error">
           <?php if (isset($error['password']) && $error['password'] === 'alphanumeric'): ?>
-          <p class="error">* パスワードは半角英数を組み合わせ、8文字以上で入力してください</p>
+          <p>* パスワードは半角英数を組み合わせ、8文字以上で入力してください</p>
           <?php endif; ?>
         </div>
-      </div>
       <div class="form_item">
         <label for="re_password">パスワード（再入力）</label>
         <input type="password" name="re_password" id="re_password" placeholder="（例）yume36ko" value="<?= h($re_password);?>"
         >
+      </div>
         <div class="error">
           <?php if (isset($error['re_password']) && $error['re_password'] === 'miss'):?>
-          <p class="error">* パスワードが一致していません</p>
+          <p>* パスワードが一致していません</p>
           <?php endif; ?>
-
-        </div>
       </div>
       <button>登録</button>
     </form>
