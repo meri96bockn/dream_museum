@@ -1,10 +1,9 @@
 <?php
+session_start();
 require_once(__DIR__ . '/../app/config.php');
 require('../app/functions.php');
 
-if (isset($_SESSION['form'])) {
-  $form = $_SESSION['form'];
-} else {
+if (!(isset($_SESSION['form']))) {
   header('Location: login.php');
   exit;
 }

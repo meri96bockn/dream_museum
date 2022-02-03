@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
 
@@ -42,11 +43,6 @@ $title = '新規登録 - ';
 $this_css = 'form';
 include(__DIR__ . '/../app/_parts/_header.php');
 
-// var_dump($re_password);
-var_dump($form['password']);
-// var_dump($form);
-var_dump($error);
-var_dump($re_password);
 ?>
 
 <div class="forms">
