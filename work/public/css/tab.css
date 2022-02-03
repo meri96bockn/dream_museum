@@ -412,7 +412,7 @@ button:hover {
   .form_item {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
     gap: 16px;
     margin-right: 32px;
   }

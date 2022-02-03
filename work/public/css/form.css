@@ -59,6 +59,23 @@ input, textarea {
   transition-delay: 0s;
 }
 
+.check dt {
+  margin-bottom: 8px;
+}
+
+.check dd {
+  width: 90%;
+  padding: 8px 24px;
+  margin-bottom: 48px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, .4);
+  border-radius: 8px;
+}
+
+.check .bi {
+  margin-right: 4px;
+}
+
 textarea {
   text-align: start;
 }
@@ -130,6 +147,15 @@ input:focus, textarea:focus {
   animation-duration: .6s;
 }
 
+.button {
+  display: flex;
+  justify-content: center;
+  gap: 2vh;
+}
+
+.button button {
+  margin: 0;
+}
 
 button {
   display: block;
@@ -181,12 +207,23 @@ button:hover {
   }
 
   .form_item{
-    display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: baseline;
     gap: 16px;
+  }
+
+
+
+  label, .check dt {
+    flex: 1;
+    text-align: start;
+  }
+
+  input, textarea, .check dd {
+    flex: 2;
+    min-width: 400px;
   }
 
   .error {
@@ -195,33 +232,23 @@ button:hover {
     margin-right: 0;
   }
 
-  label {
-    flex: 1;
-    text-align: start
-  }
-
-  input, textarea {
-    flex: 2;
-    min-width: 400px;
-  }
-  
   .radio_label {
-    flex: 1;
-  }
-  
-  .radio_items {
-    flex: 1;
-  }
+      flex: 1;
+    }
+    
+    .radio_items {
+      flex: 1;
+    }
 
-  .radio_items label {
-    margin-right: 16px;
-  }
-  
-  .radio_label label {
-    text-align: start;
-  }
+    .radio_items label {
+      margin-right: 16px;
+    }
+    
+    .radio_label label {
+      text-align: start;
+    }
 
-  #tags.show {
-    flex-direction: row;
-  }
+    #tags.show {
+      flex-direction: row;
+    }
 }

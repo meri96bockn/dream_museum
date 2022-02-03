@@ -16,10 +16,24 @@ if (!preg_match('/\A[a-z\d]{1,100}+\z/i', $form['name'])) {
   $error['name'] = 'alphanumeric';
 }
 
-$form['email'] = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-if ($form['email'] === '') {
-  $error['email'] = 'blank';
-}
+// $form['email'] = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+// if ($form['email'] === '') {
+//   $error['email'] = 'blank';
+// } else {
+//   $stmt = $pdo->prepare(
+//     "SELECT COUNT(*)
+//       FROM members
+//       where email = ?"
+//       );
+//   $stmt->execute([$form['email']]);
+//   $results = $stmt->fetch(PDO::FETCH_ASSOC);
+  
+//   if ($results > 0) {
+//     var_dump($results);
+//     $error['email'] = 'duplicate';
+//     var_dump($error['email']);
+//   }
+// }
 
 $form['password'] = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 if (!preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}+\z/i', $form['password'])) {
@@ -35,7 +49,7 @@ if ($form['password'] !== $re_password) {
 
 if (empty($error)) {
   $_SESSION['form'] = $form;
-  header('location: login.php');
+  header('location: check.php');
   exit();
 }
 
@@ -68,7 +82,9 @@ include(__DIR__ . '/../app/_parts/_header.php');
           <?php if(isset($error['email']) && $error['email'] === 'blank'): ?>
           <p>* メールアドレスを入力してください</p>
           <?php endif; ?>
+          <?php if (isset($error['email']) && $error['email'] === 'duplicate'):?>
           <p>* ご指定のメールアドレスはすでに登録されています</p>
+          <?php endif; ?>
         </div>
       <div class="form_item">
         <label for="password">パスワード</label>
@@ -89,7 +105,7 @@ include(__DIR__ . '/../app/_parts/_header.php');
           <p>* パスワードが一致していません</p>
           <?php endif; ?>
       </div>
-      <button>登録</button>
+      <button>入力内容を確認する</button>
     </form>
   </div>
 </div>
