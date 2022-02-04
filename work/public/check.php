@@ -1,7 +1,5 @@
 <?php
-
 session_start();
-
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
 
@@ -9,6 +7,7 @@ if (isset($_SESSION['form'])) {
   $form = $_SESSION['form'];
 } else {
   header('Location: index.php');
+  unset($_SESSION['form']);
   exit();
 }
 
@@ -18,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       members (username, email, password)
       VALUES (:username, :email, :password)"
   );
-
   $stmt->execute(
     ['username' => $form['name'],
       'email' => $form['email'],
@@ -55,7 +53,7 @@ include(__DIR__ . '/../app/_parts/_header.php');
       </dl>
       <div class="button">
         <button type="button" onclick=location.href="join.php?action=rewrite">変更</button>
-        <button name="add">登録</button>
+        <button name="add">登録してログイン</button>
       </div>
     </form>
   </div>

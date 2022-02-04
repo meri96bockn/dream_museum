@@ -15,13 +15,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['
 $re_password = '';
 $error = [];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
   $form['name'] = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
   if (!preg_match('/\A[a-z\d]{1,100}+\z/i', $form['name'])) {
     $error['name'] = 'alphanumeric';
   }
-  
+
   $form['email'] = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
   if ($form['email'] === '') {
     $error['email'] = 'blank';
@@ -29,42 +29,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
     $stmt = $pdo->prepare(
       "SELECT COUNT(*)
       FROM members
-      where email = :email"
+      WHERE email = :email"
       );
       $stmt->bindvalue(
         ':email', $form['email'], PDO::PARAM_STR
       );
       $stmt->execute();
       $counts = $stmt->fetch();
-      
+
       if ($counts['COUNT(*)'] > 0) {
         $error['email'] = 'duplicate';
       }
     }
-    
-    $form['password'] = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-    if (!preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}+\z/i', $form['password'])) {
-      $error['password'] = 'alphanumeric';
-      $form['password'] = '';
-    } 
-    
-    $re_password = filter_input(INPUT_POST, 're_password', FILTER_SANITIZE_STRING);
-    if ($form['password'] !== $re_password){
-      $error['re_password'] = 'miss';
-      $re_password = '';
-    }
-    
-    if (empty($error)) {
-      $_SESSION['form'] = $form;
-      header('location: check.php');
-      exit();
-    }
+
+  $form['password'] = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+  if (!preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}+\z/i', $form['password'])) {
+    $error['password'] = 'alphanumeric';
+    $form['password'] = '';
+  } 
+  
+  $re_password = filter_input(INPUT_POST, 're_password', FILTER_SANITIZE_STRING);
+  if ($form['password'] !== $re_password){
+    $error['re_password'] = 'miss';
+    $re_password = '';
+  }
+
+  if (empty($error)) {
+    $_SESSION['form'] = $form;
+    header('location: check.php');
+    exit();
+  }
 }
+
+
+if ($form['name'] === '') {
+  $error['name'] = 'alphanumeric';
+}
+if ($form['password'] === '') {
+  $error['password'] = 'alphanumeric';
+}
+
 
 $title = '新規登録 - ';
 $this_css = 'form';
 include(__DIR__ . '/../app/_parts/_header.php');
-
 ?>
 
 <div class="forms">
@@ -75,42 +83,42 @@ include(__DIR__ . '/../app/_parts/_header.php');
     <form action="" method="post" enctype="multipart/form-data">
       <div class="form_item">
         <label for="name">ユーザーネーム</label>
-        <input type="text" name="name" id="name" maxlength="255" placeholder="（例）yume3" value="<?= h($form['name']); ?>" >
+        <input type="text" name="name" id="name" maxlength="255" placeholder="（例）yume3" value="<?= h($form['name']); ?>">
       </div>
-          <div class="error">
-            <?php if (isset($error['name']) && $error['name'] === 'alphanumeric'):?>
-              <p>* ユーザーネームは半角英数で入力してください</p>
-            <?php endif; ?>
-        </div>
+      <div class="error">
+        <?php if (isset($error['name']) && $error['name'] === 'alphanumeric'):?>
+          <p>* ユーザーネームは半角英数字で入力してください</p>
+        <?php endif; ?>
+      </div>
       <div class="form_item">
         <label for="email">メールアドレス</label>
         <input type="email" name="email" id="email" maxlength="255" placeholder="（例）yumemi@gmail.com" value="<?= h($form['email']); ?>">
       </div>
-        <div class="error">
-          <?php if(isset($error['email']) && $error['email'] === 'blank'): ?>
-          <p>* メールアドレスを入力してください</p>
-          <?php endif; ?>
-          <?php if (isset($error['email']) && $error['email'] === 'duplicate'):?>
-          <p>* ご指定のメールアドレスはすでに登録されています</p>
-          <?php endif; ?>
-        </div>
+      <div class="error">
+        <?php if (isset($error['email']) && $error['email'] === 'blank'): ?>
+        <p>* メールアドレスを入力してください</p>
+        <?php endif; ?>
+        <?php if (isset($error['email']) && $error['email'] === 'duplicate'):?>
+        <p>* ご指定のメールアドレスはすでに登録されています</p>
+        <?php endif; ?>
+      </div>
       <div class="form_item">
         <label for="password">パスワード</label>
         <input type="password" name="password" id="password" placeholder="（例）yume36ko" value="<?= h($form['password']); ?>">
       </div>
-        <div class="error">
-          <?php if (isset($error['password']) && $error['password'] === 'alphanumeric'): ?>
-          <p>* パスワードは半角英数を組み合わせ、8文字以上で入力してください</p>
-          <?php endif; ?>
-        </div>
+      <div class="error">
+        <?php if (isset($error['password']) && $error['password'] === 'alphanumeric'): ?>
+        <p>* パスワードは半角英数字を1文字ずつ組み合わせ、8文字以上で入力してください</p>
+        <?php endif; ?>
+      </div>
       <div class="form_item">
         <label for="re_password">パスワード（再入力）</label>
         <input type="password" name="re_password" id="re_password" placeholder="（例）yume36ko" value="<?= h($re_password); ?>">
       </div>
-        <div class="error">
-          <?php if (isset($error['re_password']) && $error['re_password'] === 'miss'):?>
-          <p>* パスワードが一致していません</p>
-          <?php endif; ?>
+      <div class="error">
+        <?php if (isset($error['re_password']) && $error['re_password'] === 'miss'):?>
+        <p>* パスワードが一致していません</p>
+        <?php endif; ?>
       </div>
       <button>入力内容を確認する</button>
     </form>
