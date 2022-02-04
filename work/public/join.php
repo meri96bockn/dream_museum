@@ -3,54 +3,62 @@ session_start();
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
 
-$form = [
-  'name' => '',
-  'email' => '',
-  'password' => ''
-];
+if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['form'])) {
+  $form = $_SESSION['form'];
+} else {
+  $form = [
+    'name' => '',
+    'email' => '',
+    'password' => ''
+  ];
+}
 $re_password = '';
 $error = [];
 
-$form['name'] = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
-if (!preg_match('/\A[a-z\d]{1,100}+\z/i', $form['name'])) {
-  $error['name'] = 'alphanumeric';
-}
+if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
-// $form['email'] = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-// if ($form['email'] === '') {
-//   $error['email'] = 'blank';
-// } else {
-//   $stmt = $pdo->prepare(
-//     "SELECT COUNT(*)
-//       FROM members
-//       where email = ?"
-//       );
-//   $stmt->execute([$form['email']]);
-//   $results = $stmt->fetch(PDO::FETCH_ASSOC);
+  $form['name'] = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+  if (!preg_match('/\A[a-z\d]{1,100}+\z/i', $form['name'])) {
+    $error['name'] = 'alphanumeric';
+  }
   
-//   if ($results > 0) {
-//     var_dump($results);
-//     $error['email'] = 'duplicate';
-//     var_dump($error['email']);
-//   }
-// }
-
-$form['password'] = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-if (!preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}+\z/i', $form['password'])) {
-  $error['password'] = 'alphanumeric';
-  $form['password'] = '';
-} 
-
-$re_password = filter_input(INPUT_POST, 're_password', FILTER_SANITIZE_STRING);
-if ($form['password'] !== $re_password) {
-  $error['re_password'] = 'miss';
-  $re_password = '';
-}
-
-if (empty($error)) {
-  $_SESSION['form'] = $form;
-  header('location: check.php');
-  exit();
+  $form['email'] = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+  if ($form['email'] === '') {
+    $error['email'] = 'blank';
+  } else {
+    $stmt = $pdo->prepare(
+      "SELECT COUNT(*)
+      FROM members
+      where email = :email"
+      );
+      $stmt->bindvalue(
+        ':email', $form['email'], PDO::PARAM_STR
+      );
+      $stmt->execute();
+      $counts = $stmt->fetch();
+      
+      if ($counts['COUNT(*)'] > 0) {
+        $error['email'] = 'duplicate';
+      }
+    }
+    
+    $form['password'] = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+    if (!preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}+\z/i', $form['password'])) {
+      $error['password'] = 'alphanumeric';
+      $form['password'] = '';
+    } 
+    
+    $re_password = filter_input(INPUT_POST, 're_password', FILTER_SANITIZE_STRING);
+    if ($form['password'] !== $re_password){
+      $error['re_password'] = 'miss';
+      $re_password = '';
+    }
+    
+    if (empty($error)) {
+      $_SESSION['form'] = $form;
+      header('location: check.php');
+      exit();
+    }
 }
 
 $title = '新規登録 - ';
@@ -97,8 +105,7 @@ include(__DIR__ . '/../app/_parts/_header.php');
         </div>
       <div class="form_item">
         <label for="re_password">パスワード（再入力）</label>
-        <input type="password" name="re_password" id="re_password" placeholder="（例）yume36ko" value="<?= h($re_password);?>"
-        >
+        <input type="password" name="re_password" id="re_password" placeholder="（例）yume36ko" value="<?= h($re_password); ?>">
       </div>
         <div class="error">
           <?php if (isset($error['re_password']) && $error['re_password'] === 'miss'):?>
