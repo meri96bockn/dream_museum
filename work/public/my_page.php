@@ -3,9 +3,11 @@ session_start();
 require_once(__DIR__ . '/../app/config.php');
 require('../app/functions.php');
 
-if (!(isset($_SESSION['form']))) {
+if (!(isset($_SESSION))) {
   header('Location: login.php');
   exit;
+} else {
+  $name = $_SESSION['name'];
 }
 
 $title = 'マイページ - ';

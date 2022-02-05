@@ -9,15 +9,17 @@ $error = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
   $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+  
   if ($email === '') {
     $error['email'] = 'blank';
   }
   if ($password === '') {
     $error['password'] = 'blank';
   }
+  
   if (empty($error)) {
     $stmt = $pdo->prepare(
-      "SELECT id, username, password
+      "SELECT *
       FROM members
       WHERE email = :email 
       limit 1"
@@ -27,7 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       PDO::PARAM_STR
     );
     $stmt->execute();
-    
+    $row = $stmt->fetch();
+    if (password_verify($password, $row["password"])) {
+      session_regenerate_id();
+      $_SESSION['id'] = $row['id'];
+      $_SESSION['name'] = $row['username'];
+      header('Location: my_page.php');
+      exit();
+    } else {
+      $error['login'] = 'failed';
+    }
   }
 }
 
@@ -67,7 +78,7 @@ include(__DIR__ . '/../app/_parts/_header.php');
         </div>
         <div class="error">
         <?php if (isset($error['login']) && $error['login'] === 'failed'):?>
-          <p>* ログインできません</p>
+          <p>* メールアドレスまたはパスワードを正しく入力してください</p>
         <?php endif; ?>
         </div>
       </div>
