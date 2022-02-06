@@ -6,8 +6,8 @@ require(__DIR__ . '/../app/functions.php');
 if (isset($_SESSION['form'])) {
   $form = $_SESSION['form'];
 } else {
-  header('Location: index.php');
   unset($_SESSION['form']);
+  header('Location: index.php');
   exit();
 }
 
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       VALUES (:username, :email, :password)"
   );
   $stmt->execute(
-    ['username' => $form['name'],
+    [ 'username' => $form['name'],
       'email' => $form['email'],
       'password' => password_hash($form['password'], PASSWORD_DEFAULT)
     ]
@@ -26,6 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   unset($_SESSION['form']);
   header('Location: login.php');
+  exit();
 }
 
 $title = '登録内容確認 - ';
@@ -53,7 +54,7 @@ include(__DIR__ . '/../app/_parts/_header.php');
       </dl>
       <div class="button">
         <button type="button" onclick=location.href="join.php?action=rewrite">変更</button>
-        <button name="add">登録してログイン</button>
+        <button>登録してログイン</button>
       </div>
     </form>
   </div>

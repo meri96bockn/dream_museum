@@ -1,33 +1,11 @@
-/* マイページタブ */
-.tab_title_pc {
-  display: none;
-}
-
 .container {
   display: flex;
   flex-direction: column;
   position: relative;
   justify-content: center;
   margin: 0 auto;
-  background-color: rgb(30, 90, 140, .2);
-}
+  color: rgb(80, 100, 140);
 
-.container_title h1 {
-  position: absolute;
-  top: 0%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translateX(-50%, -50%);
-
-  border: ridge rgb(179, 176, 140);
-  border-radius: 8px;
-
-  font-size: 16px;
-  color: rgba(243, 232, 220);
-
-  padding: 16px;
-  background-color: rgba(30, 90, 140 , .7) ;
 }
 
 .tab {
@@ -47,7 +25,7 @@
 
 .tab1, .tab2 {
   display: block;
-  padding: 16px 32px;
+  padding: 0 32px;
   border: ridge rgba(179, 176, 140, 0.9);
   margin-bottom: -3px;
   transition: unset;
@@ -100,8 +78,7 @@
 }
 
 .form_item {
-  width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 48px;
   text-align: center;
 }
 
@@ -110,12 +87,12 @@ label {
   margin-bottom: 16px;
   cursor: pointer;
   color: rgb(80, 100, 140);
+
 }
 
 input, textarea {
   width: 90%;
   padding: 20px 40px;
-  margin: 8px 0;
   text-align: center;
   border: none;
   border-radius: 8px;
@@ -135,12 +112,6 @@ textarea {
 input:focus, textarea:focus {
   box-shadow: 0px 0px 8px rgba(0, 0, 0, .2);
   outline: 0;
-}
-
-.error {
-  margin: 8px auto 48px;
-  color: rgb(140, 90, 140, .7);
-  width: 80%;
 }
 
 .forms .radio{
@@ -200,6 +171,16 @@ input:focus, textarea:focus {
   animation-duration: .6s;
 }
 
+.button {
+  display: flex;
+  justify-content: center;
+  gap: 2vh;
+}
+
+.button button {
+  margin: 0;
+}
+
 button {
   display: block;
   margin: 0 auto;
@@ -232,7 +213,7 @@ button:hover {
   align-items: center;
 
   height: 480px;
-  width: 92%;
+  width: 90%;
   max-width: 480px;
   margin: 0 auto;
 
@@ -261,7 +242,7 @@ button:hover {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin: 72px 0;
+  margin: 64px 0;
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -275,7 +256,7 @@ button:hover {
   display: flex;
   flex-direction: column;
   row-gap: 40px;
-  width: 88%;
+  width: 90%;
   max-width: 400px;
 }
 
@@ -367,7 +348,7 @@ button:hover {
   }
   
   .tab {
-    width: 90%;
+    max-width: 640px;
     margin: 0 auto;
   }
 
@@ -418,7 +399,10 @@ button:hover {
 
   .form_item {
     display: flex;
+    justify-content: center;
     align-items: baseline;
+    gap: 16px;
+    margin-right: 32px;
   }
 
   .form_item.radio, .form_item.radio.show {
@@ -435,13 +419,6 @@ button:hover {
     flex: 2;
   }
   
-  
-  .error {
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: 0;
-  }
-
   .radio_label {
     flex: 1;
     margin: 0;

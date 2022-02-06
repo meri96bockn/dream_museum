@@ -207,11 +207,8 @@ button:hover {
   }
 
   .form_item{
-    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: center;
     align-items: baseline;
-    gap: 16px;
   }
 
 

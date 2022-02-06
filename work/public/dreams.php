@@ -19,7 +19,7 @@ include('../app/_parts/_header.php');
         <div class="emotion_dreams">
           <h2 class="emotion">たのしい</h2>
           <ul class="dreams">
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+            <li><a href="">たのしい夢タイトルタイトルタイたのしい夢</a></li>
             <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
             <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
           </ul>

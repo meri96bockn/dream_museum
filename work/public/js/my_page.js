@@ -20,6 +20,14 @@
     })
   });
 
+  if (yes_tag.checked) {
+    tags.classList.add('show');
+    emotions.forEach(emotion => {
+      emotion.disabled = false
+   });
+  }
+
+
 
   // マイページタブメニュー 切り替え
   const tab_titles = document.querySelectorAll('.tab li a');

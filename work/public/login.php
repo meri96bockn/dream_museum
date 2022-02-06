@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
     $stmt->execute();
     $row = $stmt->fetch();
+    
     if (password_verify($password, $row["password"])) {
       session_regenerate_id();
       $_SESSION['id'] = $row['id'];
@@ -64,23 +65,23 @@ include(__DIR__ . '/../app/_parts/_header.php');
         value="<?= h($email); ?>">
       </div>
       <div class="error">
-      <?php if (isset($error['email']) && $error['email'] === 'blank'):?>
-          <p>* メールアドレスを入力してください</p>
-      <?php endif; ?>
+        <?php if (isset($error['email']) && $error['email'] === 'blank'):?>
+            <p>* メールアドレスを入力してください</p>
+        <?php endif; ?>
       </div>
       <div class="form_item">
         <label for="password">パスワード</label>
         <input type="password" name="password" id="password" placeholder="（例）yume36ko">
-        <div class="error">
+      </div>
+      <div class="error">
         <?php if (isset($error['password']) && $error['password'] === 'blank'):?>
           <p>* パスワードを入力してください</p>
         <?php endif; ?>
-        </div>
-        <div class="error">
+      </div>
+      <div class="error">
         <?php if (isset($error['login']) && $error['login'] === 'failed'):?>
           <p>* メールアドレスまたはパスワードを正しく入力してください</p>
         <?php endif; ?>
-        </div>
       </div>
       <button>ログイン</button>
     </form>
