@@ -1,17 +1,15 @@
 <?php
-session_start();
 require_once(__DIR__ . '/../app/config.php');
-require('../app/functions.php');
+require(__DIR__ . '/../app/functions.php');
+createToken();
 
-var_dump($_SESSION['id']);
-var_dump($_SESSION['name']);
-
-if (!isset($_SESSION['name']) && !isset($_SESSION['id'])) {
+if (!isset($_SESSION['name']) &&
+    !isset($_SESSION['id'])) {
   header('Location: login.php');
   exit;
 } else {
-  $name = $_SESSION['name'];
   $id = $_SESSION['id'];
+  $name = $_SESSION['name'];
 }
 
 
@@ -31,6 +29,8 @@ $error = [];
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
+  validateToken();
+
   $form['id'] = $id;
   $form['name'] = $name;
 
@@ -91,7 +91,7 @@ include('../app/_parts/_header.php');
     </ul>
 
     <div class="content1 form active" id="diary">
-      <form action="" method="post">
+      <form action="" method="post" autocomplete="off">
         <div class="form_item">
           <label for="dream_title">タイトル</label>
           <input type="text" name="title" id="dreamtitle" placeholder="20字以内で入力してください" value="<?= h($form['title']); ?>">
@@ -179,11 +179,11 @@ include('../app/_parts/_header.php');
                 <?php endif; ?>>
                 <label for="emotion_5" class="radio_title">忘れたい</label>
               </div>
-          </div>
-        </div>
-      
+           </div>
+         </div>
         <button>内容を確認する</button>
-      </form>
+        <input type="hidden" name="token" value="<?=  h($_SESSION['token']); ?>">
+        </form>
     </div>
 
     <!-- タブメニューむかしの夢 -->
@@ -228,6 +228,8 @@ include('../app/_parts/_header.php');
 
 
 <?php
+var_dump($form);
+var_dump($_SESSION['form']);
 
 include('../app/_parts/_footer.php');
 

@@ -1,39 +1,35 @@
 <?php
+session_start();
 require_once(__DIR__ . '/../app/config.php');
 require('../app/functions.php');
 
-if (!isset($_SESSION['form'])) {
-  header('Location: index.php');
-  exit();
-} else {
-  $form = $_SESSION['form'];
-}
 
+if (isset($_SESSION['form'])) {
+  $form = $_SESSION['form'];
+} else {
+  header('Location: login.php');
+  unset($_SESSION['form']);
+  exit();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  validateToken();
   $stmt = $pdo->prepare(
     "INSERT INTO 
-      posts (title, content, tag, emotion, member_id)
-      VALUES (:title, :content, :tag, :emotion, :member_id)"
+      posts (title, content, tag, emotion, member_id, created)
+      VALUES (:title, :content, :tag, :emotion, :member_id, :created)"
   );
   $stmt->execute(
-    [ 'title' => $form['title'],
-      'content' => $form['content'],
-      'tag' => $form['tag'],
-      'emotion' => $form['emotion'],
-      'member_id' => $form['id']
+    ['username' => $form['name'],
+      'email' => $form['email'],
+      'password' => password_hash($form['password'], PASSWORD_DEFAULT)
     ]
   );
-
-  unset($_SESSION['token']);
   unset($_SESSION['form']);
-  createToken();
-  header('Location: success_post.php');
+  header('Location: my_page.php');
   exit();
 }
 
-$title = '夢日記内容確認 - ';
+$title = '投稿内容確認 - ';
 $this_css = 'post';
 include('../app/_parts/_header.php');
 
@@ -65,9 +61,7 @@ include('../app/_parts/_header.php');
     </div>
     <div class="button">
       <button type="button" onclick=location.href="my_page.php?action=rewrite">変更</button>
-      <button>記録</button>
-      <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-
+      <button>投稿</button>
     </div>
   </form>
 </div>

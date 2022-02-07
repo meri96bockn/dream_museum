@@ -1,12 +1,14 @@
 <?php
-session_start();
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
+createToken();
 
 $email = '';
 $error = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  validateToken();
+
   $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
   $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
   
@@ -84,6 +86,7 @@ include(__DIR__ . '/../app/_parts/_header.php');
         <?php endif; ?>
       </div>
       <button>ログイン</button>
+      <input type="hidden" name="token" value="<?=  h($_SESSION['token']); ?>">
     </form>
   </div>
 </div>

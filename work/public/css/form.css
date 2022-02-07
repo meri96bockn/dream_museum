@@ -39,6 +39,12 @@
   color: rgb(80, 100, 140);
 }
 
+.success {
+  color: rgb(80, 100, 140);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
 label {
   display: block;
   cursor: pointer;

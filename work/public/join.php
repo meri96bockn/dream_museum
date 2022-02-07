@@ -1,7 +1,8 @@
 <?php
-session_start();
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
+createToken();
+
 
 if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['form'])) {
   $form = $_SESSION['form'];
@@ -17,6 +18,8 @@ $error = [];
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
+  validateToken();
+
   $form['name'] = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
   if (!preg_match('/\A[a-z\d]{1,100}+\z/i', $form['name'])) {
     $error['name'] = 'alphanumeric';
@@ -56,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
   if (empty($error)) {
     $_SESSION['form'] = $form;
-    header('location: check.php');
+    header('Location: check.php');
     exit();
   }
 }
@@ -80,7 +83,7 @@ include(__DIR__ . '/../app/_parts/_header.php');
     <h1>新規登録</h1>
   </div>
   <div class="form">
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
       <div class="form_item">
         <label for="name">ユーザーネーム</label>
         <input type="text" name="name" id="name" maxlength="255" placeholder="（例）yume3" value="<?= h($form['name']); ?>">
@@ -121,6 +124,7 @@ include(__DIR__ . '/../app/_parts/_header.php');
         <?php endif; ?>
       </div>
       <button>入力内容を確認する</button>
+      <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
     </form>
   </div>
 </div>
@@ -131,5 +135,6 @@ include('../app/_parts/_footer.php');
 
 ?>
 <script src="js/main.js"></script>
+<script src="js/join.js"></script>
 </body>
 </html>
