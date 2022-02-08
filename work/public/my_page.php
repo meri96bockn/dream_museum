@@ -1,13 +1,13 @@
 <?php
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
-createToken();
 
 if (!isset($_SESSION['name']) &&
-    !isset($_SESSION['id'])) {
+!isset($_SESSION['id'])) {
   header('Location: login.php');
   exit;
 } else {
+  createToken();
   $id = $_SESSION['id'];
   $name = $_SESSION['name'];
 }
@@ -58,6 +58,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
 }
 
 
+// 夢日記取得
+$stmt = $pdo->prepare(
+  "SELECT title FROM posts WHERE member_id = :id ORDER BY id DESC"
+);
+$stmt->execute([':id' => $id]);
+$dream_titles = $stmt->fetchAll();
+var_dump($dream_titles);
+
+
 $title = 'マイページ - ';
 $this_css = 'tab';
 include('../app/_parts/_header.php');
@@ -91,6 +100,7 @@ include('../app/_parts/_header.php');
     </ul>
 
     <div class="content1 form active" id="diary">
+      <h2>夢日記をつける</h2>
       <form action="" method="post" autocomplete="off">
         <div class="form_item">
           <label for="dream_title">タイトル</label>
@@ -192,32 +202,17 @@ include('../app/_parts/_header.php');
         <h2 class="dreams_title">むかしの夢</h2>
         <div class="dreams">
           <ul class="dream_items">
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
-            <li><a href="">たのしい夢タイトルタイトルタイ</a></li>
+          <?php if ($dream_titles === []): ?>
+                <li class="notdream">夢はまだ記録されていません</li>
+                <li class="notdream">夢日記をつけてみましょう</li>
+          <?php else: ?>
+            <?php foreach ($dream_titles as $dream_title):?>
+            <li>
+              <a href="">
+                            <?= h($dream_title['title']); ?></a>
+                            <?php endforeach; ?>
+              <?php endif; ?>
+            </li>
           </ul>
         </div>  <!-- dreams -->
         <i class="bi bi-hand-index scroll"></i> 
@@ -228,8 +223,6 @@ include('../app/_parts/_header.php');
 
 
 <?php
-var_dump($form);
-var_dump($_SESSION['form']);
 
 include('../app/_parts/_footer.php');
 

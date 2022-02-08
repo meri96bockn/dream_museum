@@ -94,6 +94,12 @@
 
 
 /* diary */
+.content1 h2 {
+  font-size: 16px;
+  margin-bottom: 40px;
+  color: rgb(80, 100, 140);
+  text-align: center;
+}
 .form {
   width: 100%;
   padding: 80px 0 48px;
@@ -277,6 +283,11 @@ button:hover {
   row-gap: 40px;
   width: 88%;
   max-width: 400px;
+}
+
+.notdream {
+  color: rgb(241, 235, 227);
+  text-align: center;
 }
 
 .dream_items a {
