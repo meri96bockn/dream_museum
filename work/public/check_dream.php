@@ -2,11 +2,11 @@
 require_once(__DIR__ . '/../app/config.php');
 require('../app/functions.php');
 
-if (!isset($_SESSION['form'])) {
+if (isset($_SESSION['form'])) {
+  $form = $_SESSION['form'];
+} else {
   header('Location: index.php');
   exit();
-} else {
-  $form = $_SESSION['form'];
 }
 
 
@@ -40,7 +40,6 @@ include('../app/_parts/_header.php');
 ?>
 
 <div class="container">
-  <form action="" method="post" enctype="multipart/form-data">
     <h1>
       <?php if (isset($form['tag']) && ($form['tag'] === 'yes_tag')): ?>
         <i class="bi bi-award"></i>

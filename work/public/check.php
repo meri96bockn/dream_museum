@@ -2,11 +2,11 @@
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
 
-if (!isset($_SESSION['form'])) {
+if (isset($_SESSION['form'])) {
+  $form = $_SESSION['form'];
+} else {
   header('Location: index.php');
   exit();
-} else {
-  $form = $_SESSION['form'];
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

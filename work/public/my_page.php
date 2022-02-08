@@ -58,13 +58,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
 }
 
 
-// 夢日記取得
+// むかしの夢
 $stmt = $pdo->prepare(
-  "SELECT title FROM posts WHERE member_id = :id ORDER BY id DESC"
+  "SELECT title, id FROM posts WHERE member_id = :id ORDER BY id DESC"
 );
 $stmt->execute([':id' => $id]);
-$dream_titles = $stmt->fetchAll();
-var_dump($dream_titles);
+$past_dreams = $stmt->fetchAll();
 
 
 $title = 'マイページ - ';
@@ -202,17 +201,19 @@ include('../app/_parts/_header.php');
         <h2 class="dreams_title">むかしの夢</h2>
         <div class="dreams">
           <ul class="dream_items">
-          <?php if ($dream_titles === []): ?>
-                <li class="notdream">夢はまだ記録されていません</li>
-                <li class="notdream">夢日記をつけてみましょう</li>
-          <?php else: ?>
-            <?php foreach ($dream_titles as $dream_title):?>
-            <li>
-              <a href="">
-                            <?= h($dream_title['title']); ?></a>
-                            <?php endforeach; ?>
-              <?php endif; ?>
-            </li>
+            <li><a href="past_dream.php">おす</a></li>
+            <?php if ($past_dreams === []): ?>
+              <li class="notdream">夢はまだ記録されていません</li>
+              <li class="notdream">夢日記をつけてみましょう</li>
+            <?php else: ?>
+              <?php foreach ($past_dreams as $past_dream):?>
+                <li>
+                  <a href="past_dream.php?post_id=<?= h($past_dream['id']); ?>">
+                    <?= h($past_dream['title']); ?>
+                  </a>
+                </li>
+              <?php endforeach; ?>
+            <?php endif; ?>
           </ul>
         </div>  <!-- dreams -->
         <i class="bi bi-hand-index scroll"></i> 

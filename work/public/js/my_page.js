@@ -30,7 +30,7 @@
 
 
   // マイページタブメニュー 切り替え
-  const tab_titles = document.querySelectorAll('.tab li a');
+  const tab_titles = document.querySelectorAll('a.tab1, a.tab2');
   const contents = document.querySelectorAll('.content1, .content2')
 
   tab_titles.forEach(tab_title => {
