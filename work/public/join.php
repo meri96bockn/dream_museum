@@ -75,6 +75,10 @@ if ($form['password'] === '') {
 
 $title = '新規登録 - ';
 $this_css = 'form';
+$index = '';
+$dreams = '';
+$howto = '';
+$my_page = '';
 include(__DIR__ . '/../app/_parts/_header.php');
 ?>
 

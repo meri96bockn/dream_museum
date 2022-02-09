@@ -9,6 +9,10 @@ if (!isset($_SESSION['token'])) {
 
 $title = '登録完了 - ';
 $this_css = 'form';
+$index = '';
+$dreams = '';
+$howto = '';
+$my_page = '';
 include(__DIR__ . '/../app/_parts/_header.php');
 
 ?>

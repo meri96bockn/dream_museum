@@ -50,7 +50,7 @@ $this_css = 'form';
 $index = '';
 $dreams = '';
 $howto = '';
-$login = 'select';
+$my_page = '';
 include(__DIR__ . '/../app/_parts/_header.php');
 
 ?>

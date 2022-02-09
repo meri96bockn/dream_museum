@@ -355,6 +355,7 @@ button:hover {
 }
 
 .bi-hand-index.fade-out{
+  pointer-events: none;
   opacity: 0;
   transition: opacity 1s;
 }

@@ -31,6 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $title = '登録内容確認 - ';
 $this_css = 'form';
+$index = '';
+$dreams = '';
+$howto = '';
+$my_page = '';
 include(__DIR__ . '/../app/_parts/_header.php');
 
 ?>

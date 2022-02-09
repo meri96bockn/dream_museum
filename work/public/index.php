@@ -7,7 +7,7 @@ $this_css = 'top';
 $index = 'select';
 $dreams = '';
 $howto = '';
-$login = '';
+$my_page = '';
 include('../app/_parts/_header.php');
 
 ?>

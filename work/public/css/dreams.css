@@ -40,6 +40,7 @@
   align-items: center;
   width: 100%;
   max-width: 424px;
+  margin: 24px;
 
   border: ridge rgba(179, 176, 140, 0.9);
   border-radius: 16px;

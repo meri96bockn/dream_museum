@@ -7,7 +7,7 @@ $this_css = 'form';
 $index = '';
 $dreams = '';
 $howto = 'select';
-$login = '';
+$my_page = '';
 include('../app/_parts/_header.php');
 
 ?>

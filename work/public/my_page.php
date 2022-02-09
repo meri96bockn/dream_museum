@@ -68,6 +68,10 @@ $past_dreams = $stmt->fetchAll();
 
 $title = 'マイページ - ';
 $this_css = 'tab';
+$index = '';
+$dreams = '';
+$howto = '';
+$my_page = 'select';
 include('../app/_parts/_header.php');
 
 ?>
@@ -154,35 +158,35 @@ include('../app/_parts/_header.php');
           </div>
           <div class="radio_items">
               <div class="radio_item">
-                <input type="radio" name="emotion" id="emotion_1" value="たのしい"
+                <input type="radio" name="emotion" id="emotion_1" value="fun"
                 <?php if ($form['emotion'] === 'たのしい'): ?>
                 checked="checked"
                 <?php endif; ?>>
                 <label for="emotion_1" class="radio_title">たのしい</label>
               </div>
               <div class="radio_item">
-                <input type="radio" name="emotion" id="emotion_2" value="しあわせ"
+                <input type="radio" name="emotion" id="emotion_2" value="happy"
                 <?php if ($form['emotion'] === 'しあわせ'): ?>
                 checked="checked"
                 <?php endif; ?>>
                 <label for="emotion_2" class="radio_title">しあわせ</label>
               </div>
               <div class="radio_item">
-                <input type="radio" name="emotion" id="emotion_3" value="しんどい"
+                <input type="radio" name="emotion" id="emotion_3" value="hard"
                 <?php if ($form['emotion'] === 'しんどい'): ?>
                 checked="checked"
                 <?php endif; ?>>
                 <label for="emotion_3" class="radio_title">しんどい</label>
               </div>
               <div class="radio_item">
-                <input type="radio" name="emotion" id="emotion_4" value="こわい"
+                <input type="radio" name="emotion" id="emotion_4" value="scary"
                 <?php if ($form['emotion'] === 'こわい'): ?>
                 checked="checked"
                 <?php endif; ?>>
                 <label for="emotion_4" class="radio_title">こわい</label>
               </div>
               <div class="radio_item">
-                <input type="radio" name="emotion" id="emotion_5" value="忘れたい"
+                <input type="radio" name="emotion" id="emotion_5" value="forget"
                 <?php if ($form['emotion'] === '忘れたい'): ?>
                 checked="checked"
                 <?php endif; ?>>
@@ -201,7 +205,6 @@ include('../app/_parts/_header.php');
         <h2 class="dreams_title">むかしの夢</h2>
         <div class="dreams">
           <ul class="dream_items">
-            <li><a href="past_dream.php">おす</a></li>
             <?php if ($past_dreams === []): ?>
               <li class="notdream">夢はまだ記録されていません</li>
               <li class="notdream">夢日記をつけてみましょう</li>

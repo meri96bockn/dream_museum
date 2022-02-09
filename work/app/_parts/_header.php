@@ -27,7 +27,7 @@
         <ul>
           <li><a href="dreams.php">きょうの夢</a></li>
           <li><a href="howto.php">使い方</a></li>
-          <li><a href="login.php">ログイン</a></li>
+          <li><a href="my_page.php">マイページ</a></li>
         </ul>
         <ul>
           <li><a href="user_policy.php">利用規約</a></li>
@@ -49,7 +49,7 @@
           <a id="<?= h($howto); ?>" href="howto.php">使い方</a>
         </li>
         <li>
-          <a id="<?= h($login); ?>" href="login.php">ログイン</a>
+          <a id="<?= h($my_page); ?>" href="my_page.php">マイページ</a>
         </li>
       </ul>
     </nav>

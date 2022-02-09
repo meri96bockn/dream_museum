@@ -15,7 +15,4 @@
     overlay.classList.remove('show');
     open.classList.remove('hide');
   });
-
-  
-  
 }

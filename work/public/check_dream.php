@@ -35,11 +35,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $title = '夢日記内容確認 - ';
 $this_css = 'post';
+$index = '';
+$dreams = '';
+$howto = '';
+$my_page = '';
 include('../app/_parts/_header.php');
 
 ?>
 
 <div class="container">
+  <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
     <h1>
       <?php if (isset($form['tag']) && ($form['tag'] === 'yes_tag')): ?>
         <i class="bi bi-award"></i>
@@ -66,7 +71,6 @@ include('../app/_parts/_header.php');
       <button type="button" onclick=location.href="my_page.php?action=rewrite">変更</button>
       <button>記録</button>
       <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-
     </div>
   </form>
 </div>

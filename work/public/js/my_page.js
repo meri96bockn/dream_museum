@@ -70,10 +70,4 @@
     setTimeout(fadeOut, 2000);
   }
 
-  // ブラウザバックしたらページリロード
-  // window.addEventListener('pageshow',()=>{
-  //   if(window.performance.navigation.type==2) location.reload();
-  // });
-  
-
 }

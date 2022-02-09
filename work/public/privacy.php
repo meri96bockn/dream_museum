@@ -4,6 +4,10 @@ require(__DIR__ . '/../app/functions.php');
 
 $title = 'プライバシーポリシー - ';
 $this_css = 'form';
+$index = '';
+$dreams = '';
+$howto = '';
+$my_page = '';
 include('../app/_parts/_header.php');
 
 ?>
