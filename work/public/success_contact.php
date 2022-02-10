@@ -9,7 +9,7 @@ if (!isset($_SESSION['token'])) {
   unset($_SESSION['token']);
 }
 
-$title = '登録完了 - ';
+$title = 'お問い合わせ完了 - ';
 $this_css = 'form';
 $index = '';
 $dreams = '';
@@ -21,12 +21,12 @@ include(__DIR__ . '/../app/_parts/_header.php');
 
 <div class="forms">
   <div class="form_title">
-    <h1>新規登録</h1>
+    <h1>お問い合わせ</h1>
   </div>
   <div class="form">
-    <p class="success">登録が完了しました。</p>
-    <p class="success">ログインできます。</p>
-    <button type="button" onclick=location.href="login.php">ログイン</button>
+    <p class="success">お問い合わせいただき、ありがとうございました。</p>
+    <p class="success">トップページにお戻りください。</p>
+    <button type="button" onclick=location.href="index.php">DreamMuseum</button>
   </div>
 </div>
 

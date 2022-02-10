@@ -47,7 +47,7 @@ $index = '';
 $dreams = '';
 $howto = '';
 $my_page = '';
-include('../app/_parts/_header.php');
+include(__DIR__ . '/../app/_parts/_header.php');
 
 ?>
 
@@ -56,10 +56,10 @@ include('../app/_parts/_header.php');
       <h1>お問い合わせ</h1>
     </div>
     <div class="form">
-      <form action="process.php" method="post">
+      <form action="" method="post" autocomplete="off">
         <div class="form_item">
           <label for="name">お名前</label>
-          <input type="text" id="name" maxlength="255" value="<?= h($form['name']); ?>" autocomplete="off">
+          <input type="text" name="name" id="name" maxlength="255" value="<?= h($form['name']); ?>">
         </div>
         <div class="error">
         <?php if (isset($error['name']) && $error['name'] === 'blank'):?>
@@ -68,7 +68,7 @@ include('../app/_parts/_header.php');
         </div>
         <div class="form_item">
           <label for="email">メールアドレス</label>
-          <input type="email" id="email" maxlength="255" placeholder="（例）yumemiruko@gmail.com" value="<?= h($form['email']); ?>">
+          <input type="email" name="email" id="email" maxlength="255" placeholder="（例）yumemiruko@gmail.com" value="<?= h($form['email']); ?>">
         </div>
         <div class="error">
         <?php if (isset($error['email']) && $error['email'] === 'blank'): ?>
@@ -77,7 +77,7 @@ include('../app/_parts/_header.php');
         </div>
         <div class="form_item">
           <label for="message">お問い合わせ内容</label>
-          <textarea name="message" id="message" rows="10"></textarea>
+          <textarea name="message" id="message" rows="10"><?= h($form['message']); ?></textarea>
         </div>
         <div class="error">
         <?php if (isset($error['message']) && $error['message'] === 'blank'): ?>
@@ -85,6 +85,7 @@ include('../app/_parts/_header.php');
           <?php endif; ?>
         </div>
         <button>送信</button>
+        <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
       </form>
     </div>
   </div>

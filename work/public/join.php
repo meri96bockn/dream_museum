@@ -139,6 +139,5 @@ include('../app/_parts/_footer.php');
 
 ?>
 <script src="js/main.js"></script>
-<script src="js/join.js"></script>
 </body>
 </html>

@@ -87,13 +87,12 @@
   background-color: rgb(186, 202, 219);
 }
 
-.content1.active, .content2.active {
+
+/* diary */
+.content1.active {
   display: block;
 }
 
-
-
-/* diary */
 .content1 h2 {
   font-size: 16px;
   margin-bottom: 40px;
@@ -227,9 +226,12 @@ button:hover {
 }
 
 
-/* dreams */
-.content2 {
+/* past_dream */
+.content2.active {
+  display: flex;
   padding: 88px 0 64px;
+  flex-direction: column;
+  gap: 120px;
 }
 
 .dreams_container {
@@ -313,7 +315,7 @@ button:hover {
   opacity: 0;
 
   position: absolute;
-  top: 62%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
@@ -339,16 +341,16 @@ button:hover {
 
 @keyframes move{
   0% {
-    top: 62%;
+    top: 40%;
     opacity: 1;
   }
   50% {
-    top: 55%;
+    top: 30%;
     transform: rotate(-25deg);
     opacity: 1;
   }
   100% {
-    top: 55%;
+    top: 30%;
     opacity: 0;
     transform: rotate(-25deg);
   }
@@ -390,24 +392,24 @@ button:hover {
 
   /* スクロールアイコン */
   .bi-hand-index {
-    top: 55%;
+    top: 40%;
   }
   
   .bi-hand-index.fade-out{
-    top: 55%;
+    top: 40%;
   }
   
   @keyframes move{
     0% {
-      top: 55%;
+      top: 40%;
     }
     50% {
-      top: 45%;
+      top: 30%;
       transform: rotate(-25deg);
       opacity: 1;
     }
     100% {
-      top: 45%;
+      top: 30%;
       opacity: 0;
       transform: rotate(-25deg);
     }

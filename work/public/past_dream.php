@@ -60,7 +60,7 @@ include('../app/_parts/_header.php');
       </h1>
       <div>
         <p>
-          <?php if ($past_dream['emotion'] !== ''): ?>
+          <?php if ($past_dream['tag'] === 'yes_tag'): ?>
             <i class="bi bi-tag-fill"></i>
           <?= h($past_dream['emotion']); ?>
           <?php endif; ?>

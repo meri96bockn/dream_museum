@@ -5,6 +5,8 @@ require('../app/functions.php');
 if (!isset($_SESSION['token'])) {
   header('Location: index.php');
   exit;
+} else {
+  unset($_SESSION['token']);
 }
 
 $title = '記録完了 - ';

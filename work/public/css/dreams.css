@@ -28,7 +28,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 120px;
+  gap: 80px;
   background-color: rgb(30, 90, 140, .2);
   padding: 120px 0px;
 }
@@ -103,10 +103,6 @@
 
 /* large screen */
 @media (min-width: 1000px) {
-  .dreams_container {
-    flex-wrap: wrap;
-  }
-
   .emotions_area {
     flex-direction: row;
     flex-wrap: wrap;

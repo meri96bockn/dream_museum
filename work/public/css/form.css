@@ -78,6 +78,11 @@ input, textarea {
   border-radius: 8px;
 }
 
+.check dd.message {
+  display: flex;
+  text-align: left;
+}
+
 .check .bi {
   margin-right: 4px;
 }

@@ -65,6 +65,13 @@ $stmt = $pdo->prepare(
 $stmt->execute([':id' => $id]);
 $past_dreams = $stmt->fetchAll();
 
+// 寄贈された夢
+$stmt = $pdo->prepare(
+  "SELECT title, id FROM posts WHERE member_id = :id AND tag = 'yes_tag' ORDER BY id DESC"
+);
+$stmt->execute([':id' => $id]);
+$emotions = $stmt->fetchAll();
+
 
 $title = 'マイページ - ';
 $this_css = 'tab';
@@ -206,13 +213,34 @@ include('../app/_parts/_header.php');
         <div class="dreams">
           <ul class="dream_items">
             <?php if ($past_dreams === []): ?>
-              <li class="notdream">夢はまだ記録されていません</li>
+              <li class="notdream">記録された夢はまだありません</li>
               <li class="notdream">夢日記をつけてみましょう</li>
             <?php else: ?>
               <?php foreach ($past_dreams as $past_dream):?>
                 <li>
                   <a href="past_dream.php?post_id=<?= h($past_dream['id']); ?>">
                     <?= h($past_dream['title']); ?>
+                  </a>
+                </li>
+              <?php endforeach; ?>
+            <?php endif; ?>
+          </ul>
+        </div>  <!-- dreams -->
+        <i class="bi bi-hand-index scroll"></i> 
+      </div>  <!-- dreams_container -->
+
+      <div class="dreams_container">
+        <h2 class="dreams_title">寄贈した夢</h2>
+        <div class="dreams">
+          <ul class="dream_items">
+            <?php if ($emotions === []): ?>
+              <li class="notdream">寄贈された夢はまだありません</li>
+              <li class="notdream">あなたの夢をお待ちしております</li>
+            <?php else: ?>
+              <?php foreach ($emotions as $emotion):?>
+                <li>
+                  <a href="past_dream.php?post_id=<?= h($emotion['id']); ?>">
+                    <?= h($emotion['title']); ?>
                   </a>
                 </li>
               <?php endforeach; ?>
