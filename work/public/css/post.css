@@ -5,7 +5,7 @@
   justify-content: center;
   margin: 0 auto;
   color: rgb(80, 100, 140);
-
+  width: 90%;
 }
 
 .tab {
@@ -329,6 +329,11 @@ button:hover {
   transition: opacity 1s;
 }
 
+
+/* pastdream */
+.bi-award, .bi-tag-fill {
+  color: rgba(179, 176, 140, 0.9);
+}
 
 /* medium screen */
 @media (min-width: 600px) {
