@@ -26,7 +26,9 @@ include(__DIR__ . '/../app/_parts/_header.php');
   <div class="form">
     <p class="success">登録が完了しました。</p>
     <p class="success">ログインできます。</p>
-    <button type="button" onclick=location.href="login.php">ログイン</button>
+    <div class="button">
+      <button type="button" onclick=location.href="login.php">ログイン</button>
+    </div>
   </div>
 </div>
 

@@ -26,7 +26,9 @@ include(__DIR__ . '/../app/_parts/_header.php');
   <div class="form">
     <p class="success">夢日記を記録しました。</p>
     <p class="success">マイページにもどります。</p>
-    <button type="button" onclick=location.href="my_page.php">マイページ</button>
+    <div class="button">
+      <button type="button" onclick=location.href="my_page.php">マイページ</button>
+    </div>
   </div>
 </div>
 

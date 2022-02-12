@@ -127,8 +127,10 @@ include(__DIR__ . '/../app/_parts/_header.php');
         <p>* パスワードが一致していません</p>
         <?php endif; ?>
       </div>
-      <button>入力内容を確認する</button>
-      <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+      <div class="button">
+        <button>入力内容を確認する</button>
+        <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+      </div>
     </form>
   </div>
 </div>

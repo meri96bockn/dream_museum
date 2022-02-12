@@ -60,40 +60,47 @@ include('../app/_parts/_header.php');
     <p>この夢日記は削除されたか、ご指定のURLが間違っている可能性があります。</p>
   <?php else: ?>
     <?php foreach ($past_dreams as $past_dream):?>
-      <h1>
+  <div class="tag">
         <?php if ($past_dream['tag'] === 'yes_tag'): ?>
           <i class="bi bi-award"></i>
         <?php endif; ?>
-        <?= h($past_dream['title']); ?>
-      </h1>
-      <div>
-        <p>
-          <?php if ($past_dream['tag'] === 'yes_tag'): ?>
-            <i class="bi bi-tag-fill"></i>
-          <?= h($past_dream['emotion']); ?>
-          <?php endif; ?>
-        </p>
-        <p>
-          <i class="bi bi-person-circle"></i>
-          <?= h($name); ?>
-        </p>
-        <p><?= h($past_dream['created']); ?></p>
-      </div>
-      <div class="content">
-        <?= h($past_dream['content']); ?>
-      </div>
+    <div class="emotion">
+    <?php if ($past_dream['tag'] === 'yes_tag'): ?>
+        <i class="bi bi-tag-fill"></i><?= h($past_dream['emotion']); ?>
+      <?php endif; ?>
+    </div>
+  </div>
+  <div>
+    <h1>
+    <?= h($past_dream['title']); ?>
+    </h1>
+  </div>
+  
+  <div class="content">
+  <?= h($past_dream['content']); ?>
+  </div>
+  <div class="info">
+    <p>
+    <?= h($past_dream['created']); ?>
+  </p>
+    <p>
+      <i class="bi bi-person-circle"></i>
+      <?= h($name); ?>
+    </p>
+    </div>
+
       <div class="button">
         <?php if ($past_dream['tag'] === 'yes_tag'): ?>
         <form action="" method="POST" id="action" onsubmit="return tag()">
           <button form='action'>非公開にする</button>
           <input type="hidden" name="type" value="action">
         </form>
-        <?php endif; ?>
+        <?php endif;?>
         <form action="" method="POST" id="delete" onsubmit="return del()">
           <button form="delete">削除</button>
           <input type="hidden" name="type" value="bye">
+        </div>
         </form>
-      </div>
     <?php endforeach; ?>
   <?php endif; ?>
 </div>

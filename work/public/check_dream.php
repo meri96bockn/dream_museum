@@ -45,33 +45,42 @@ include('../app/_parts/_header.php');
 
 <div class="container">
   <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
-    <h1>
-      <?php if (isset($form['tag']) && ($form['tag'] === 'yes_tag')): ?>
+
+  <div class="tag">
+    <?php if (isset($form['tag']) && ($form['tag'] === 'yes_tag')): ?>
         <i class="bi bi-award"></i>
+    <?php endif; ?>
+    <div class="emotion">
+      <?php if (isset($form['emotion']) && !($form['emotion'] === '')): ?>
+        <i class="bi bi-tag-fill"></i><?= h($form['emotion']);?>
       <?php endif; ?>
+    </div>
+  </div>
+  <div>
+    <h1>
       <?= h($form['title']); ?>
     </h1>
-    <div>
-      <p>
-        <?php if (isset($form['emotion']) && !($form['emotion'] === '')): ?>
-          <i class="bi bi-tag-fill"></i>
-        <?= h($form['emotion']);?></p>
-        <?php endif; ?>
-      </p>
-      <p>
-        <i class="bi bi-person-circle"></i>
-        <?= h($form['name']); ?>
-      </p>
-      <p><?= date("Y/m/d H:i"); ?></p>
-    </div>
-    <div class="content">
-      <?= nl2br(h($form['content'])); ?>
-    </div>
-    <div class="button">
-      <button type="button" onclick=location.href="my_page.php?action=rewrite">変更</button>
-      <button>記録</button>
-      <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-    </div>
+  </div>
+
+  
+  <div class="content">
+    <?= nl2br(h($form['content'])); ?>
+  </div>
+  <div class="info">
+    <p>
+      <?= date("Y/m/d H:i"); ?>
+    </p>
+    <p>
+      <i class="bi bi-person-circle"></i>
+      <?= h($form['name']); ?>
+    </p>
+     
+  </div>
+  <div class="button">
+    <button type="button" onclick=location.href="my_page.php?action=rewrite">変更</button>
+    <button>記録</button>
+    <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+  </div>
   </form>
 </div>
 

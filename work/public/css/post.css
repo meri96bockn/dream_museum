@@ -5,7 +5,7 @@
   justify-content: center;
   margin: 0 auto;
   color: rgb(80, 100, 140);
-  width: 90%;
+  width: 88%;
 }
 
 .tab {
@@ -171,12 +171,15 @@ input:focus, textarea:focus {
   animation-duration: .6s;
 }
 
-
+.button {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2vh;
+  margin-top: 8vh;
+}
 
 button {
-  display: block;
-  margin: 0 auto;
-  margin-top: 12px;
   font-size: 16px;
   color: rgb(80, 100, 140);
   border: none;
@@ -324,9 +327,51 @@ button:hover {
 
 
 /* pastdream */
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2vh;
+}
+
+div + div {
+  margin-top: 4vh;
+}
+
+.tag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 14px;
+}
+
+.container h1 {
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: center;
+}
+
 .bi-award, .bi-tag-fill {
   color: rgba(179, 176, 140, 0.9);
 }
+
+.bi-award {
+  font-size: 3em;
+  vertical-align: middle;
+  line-height: 0;
+}
+
+.content {
+  border-top: dotted rgb(80, 100, 140, .1);
+  border-bottom: dotted rgb(80, 100, 140, .1);
+  padding: 60px 0;
+  /* margin: 40px 0; */
+  font-size: 14px;
+}
+
+.info {
+  font-size: 12px;
+}
+
 
 /* medium screen */
 @media (min-width: 600px) {
