@@ -250,7 +250,7 @@ include('../app/_parts/_header.php');
         <i class="bi bi-hand-index scroll"></i> 
       </div>  <!-- dreams_container -->
     </div> <!-- content2 -->
-</div>
+  </div>
 </div>
 
 

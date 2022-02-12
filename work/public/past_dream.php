@@ -23,19 +23,27 @@ $stmt->execute([
 $past_dreams = $stmt->fetchAll();
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-$stmt = $pdo->prepare(
-  "DELETE FROM posts WHERE id = :post_id AND member_id = :members_id"
-);
-$stmt->execute([
-  ':post_id' => $post_id,
-  ':members_id' => $id
-]);
-
-header('Location: my_page.php');
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) && $_POST['type'] === 'action') {
+  $stmt = $pdo->prepare(
+    "UPDATE posts SET tag = 'no_tag', emotion = '' WHERE id = :post_id AND member_id = :members_id"
+  );
+  $stmt->execute([
+    ':post_id' => $post_id,
+    ':members_id' => $id
+  ]);
+  header('Location: my_page.php');
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['type'] === 'bye') {
+  $stmt = $pdo->prepare(
+    "DELETE FROM posts WHERE id = :post_id AND member_id = :members_id"
+  );
+  $stmt->execute([
+    ':post_id' => $post_id,
+    ':members_id' => $id
+  ]);
+  header('Location: my_page.php');
+  }
 
 $title = 'むかしの夢 - ';
 $this_css = 'post';
@@ -75,22 +83,33 @@ include('../app/_parts/_header.php');
         <?= h($past_dream['content']); ?>
       </div>
       <div class="button">
-        <form action="" method="POST" onsubmit="return del()">
-          <button>削除</button>
-      </form>
+        <?php if ($past_dream['tag'] === 'yes_tag'): ?>
+        <form action="" method="POST" id="action" onsubmit="return tag()">
+          <button form='action'>非公開にする</button>
+          <input type="hidden" name="type" value="action">
+        </form>
+        <?php endif; ?>
+        <form action="" method="POST" id="delete" onsubmit="return del()">
+          <button form="delete">削除</button>
+          <input type="hidden" name="type" value="bye">
+        </form>
       </div>
     <?php endforeach; ?>
   <?php endif; ?>
 </div>
 
 <?php
-
 include('../app/_parts/_footer.php');
 
 ?>
 <script>
   function del() {
     const select = confirm('本当に削除しますか？');
+    return select;
+  }
+
+  function tag() {
+    const select = confirm('タグを外して非公開にしますか？');
     return select;
   }
 </script>
