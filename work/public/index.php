@@ -5,9 +5,6 @@ require(__DIR__ . '/../app/functions.php');
 $title = '';
 $this_css = 'top';
 $index = 'select';
-$dreams = '';
-$howto = '';
-$my_page = '';
 include('../app/_parts/_header.php');
 
 ?>

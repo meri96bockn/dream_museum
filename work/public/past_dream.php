@@ -28,8 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) && $_POST['ty
     "UPDATE posts SET tag = 'no_tag', emotion = '' WHERE id = :post_id AND member_id = :members_id"
   );
   $stmt->execute([
-    ':post_id' => $post_id,
-    ':members_id' => $id
+    'post_id' => $post_id,
+    'members_id' => $id
   ]);
   header('Location: my_page.php');
 }
@@ -47,10 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
 
 $title = 'むかしの夢 - ';
 $this_css = 'post';
-$index = '';
-$dreams = '';
-$howto = '';
-$my_page = '';
+$my_page = 'select';
 include('../app/_parts/_header.php');
 
 ?>
@@ -60,47 +57,48 @@ include('../app/_parts/_header.php');
     <p>この夢日記は削除されたか、ご指定のURLが間違っている可能性があります。</p>
   <?php else: ?>
     <?php foreach ($past_dreams as $past_dream):?>
-  <div class="tag">
-        <?php if ($past_dream['tag'] === 'yes_tag'): ?>
-          <i class="bi bi-award"></i>
+      <div class="tag">
+        <?php if (isset($past_dream['tag']) && ($past_dream['tag'] === 'yes_tag')): ?>
+            <i class="bi bi-award gold"></i>
         <?php endif; ?>
-    <div class="emotion">
-    <?php if ($past_dream['tag'] === 'yes_tag'): ?>
-        <i class="bi bi-tag-fill"></i><?= h($past_dream['emotion']); ?>
-      <?php endif; ?>
-    </div>
-  </div>
-  <div>
-    <h1>
-    <?= h($past_dream['title']); ?>
-    </h1>
-  </div>
-  
-  <div class="content">
-  <?= h($past_dream['content']); ?>
-  </div>
-  <div class="info">
-    <p>
-    <?= h($past_dream['created']); ?>
-  </p>
-    <p>
-      <i class="bi bi-person-circle"></i>
-      <?= h($name); ?>
-    </p>
-    </div>
-
+        <?php if (isset($past_dream['tag']) && ($past_dream['tag'] === 'no_tag')): ?>
+            <i class="bi bi-award normal"></i>
+        <?php endif; ?>
+        <div class="emotion">
+          <?php if ($past_dream['tag'] === 'yes_tag'): ?>
+            <i class="bi bi-tag-fill"></i><?= h($past_dream['emotion']); ?>
+          <?php endif; ?>
+        </div>
+      </div>
+      <div>
+        <h1>
+        <?= h($past_dream['title']); ?>
+        </h1>
+      </div>
+      <div class="content">
+        <?= nl2br(h($past_dream['content'])); ?>
+      </div>
+      <div class="info">
+        <p>
+        <?= h($past_dream['created']); ?>
+        </p>
+        <p>
+          <i class="bi bi-person-circle"></i>
+          <?= h($name); ?>
+        </p>
+      </div>
       <div class="button">
         <?php if ($past_dream['tag'] === 'yes_tag'): ?>
-        <form action="" method="POST" id="action" onsubmit="return tag()">
-          <button form='action'>非公開にする</button>
-          <input type="hidden" name="type" value="action">
-        </form>
+          <form action="" method="POST" id="action" onsubmit="return tag()">
+            <button form='action'>非公開にする</button>
+            <input type="hidden" name="type" value="action">
+          </form>
         <?php endif;?>
-        <form action="" method="POST" id="delete" onsubmit="return del()">
-          <button form="delete">削除</button>
-          <input type="hidden" name="type" value="bye">
+          <form action="" method="POST" id="delete" onsubmit="return del()">
+            <button form="delete">削除</button>
+            <input type="hidden" name="type" value="bye">
+          </form>
         </div>
-        </form>
     <?php endforeach; ?>
   <?php endif; ?>
 </div>

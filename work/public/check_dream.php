@@ -35,12 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $title = '夢日記内容確認 - ';
 $this_css = 'post';
-$index = '';
-$dreams = '';
-$howto = '';
-$my_page = '';
+$my_page = 'select';
 include('../app/_parts/_header.php');
-
 ?>
 
 <div class="container">
@@ -48,6 +44,9 @@ include('../app/_parts/_header.php');
 
   <div class="tag">
     <?php if (isset($form['tag']) && ($form['tag'] === 'yes_tag')): ?>
+        <i class="bi bi-award gold"></i>
+    <?php endif; ?>
+    <?php if (isset($form['tag']) && ($form['tag'] === 'no_tag')): ?>
         <i class="bi bi-award"></i>
     <?php endif; ?>
     <div class="emotion">
@@ -68,7 +67,7 @@ include('../app/_parts/_header.php');
   </div>
   <div class="info">
     <p>
-      <?= date("Y/m/d H:i"); ?>
+      <?= date("Y-m-d H:i:s"); ?>
     </p>
     <p>
       <i class="bi bi-person-circle"></i>

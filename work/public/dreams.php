@@ -46,10 +46,7 @@ require(__DIR__ . '/../app/functions.php');
 
 $title = 'きょうの夢 - ';
 $this_css = 'dreams';
-$index = '';
 $dreams = 'select';
-$howto = '';
-$my_page = '';
 include('../app/_parts/_header.php');
 
 ?>

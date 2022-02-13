@@ -39,6 +39,10 @@
   color: rgb(80, 100, 140);
 }
 
+.form_item.leave {
+  margin-top: 40px;
+}
+
 .success {
   color: rgb(80, 100, 140);
   text-align: center;
@@ -183,7 +187,6 @@ button:hover {
   box-shadow: none;
   transform: translate(4px, 2px);
 }
-
 
 
 /* medium screen */

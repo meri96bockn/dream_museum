@@ -11,10 +11,7 @@ if (!isset($_SESSION['token'])) {
 
 $title = '記録完了 - ';
 $this_css = 'form';
-$index = '';
-$dreams = '';
-$howto = '';
-$my_page = '';
+$my_page = 'select';
 include(__DIR__ . '/../app/_parts/_header.php');
 
 ?>

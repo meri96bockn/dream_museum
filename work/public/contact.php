@@ -43,10 +43,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
 
 $title = 'お問い合わせ - ';
 $this_css = 'form';
-$index = '';
-$dreams = '';
-$howto = '';
-$my_page = '';
 include(__DIR__ . '/../app/_parts/_header.php');
 
 ?>
@@ -84,8 +80,10 @@ include(__DIR__ . '/../app/_parts/_header.php');
           <p>* お問い合わせ内容を入力してください</p>
           <?php endif; ?>
         </div>
-        <button>送信</button>
-        <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+        <div class="button">
+          <button>送信</button>
+          <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+        </div>
       </form>
     </div>
   </div>

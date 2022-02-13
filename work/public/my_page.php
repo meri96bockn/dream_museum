@@ -75,9 +75,6 @@ $emotions = $stmt->fetchAll();
 
 $title = 'マイページ - ';
 $this_css = 'tab';
-$index = '';
-$dreams = '';
-$howto = '';
 $my_page = 'select';
 include('../app/_parts/_header.php');
 
@@ -166,44 +163,46 @@ include('../app/_parts/_header.php');
           <div class="radio_items">
               <div class="radio_item">
                 <input type="radio" name="emotion" id="emotion_1" value="fun"
-                <?php if ($form['emotion'] === 'たのしい'): ?>
+                <?php if ($form['emotion'] === 'fun'): ?>
                 checked="checked"
                 <?php endif; ?>>
                 <label for="emotion_1" class="radio_title">たのしい</label>
               </div>
               <div class="radio_item">
                 <input type="radio" name="emotion" id="emotion_2" value="happy"
-                <?php if ($form['emotion'] === 'しあわせ'): ?>
+                <?php if ($form['emotion'] === 'happy'): ?>
                 checked="checked"
                 <?php endif; ?>>
                 <label for="emotion_2" class="radio_title">しあわせ</label>
               </div>
               <div class="radio_item">
                 <input type="radio" name="emotion" id="emotion_3" value="hard"
-                <?php if ($form['emotion'] === 'しんどい'): ?>
+                <?php if ($form['emotion'] === 'hard'): ?>
                 checked="checked"
                 <?php endif; ?>>
                 <label for="emotion_3" class="radio_title">しんどい</label>
               </div>
               <div class="radio_item">
                 <input type="radio" name="emotion" id="emotion_4" value="scary"
-                <?php if ($form['emotion'] === 'こわい'): ?>
+                <?php if ($form['emotion'] === 'scary'): ?>
                 checked="checked"
                 <?php endif; ?>>
                 <label for="emotion_4" class="radio_title">こわい</label>
               </div>
               <div class="radio_item">
                 <input type="radio" name="emotion" id="emotion_5" value="forget"
-                <?php if ($form['emotion'] === '忘れたい'): ?>
+                <?php if ($form['emotion'] === 'forget'): ?>
                 checked="checked"
                 <?php endif; ?>>
                 <label for="emotion_5" class="radio_title">忘れたい</label>
               </div>
            </div>
          </div>
-        <button>内容を確認する</button>
-        <input type="hidden" name="token" value="<?=  h($_SESSION['token']); ?>">
-        </form>
+         <div class="button">
+           <button>内容を確認する</button>
+           <input type="hidden" name="token" value="<?=  h($_SESSION['token']); ?>">
+         </div>
+      </form>
     </div>
 
     <!-- タブメニューむかしの夢 -->

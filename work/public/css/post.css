@@ -350,7 +350,7 @@ div + div {
   text-align: center;
 }
 
-.bi-award, .bi-tag-fill {
+.bi-award.gold, .bi-tag-fill, .emotion {
   color: rgba(179, 176, 140, 0.9);
 }
 

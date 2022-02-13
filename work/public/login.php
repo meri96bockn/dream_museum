@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $_SESSION['id'] = $row['id'];
       $_SESSION['name'] = $row['username'];
       header('Location: my_page.php');
-      exit();
+      exit;
     } else {
       $error['login'] = 'failed';
     }
@@ -47,10 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $title = 'ログイン - ';
 $this_css = 'form';
-$index = '';
-$dreams = '';
-$howto = '';
-$my_page = '';
 include(__DIR__ . '/../app/_parts/_header.php');
 
 ?>
@@ -85,8 +81,10 @@ include(__DIR__ . '/../app/_parts/_header.php');
           <p>* メールアドレスまたはパスワードを正しく入力してください</p>
         <?php endif; ?>
       </div>
-      <button>ログイン</button>
-      <input type="hidden" name="token" value="<?=  h($_SESSION['token']); ?>">
+      <div class="button">
+        <button>ログイン</button>
+        <input type="hidden" name="token" value="<?=  h($_SESSION['token']); ?>">
+      </div>
     </form>
   </div>
 </div>

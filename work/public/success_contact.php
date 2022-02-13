@@ -11,10 +11,6 @@ if (!isset($_SESSION['token'])) {
 
 $title = 'お問い合わせ完了 - ';
 $this_css = 'form';
-$index = '';
-$dreams = '';
-$howto = '';
-$my_page = '';
 include(__DIR__ . '/../app/_parts/_header.php');
 
 ?>
