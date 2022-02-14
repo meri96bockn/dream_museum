@@ -2,19 +2,54 @@
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
 createToken();
-
-
-if (isset($_GET['action']) && $_GET['action'] === 'rewrite' && isset($_SESSION['form'])) {
-  $form = $_SESSION['form'];
-} else {
-  $form = [
-    'name' => '',
-    'email' => '',
-    'password' => ''
-  ];
-}
+$form = [
+  'name' => '',
+  'email' => '',
+  'password' => ''
+];
 $re_password = '';
 $error = [];
+
+if(isset($_GET['urltoken'])) {
+  $urltoken = isset($_GET["urltoken"]) ? $_GET["urltoken"] : NULL;
+  $sql = "SELECT flag FROM pre_members WHERE urltoken=(:urltoken)";
+  $stm = $pdo->prepare($sql);
+  $stm->bindValue(':urltoken', $urltoken, PDO::PARAM_STR);
+  $stm->execute();
+  $row = $stm->fetch();
+
+  if ($row['flag'] === 1) {
+    header("Location: pre_join.php");
+    exit;
+  } elseif ($urltoken === '') {
+    $error['urltoken'] = "notfind";
+  } else {
+    try {
+      $sql = "SELECT email FROM pre_members WHERE urltoken=(:urltoken) AND flag = 0 AND date > now() - interval 24 hour";
+      $stm = $pdo->prepare($sql);
+      $stm->bindValue(':urltoken', $urltoken, PDO::PARAM_STR);
+      $stm->execute();
+      $row_count = $stm->rowCount();
+      if ($row_count === 1) {
+        $email_array = $stm->fetch();
+        $email = $email_array["email"];
+      } else {
+        $error['urltoken'] = "notuse";
+      }
+      //データベース接続切断
+      $stm = null;
+    } catch (PDOException $e) {
+      print('Error:'.$e->getMessage());
+      die();
+    }
+  }
+} elseif (!isset($_GET['urltoken'])) {
+  header("Location: pre_join.php");
+}
+
+if (isset($_SESSION['form'])) {
+  $form = $_SESSION['form'];
+}
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
@@ -25,25 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
     $error['name'] = 'alphanumeric';
   }
 
-  $form['email'] = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-  if ($form['email'] === '') {
-    $error['email'] = 'blank';
-  } else {
-    $stmt = $pdo->prepare(
-      "SELECT COUNT(*)
-      FROM members
-      WHERE email = :email"
-      );
-      $stmt->bindvalue(
-        ':email', $form['email'], PDO::PARAM_STR
-      );
-      $stmt->execute();
-      $counts = $stmt->fetch();
-
-      if ($counts['COUNT(*)'] > 0) {
-        $error['email'] = 'duplicate';
-      }
-    }
+  $form['email'] = $email;
 
   $form['password'] = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
   if (!preg_match('/\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{8,100}+\z/i', $form['password'])) {
@@ -57,8 +74,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
     $re_password = '';
   }
 
+
   if (empty($error)) {
     $_SESSION['form'] = $form;
+    $_SESSION['urltoken'] = $urltoken;
     header('Location: check.php');
     exit;
   }
@@ -73,14 +92,36 @@ if ($form['password'] === '') {
 }
 
 
-$title = '新規登録 - ';
+$title = '本会員登録 - ';
 $this_css = 'form';
 include(__DIR__ . '/../app/_parts/_header.php');
 ?>
 
+<?php if (isset($error['urltoken'])): ?>
 <div class="forms">
   <div class="form_title">
-    <h1>新規登録</h1>
+    <h1>本会員登録</h1>
+  </div>
+  <div class="form">
+    <div class="form_item">
+      <?php if (isset($error['urltoken']) && $error['urltoken'] === "notfind"): ?>
+      <div class="error">
+        <p>* トークンがありません。</p>
+      </div>
+      <?php endif; ?>
+      <?php if (isset($error['urltoken']) && $error['urltoken'] === "notuse"): ?>
+      <div class="error">
+        <p>* このURLはご利用できません。有効期限が過ぎたかURLが間違えている可能性がございます。もう一度登録をやりなおして下さい。</p>
+      </div>
+      <?php endif; ?>
+    </div>
+  </div>
+</div>
+ <?php else: ?>
+
+<div class="forms">
+  <div class="form_title">
+    <h1>本会員登録</h1>
   </div>
   <div class="form">
     <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
@@ -93,18 +134,10 @@ include(__DIR__ . '/../app/_parts/_header.php');
           <p>* ユーザーネームは半角英数字で入力してください</p>
         <?php endif; ?>
       </div>
-      <div class="form_item">
-        <label for="email">メールアドレス</label>
-        <input type="email" name="email" id="email" maxlength="255" placeholder="（例）yumemi@gmail.com" value="<?= h($form['email']); ?>">
-      </div>
-      <div class="error">
-        <?php if (isset($error['email']) && $error['email'] === 'blank'): ?>
-        <p>* メールアドレスを入力してください</p>
-        <?php endif; ?>
-        <?php if (isset($error['email']) && $error['email'] === 'duplicate'):?>
-        <p>* ご指定のメールアドレスはすでに登録されています</p>
-        <?php endif; ?>
-      </div>
+      <dl class="form_item check">
+        <dt>メールアドレス</dt>
+        <dd><i class="bi bi-chevron-double-right"></i><?= h($email); ?></dd>
+      </dl>
       <div class="form_item">
         <label for="password">パスワード</label>
         <input type="password" name="password" id="password" placeholder="（例）yume36ko" value="<?= h($form['password']); ?>">
@@ -130,9 +163,9 @@ include(__DIR__ . '/../app/_parts/_header.php');
     </form>
   </div>
 </div>
+<?php endif; ?>
 
 <?php
-
 include('../app/_parts/_footer.php');
 
 ?>

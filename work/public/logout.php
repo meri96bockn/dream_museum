@@ -35,7 +35,7 @@ include('../app/_parts/_header.php');
   </div>
   <div class="form">
     <form action="" method="post" enctype="multipart/form-data" autocomplete="off" onsubmit="return settings()">
-      <div class="form_item">
+      <div class="form_item caution">
       <p>ログアウトしてよろしければ、<br>下のボタンをタップしてください。</p>
       </div>
       

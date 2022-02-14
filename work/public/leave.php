@@ -67,8 +67,8 @@ include('../app/_parts/_header.php');
   </div>
   <div class="form">
     <form action="" method="post" enctype="multipart/form-data" autocomplete="off" onsubmit="return settings()">
-      <div class="form_item">
-      <p>退会すると、<br>夢日記はすべて削除されます。<br>退会してよろしければ、<br>パスワードを入力のうえ、<br>下のボタンをタップしてください。</p>
+      <div class="form_item caution">
+      <p>退会すると、夢日記はすべて削除されます。<br>退会してよろしければ、<br>パスワードを入力のうえ、<br>下のボタンをタップしてください。</p>
       </div>
       <div class="form_item leave">
         <label for="password">パスワード</label>

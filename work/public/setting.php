@@ -28,7 +28,7 @@ include('../app/_parts/_header.php');
     <div class="settings">
       <ul>
         <li><a href="change_name.php"><i class="bi bi-person-circle"></i>ユーザーネーム変更</a></li>
-        <li><a href="change_email.php"><i class="bi bi-envelope"></i>メールアドレス変更</a></li>
+        <li><a href="change_preemail.php"><i class="bi bi-envelope"></i>メールアドレス変更</a></li>
         <li><a href="change_passwd.php"><i class="bi bi-key"></i>パスワード変更</a></li>
         <li><a href="logout.php"><i class="bi bi-box-arrow-left"></i>ログアウト</a></li>
         <li><a href="leave.php"><i class="bi bi-person-x-fill"></i>退会</a></li>

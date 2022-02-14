@@ -15,7 +15,7 @@ include('../app/_parts/_header.php');
   <h1>Dream<br>Museum</h1>
   <p>夢を展示する博物館</p>
   <div class="join">
-    <a href="join.php">新規登録</a>
+    <a href="pre_join.php">新規登録</a>
   </div>
 </div>
 </div>
