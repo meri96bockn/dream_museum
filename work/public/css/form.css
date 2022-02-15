@@ -56,6 +56,8 @@
 
 .form_item.policy {
   display: block;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .form_item.policy h2 {

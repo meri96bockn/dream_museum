@@ -14,9 +14,11 @@ include('../app/_parts/_header.php');
 <div class="hero_message">
   <h1>Dream<br>Museum</h1>
   <p>夢を展示する博物館</p>
-  <div class="join">
-    <a href="pre_join.php">新規登録</a>
-  </div>
+  <?php if (!isset($_SESSION['name']) && !isset($_SESSION['id'])) : ?>
+    <div class="join">
+      <a href="pre_join.php">新規登録</a>
+    </div>
+  <?php endif; ?>
 </div>
 </div>
 

@@ -1,4 +1,5 @@
 <footer>
+  <div id="scroll-top" class="scroll-top"><i class="bi bi-arrow-up-circle"></i></div>
   <div class="footer">
     <div class="footer_container">
       <div class="footer_links">
@@ -11,3 +12,12 @@
     </div>
   </div>
 </footer>
+<script>
+  const PageTopBtn = document.getElementById('scroll-top');
+PageTopBtn.addEventListener('click', () =>{
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+</script>

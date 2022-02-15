@@ -50,6 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
   $form['tag'] = filter_input(INPUT_POST, 'tag', FILTER_SANITIZE_STRING);
   $form['emotion'] = filter_input(INPUT_POST, 'emotion', FILTER_SANITIZE_STRING);
 
+  if ($form['tag'] === 'yes_tag' && !isset($form['emotion']) ) {
+    $error['emotion'] = 'blank';
+  }
+
   if (empty($error)) {
     $_SESSION['form'] = $form;
     header('location: check_dream.php');
@@ -196,8 +200,13 @@ include('../app/_parts/_header.php');
                 <?php endif; ?>>
                 <label for="emotion_5" class="radio_title">忘れたい</label>
               </div>
-           </div>
-         </div>
+            </div>
+          </div>
+          <div class="error tag">
+            <?php if (isset($error['emotion']) && $error['emotion'] === 'blank'):?>
+              <p>* タグをひとつ選択してください</p>
+            <?php endif; ?>
+          </div>
          <div class="button">
            <button>内容を確認する</button>
            <input type="hidden" name="token" value="<?=  h($_SESSION['token']); ?>">
