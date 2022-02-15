@@ -62,8 +62,20 @@
   margin: 48px 0 16px;
 }
 
+.form_item.form_item.policy ol {
+  margin: 0 0 20px 40px;
+}
+
+.form_item.form_item.policy li {
+  margin: 0 0 20px 0;
+}
+
 .form_item.policy > p {
   margin-top: 24px;
+}
+
+.form_item.policy a {
+  text-decoration-line: underline;
 }
 
 .success {
