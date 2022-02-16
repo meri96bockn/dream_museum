@@ -1,8 +1,6 @@
 <?php
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
-var_dump($_SESSION['urltoken']);
-var_dump($urltoken);
 if (isset($_SESSION['form'])) {
   $form = $_SESSION['form'];
   $urltoken = $_SESSION['urltoken'];
@@ -27,56 +25,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
     $sql = "UPDATE pre_members SET flag = 1 WHERE email=:email";
     $stm = $pdo->prepare($sql);
-    //プレースホルダへ実際の値を設定する
     $stm->bindValue(':email', $form['email'], PDO::PARAM_STR);
     $stm->execute();
+
+
+    $to = $form['email'];
+    $subject = '【自動返信】本登録が完了しました';
+    $body = <<< EOM
+    DreaMuseumにご登録いただきありがとうございました。
+    下記URLからログインできます。
+    https://dreamuseum.com/login.php
+
+    また、こちらのメールにご返信いただくことはできません。
+    ご了承ください。
+    お困りの際は、本サービスの「お問い合わせ」にてご連絡ください。
+    EOM;
+    $from_name = 'DreaMuseum';
+    $from_email = 'join@dreamuseum.com';
+    $pfrom = "-f $from_email";
+    $headers = 'From: ' . ($from_name). ' <' . $from_email. '>';
   
-
-
-    /*
-      * 登録ユーザと管理者へ仮登録されたメール送信
-        */
-  /* 
-      $mailTo = $mail.','.$companymail;
-        $body = <<< EOM
-        この度はご登録いただきありがとうございます。本登録致しました。
-        EOM;
-        mb_language('ja');
-        mb_internal_encoding('UTF-8');
-    
-        //Fromヘッダーを作成
-        $header = 'From: ' . mb_encode_mimeheader($companyname). ' <' . $companymail. '>';
-    
-        if(mb_send_mail($mailTo, $registation_mail_subject, $body, $header, '-f'. $companymail)){          
-            $message['success'] = "会員登録しました";
-        }else{
-            $errors['mail_error'] = "メールの送信に失敗しました。";
-      }	
-  */
-      //データベース接続切断
-      $stm = null;
-
-      // //セッション変数を全て解除
-      // $_SESSION = array();
-      // //セッションクッキーの削除
-      // if (isset($_COOKIE["PHPSESSID"])) {
-      //     setcookie("PHPSESSID", '', time() - 1800, '/');
-      // }
-      // //セッションを破棄する
-      // session_destroy();
-      
-
-	}catch (PDOException $e){
-		//トランザクション取り消し（ロールバック）
-		$pdo->rollBack();
-		$errors['error'] = "もう一度やりなおして下さい。";
-		print('Error:'.$e->getMessage());
-	}
-    $urltoken = '';
-
-      $_SESSION['form'] = $form;
+    mb_language('ja');
+    mb_internal_encoding('UTF-8');
+    if (mb_send_mail($to, $subject, $body, $headers, $pfrom)) {
+      $urltoken = '';
+      unset($_SESSION['token']);
+      unset($_SESSION['form']);
+      createToken();
       header('Location: success.php');
-      exit();
+      exit;
+    }
+      $stm = null;
+  }catch (PDOException $e){
+    $pdo->rollBack();
+    $errors['error'] = "もう一度やりなおして下さい。";
+    print('Error:'.$e->getMessage());
+  }
 }
 
 $title = '本会員登録確認 - ';
@@ -112,8 +96,6 @@ include(__DIR__ . '/../app/_parts/_header.php');
 </div>
 
 <?php
-var_dump($_SESSION['urltoken']);
-var_dump($urltoken);
 include('../app/_parts/_footer.php');
 
 ?>

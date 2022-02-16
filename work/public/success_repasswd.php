@@ -4,16 +4,16 @@ require(__DIR__ . '/../app/functions.php');
 
 if (isset($_SESSION['token'])) {
   $_SESSION = array();
-      if (isset($_COOKIE["PHPSESSID"])) {
-          setcookie("PHPSESSID", '', time() - 1800, '/');
-      }
-      session_destroy();
+  if (isset($_COOKIE["PHPSESSID"])) {
+    setcookie("PHPSESSID", '', time() - 1800, '/');
+  }
+  session_destroy();
 } else {
-  header("Location: pre_join.php");
+  header("Location: forget_passwd.php");
 }
 
 
-$title = '仮会員登録 - ';
+$title = 'パスワード再設定 - ';
 $this_css = 'form';
 include(__DIR__ . '/../app/_parts/_header.php');
 ?>
@@ -25,9 +25,9 @@ include(__DIR__ . '/../app/_parts/_header.php');
   <div class="form">
     <div class="form_item">
         <p>
-        登録ご案内のメールをお送りいたしました。
-        <br>  
-        24時間以内にメールに記載されたURLからご登録ください
+        パスワード再設定用のご案内メールをお送りいたしました。
+        <br>
+        24時間以内にメールに記載されたURLから再設定してください。
       </p>
       </div>
     </div>

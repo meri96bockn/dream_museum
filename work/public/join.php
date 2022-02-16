@@ -36,7 +36,6 @@ if(isset($_GET['urltoken'])) {
       } else {
         $error['urltoken'] = "notuse";
       }
-      //データベース接続切断
       $stm = null;
     } catch (PDOException $e) {
       print('Error:'.$e->getMessage());

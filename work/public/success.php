@@ -1,19 +1,14 @@
 <?php
 require_once(__DIR__ . '/../app/config.php');
 require('../app/functions.php');
-var_dump($_SESSION['urltoken']);
-var_dump($urltoken);
 if (!isset($_SESSION['token']) || !isset($_SESSION['form'])) {
   header('Location: index.php');
   exit;
 } else {
-  //セッション変数を全て解除
   $_SESSION = array();
-  //セッションクッキーの削除
   if (isset($_COOKIE["PHPSESSID"])) {
       setcookie("PHPSESSID", '', time() - 1800, '/');
   }
-  //セッションを破棄する
   session_destroy();
 }
 
@@ -38,8 +33,7 @@ include(__DIR__ . '/../app/_parts/_header.php');
 
 
 <?php
-var_dump($_SESSION['urltoken']);
-var_dump($urltoken);
+
 include('../app/_parts/_footer.php');
 
 ?>

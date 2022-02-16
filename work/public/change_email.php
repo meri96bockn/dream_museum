@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
 }
 
 
-$title = 'ユーザーネーム変更 - ';
+$title = 'メールアドレス変更 - ';
 $this_css = 'form';
 $setting = 'select';
 include('../app/_parts/_header.php');

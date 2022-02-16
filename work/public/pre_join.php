@@ -4,19 +4,16 @@ require(__DIR__ . '/../app/functions.php');
 createToken();
 
 $email = '';
-$re_password = '';
 $error = '';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
   validateToken();
-
   $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-
   if ($email === '') {
     $error = 'blank';
-  // } elseif (!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $email)) {
-  //   $error= 'check';
+  } elseif (!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $email)) {
+    $error= 'check';
   } else {
     $stmt = $pdo->prepare(
       "SELECT COUNT(*)
@@ -28,17 +25,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
       );
       $stmt->execute();
       $counts = $stmt->fetch();
-
-      if ($counts['COUNT(*)'] > 0) {
-        $error = 'duplicate';
-      }
+    if ($counts['COUNT(*)'] > 0) {
+      $error = 'duplicate';
     }
+  }
 
 
   if (empty($error)) {
-    // メール送信処理
     $urltoken = hash('sha256',uniqid(rand(),1));
-    $url = "http://localhost:8562/join.php?urltoken=".$urltoken;
+    $url = "https://dreamuseum.com/join.php?urltoken=".$urltoken;
 
     try{
       $sql = "INSERT INTO pre_members (urltoken, email, date, flag) VALUES (:urltoken, :email, now(), '0')";
@@ -47,47 +42,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
       $stm->bindValue(':email', $email, PDO::PARAM_STR);
       $stm->execute();
       $pdo = null;
-      $message = "メールをお送りしました。24時間以内にメールに記載されたURLからご登録下さい。";
-      $_SESSION['message'] = $message;
-      $_SESSION['url'] = $url;
-      header("Location: success_pre.php");
-
-  }catch (PDOException $e){
-      print('Error:'.$e->getMessage());
-      die();
-  }
-
-/*
-       * メール送信処理
-       * 登録されたメールアドレスへメールをお送りする。
-       * 今回はメール送信はしないためコメント
-       */
-       /*  
-   	$mailTo = $mail;
-       $body = <<< EOM
-       この度はご登録いただきありがとうございます。
-       24時間以内に下記のURLからご登録下さい。
-       {$url}
-EOM;
-       mb_language('ja');
-       mb_internal_encoding('UTF-8');
-   
-       //Fromヘッダーを作成
-       $header = 'From: ' . mb_encode_mimeheader($companyname). ' <' . $companymail. '>';
-   
-       if(mb_send_mail($mailTo, $registation_subject, $body, $header, '-f'. $companymail)){      
-           //セッション変数を全て解除
-           $_SESSION = array();
-           //クッキーの削除
-           if (isset($_COOKIE["PHPSESSID"])) {
-               setcookie("PHPSESSID", '', time() - 1800, '/');
-           }
-           //セッションを破棄する
-           session_destroy();
-           $message = "メールをお送りしました。24時間以内にメールに記載されたURLからご登録下さい。";
-       }
-       */
+    }catch (PDOException $e){
+        print('Error:'.$e->getMessage());
+        die();
     }
+
+    /* メール送信処理 登録されたメールアドレスへメールをお送りする。 */
+    $to = $email;
+    $subject = '本会員登録のご案内';
+    $body = <<< EOM
+    このたびは、仮登録していただきありがとうございます。
+    24時間以内に下記のURLへアクセスし、本会員登録をしてください。
+    {$url}
+
+    また、こちらのメールにご返信いただくことはできません。
+    ご了承ください。
+    お困りの際は、本サービスの「お問い合わせ」にてご連絡ください。
+    EOM;
+    $from_name = 'DreaMuseum';
+    $from_email = 'join@dreamuseum.com';
+    $pfrom = "-f $from_email";
+    $headers = 'From: ' . ($from_name). ' <' . $from_email. '>';
+
+    mb_language('ja');
+    mb_internal_encoding('UTF-8');
+    if (mb_send_mail($to ,$subject ,$body , $headers, $pfrom)) {
+      header("Location: success_pre.php");
+    }
+  }
 }
 
 

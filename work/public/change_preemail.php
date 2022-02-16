@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
   if (empty($error)) {
   // メール送信処理
   $urltoken = hash('sha256',uniqid(rand(),1));
-  $url = "http://localhost:8562/change_email.php?urltoken=".$urltoken;
+  $url = "https://dreamuseum.com/change_email.php?urltoken=".$urltoken;
 
   try{
     $sql = "INSERT INTO pre_emails (member_id, urltoken, email, date, flag) VALUES (:member_id, :urltoken, :remail, now(), '0')";

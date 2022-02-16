@@ -23,7 +23,7 @@ include(__DIR__ . '/../app/_parts/_header.php');
     <p class="success">お問い合わせいただき、ありがとうございました。</p>
     <p class="success">トップページにお戻りください。</p>
     <div class="button">
-      <button type="button" onclick=location.href="index.php">DreamMuseum</button>
+      <button type="button" onclick=location.href="index.php">DreaMuseum</button>
     </div>
   </div>
 </div>

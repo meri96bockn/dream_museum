@@ -79,7 +79,7 @@ include('../app/_parts/_header.php');
   <div class="howto">
     <div class="title">
     <i class="bi bi-moon-stars"></i>
-    <h2>DreamMuseumへようこそ</h2>
+    <h2>DreaMuseumへようこそ</h2>
     </div>
     <p>夢の博物館を楽しめますように！</p>
     <?php if (!isset($_SESSION['name']) && !isset($_SESSION['id'])) :?>

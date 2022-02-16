@@ -13,45 +13,73 @@ if (isset($_SESSION['form'])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   validateToken();
   $name = $form["name"];
-  $to = $form["email"];
   $message = $form["message"];
-  $email = "";
-
-  mb_language("ja");
-  mb_internal_encoding("UTF-8");
-  $subject = "[自動送信]お問い合わせ内容の確認";
-  $body = <<< "EOM"
-  {$name}様、お問い合わせありがとうございます。
+  $to = $form['email'];
+  $subject = '【自動返信】お問い合わせありがとうございます';
+  $body = <<< EOM
+  {$name}様、お問い合わせいただきありがとうございます。
   以下の内容で承りました。
-  ===================================================
-  【 お名前 】
-  {$name}
 
-  【 メールアドレス 】
-  {$user_email}
+  ━━━━━━□■□　お問い合わせ内容　□■□━━━━━━
 
-  【 お問い合わせ内容 】
+  【お名前】
+  {$name}様
+
+  【メールアドレス】
+  {$to}
+
+  【お問い合わせ内容】
   {$message}
 
-  ===================================================
-  内容を確認の上、回答いたします。
-  しばらくお待ちください。
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-  DreamMuseum
+  内容を確認のうえ、ご返信いたします。
+  しばらくお待ちください。
+  EOM;
+
+  date_default_timezone_set('Asia/Tokyo');
+  $timeStamp = time();
+  $week = array('日', '月', '火', '水', '木', '金', '土');
+  $dateFormatYMD = date('Y年m月d日',$timeStamp);
+  $dateFormatHIS = date('H時i分s秒',$timeStamp);
+  $weekFormat = "（".$week[date('w',$timeStamp)]."）";
+  $outputDate = $dateFormatYMD.$weekFormat.$dateFormatHIS;
+  $admin_subject = "$name 様よりお問い合わせ";
+  $admin_body = <<< EOM
+  {$name}様よりお問い合わせです。
+  {$outputDate}
+
+  ━━━━━━□■□　お問い合わせ内容　□■□━━━━━━
+
+  【お名前】
+  {$name}様
+
+  【メールアドレス】
+  {$to}
+
+  【お問い合わせ内容】
+  {$message}
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
   EOM;
 
 
-  $fromEmail = ""; 
-  $fromName = "DreamMuseum";
-  $header = "From: " .mb_encode_mimeheader($fromName) ."<{$fromEmail}>";
-  mb_send_mail($user_email, $subject, $body, $header);
+  $from_name = 'DreaMuseum';
+  $from_email = 'contact@dreamuseum.com';
+  $pfrom = "-f $from_email";
+  $headers = 'From: ' . ($from_name). ' <' . $from_email. '>';
 
-  unset($_SESSION['token']);
-  unset($_SESSION['form']);
-  createToken();
-  header("Location: success_contact.php");
-  exit;
-
+  mb_language('ja');
+  mb_internal_encoding('UTF-8');
+  if (mb_send_mail($to, $subject, $body, $headers, $pfrom) &&
+  mb_send_mail($from_email, $admin_subject, $admin_body, $headers, $pfrom)) {
+    unset($_SESSION['token']);
+    unset($_SESSION['form']);
+    createToken();
+    header("Location: success_contact.php");
+    exit;
+  }
 }
 
 $title = 'お問い合わせ内容確認 - ';
