@@ -1,3 +1,4 @@
+</main>
 <footer>
   <div id="scroll-top" class="scroll-top"><i class="bi bi-arrow-up-circle"></i></div>
   <div class="footer">

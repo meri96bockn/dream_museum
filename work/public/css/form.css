@@ -227,6 +227,14 @@ button:hover {
 }
 
 
+a.re_passwd {
+  display: block;
+  width: 200px;
+  margin: 24px auto;
+  border-bottom: dotted rgba(30, 90, 140, .1);
+}
+
+
 /* medium screen */
 @media (min-width: 600px) {
   .forms {

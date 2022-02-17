@@ -50,7 +50,6 @@ $this_css = 'form';
 include(__DIR__ . '/../app/_parts/_header.php');
 
 ?>
-
 <div class="forms">
   <div class="form_title">
     <h1>ログイン</h1>
@@ -85,6 +84,7 @@ include(__DIR__ . '/../app/_parts/_header.php');
         <button>ログイン</button>
         <input type="hidden" name="token" value="<?=  h($_SESSION['token']); ?>">
       </div>
+        <a href="forget_passwd.php" class="re_passwd">パスワードを忘れた方へ</a>
     </form>
   </div>
 </div>

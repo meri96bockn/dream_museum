@@ -37,7 +37,6 @@ if (!isset($_GET['urltoken'])) {
       $error['try'] = "failure";
       $error_message = 'Error:'. $e->getMessage();
       error_log($error_message, 1, "error@dreamuseum.com");
-      die();
     }
   }
 }
@@ -100,14 +99,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
         unset($_SESSION['token']);
         $stm = null;
         header('Location: login.php');
-        exit;
       }
     } catch (PDOException $e) {
       $pdo->rollBack();
       $error['try'] = "failure";
       $error_message = 'Error:'. $e->getMessage();
       error_log($error_message, 1, "error@dreamuseum.com");
-      die();
     }
   }
 }

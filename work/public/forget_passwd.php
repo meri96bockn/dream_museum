@@ -66,11 +66,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
           header("Location: success_repasswd.php");
         }
       } catch (PDOException $e) {
-          $pdo->rollBack();
           $error['try'] = "failure";
           $error_message = 'Error:'. $e->getMessage();
           error_log($error_message, 1, "error@dreamuseum.com");
-          die();
       }
     }
   }

@@ -19,7 +19,7 @@
   transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
-
+  margin-left: 2vh;
   color: rgba(243, 232, 220);
 }
 

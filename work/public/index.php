@@ -6,7 +6,6 @@ $title = '';
 $this_css = 'top';
 $index = 'select';
 include('../app/_parts/_header.php');
-
 ?>
 
 <div class="hero_container">
