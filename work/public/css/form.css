@@ -98,7 +98,7 @@ input, textarea {
   text-align: center;
   border: none;
   border-radius: 8px;
-  color: inherit;
+  color: rgb(80, 100, 140);
 
   transition-property: box-shadow;
   transition-duration: .3s;

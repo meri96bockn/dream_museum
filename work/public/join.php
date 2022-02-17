@@ -38,7 +38,9 @@ if(isset($_GET['urltoken'])) {
       }
       $stm = null;
     } catch (PDOException $e) {
-      print('Error:'.$e->getMessage());
+      $error['try'] = "failure";
+      $error_message = 'Error:'. $e->getMessage();
+      error_log($error_message, 1, "error@dreamuseum.com");
       die();
     }
   }
@@ -116,8 +118,22 @@ include(__DIR__ . '/../app/_parts/_header.php');
     </div>
   </div>
 </div>
- <?php else: ?>
 
+<?php elseif (isset($error['try']) && $error['try'] === 'failure'): ?>
+<div class="forms">
+  <div class="form_title">
+    <h1>本会員登録</h1>
+  </div>
+  <div class="form">
+    <div class="form_item">
+      <div class="error">
+        <p>* お手数ですが、もう一度やり直してください</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php else: ?>
 <div class="forms">
   <div class="form_title">
     <h1>本会員登録</h1>

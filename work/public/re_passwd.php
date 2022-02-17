@@ -34,7 +34,9 @@ if (!isset($_GET['urltoken'])) {
       }
       $stm = null;
     } catch (PDOException $e) {
-      print('Error:'.$e->getMessage());
+      $error['try'] = "failure";
+      $error_message = 'Error:'. $e->getMessage();
+      error_log($error_message, 1, "error@dreamuseum.com");
       die();
     }
   }
@@ -102,8 +104,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
       }
     } catch (PDOException $e) {
       $pdo->rollBack();
-      $errors['error'] = "もう一度やりなおして下さい。";
-      print('Error:'.$e->getMessage());
+      $error['try'] = "failure";
+      $error_message = 'Error:'. $e->getMessage();
+      error_log($error_message, 1, "error@dreamuseum.com");
+      die();
     }
   }
 }
@@ -115,6 +119,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
   
   ?>
   
+<?php if (isset($error['try']) && $error['try'] === 'failure'): ?>
+<div class="forms">
+  <div class="form_title">
+    <h1>パスワード再設定</h1>
+  </div>
+  <div class="form">
+    <div class="form_item">
+      <div class="error">
+        <p>* お手数ですが、もう一度やり直してください</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php else: ?>
   <div class="forms">
     <div class="form_title">
       <h1>パスワード再設定</h1>
@@ -148,7 +167,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
       </form>
     </div>
   </div>
-  
+<?php endif; ?>
+
   
   <?php
   

@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
 
   
     if (empty($error)) {
+      try {
       $stmt = $pdo->prepare(
         "UPDATE members SET password = :newpasswd WHERE id = :id"
       );
@@ -59,7 +60,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
       $new_password = "";
       $re_password = "";
       unset($_SESSION['token']);
-    } 
+    } catch (PDOException $e) {
+      $pdo->rollBack();
+      $error['try'] = "failure";
+      $error_message = 'Error:'. $e->getMessage();
+      error_log($error_message, 1, "error@dreamuseum.com");
+      die();
+    }
+  }
 }
 
 
@@ -70,6 +78,21 @@ include('../app/_parts/_header.php');
 
 ?>
 
+<?php if (isset($error['try']) && $error['try'] === 'failure'): ?>
+<div class="forms">
+  <div class="form_title">
+    <h1>パスワード変更</h1>
+  </div>
+  <div class="form">
+    <div class="form_item">
+      <div class="error">
+        <p>* お手数ですが、もう一度やり直してください</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php else: ?>
 <div class="forms">
   <div class="form_title">
     <h1>パスワード変更</h1>
@@ -112,6 +135,7 @@ include('../app/_parts/_header.php');
     </form>
   </div>
 </div>
+<?php endif; ?>
 
 
 <?php

@@ -4,6 +4,7 @@ require('../app/functions.php');
 
 if (isset($_SESSION['form'])) {
   $form = $_SESSION['form'];
+  $error = [];
 } else {
   header('Location: index.php');
   exit();
@@ -12,25 +13,32 @@ if (isset($_SESSION['form'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   validateToken();
-  $stmt = $pdo->prepare(
-    "INSERT INTO 
-      posts (title, content, tag, emotion, member_id)
-      VALUES (:title, :content, :tag, :emotion, :member_id)"
-  );
-  $stmt->execute(
-    [ 'title' => $form['title'],
-      'content' => $form['content'],
-      'tag' => $form['tag'],
-      'emotion' => $form['emotion'],
-      'member_id' => $form['id']
-    ]
-  );
-
-  unset($_SESSION['token']);
-  unset($_SESSION['form']);
-  createToken();
-  header('Location: success_post.php');
-  exit();
+  try {
+    $stmt = $pdo->prepare(
+      "INSERT INTO 
+        posts (title, content, tag, emotion, member_id)
+        VALUES (:title, :content, :tag, :emotion, :member_id)"
+    );
+    $stmt->execute(
+      [ 'title' => $form['title'],
+        'content' => $form['content'],
+        'tag' => $form['tag'],
+        'emotion' => $form['emotion'],
+        'member_id' => $form['id']
+      ]
+    );
+    unset($_SESSION['token']);
+    unset($_SESSION['form']);
+    createToken();
+    header('Location: success_post.php');
+    exit();
+  } catch (PDOException $e) {
+    $pdo->rollBack();
+    $error['try'] = "failure";
+    $error_message = 'Error:'. $e->getMessage();
+    error_log($error_message, 1, "error@dreamuseum.com");
+    die();
+  }
 }
 
 $title = '夢日記内容確認 - ';
@@ -38,6 +46,14 @@ $this_css = 'post';
 $my_page = 'select';
 include('../app/_parts/_header.php');
 ?>
+
+<?php if (isset($error['try']) && $error['try'] === 'failure'): ?>
+<div class="container">
+    <div class="error">
+      <p>* お手数ですが、もう一度やり直してください</p>
+    </div>
+</div>
+<?php else: ?>
 
 <div class="container">
   <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
@@ -82,6 +98,7 @@ include('../app/_parts/_header.php');
   </div>
   </form>
 </div>
+<?php endif; ?>
 
 
 <?php

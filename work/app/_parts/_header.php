@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= h($title); ?>DreamMuseum</title>
+  <title><?= h($title); ?>DreaMuseum</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/<?= h($this_css); ?>.css">
@@ -14,7 +14,7 @@
     <div class="topbar_container_mobile">
       <ul class="topbar_nav_mobile">
         <li class="top">
-          <a href="index.php">DreamMuseum</a>
+          <a href="index.php">DreaMuseum</a>
         </li>
         <?php if (isset($_SESSION['name']) && isset($_SESSION['id'])): ?>
         <li>
@@ -49,7 +49,7 @@
             if(isset($index) && $index === 'select') {
               echo h($index); 
             }
-          ?>" href="index.php">DreamMuseum</a>
+          ?>" href="index.php">DreaMuseum</a>
         </li>
         <li>
           <a id="<?php

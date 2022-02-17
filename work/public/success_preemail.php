@@ -2,15 +2,18 @@
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
 
-if (isset($_SESSION['token']) && isset($_SESSION['url'])) {
-  $message = $_SESSION['message'];
-  $url = $_SESSION['url'];
+if (isset($_SESSION['token'])) {
+  $_SESSION = array();
+  if (isset($_COOKIE["PHPSESSID"])) {
+    setcookie("PHPSESSID", '', time() - 1800, '/');
+  }
+  session_destroy();
 } else {
   header("Location: change_preemail.php");
 }
 
 
-$title = 'メールアドレス仮変更 - ';
+$title = 'メールアドレス変更 - ';
 $this_css = 'form';
 include(__DIR__ . '/../app/_parts/_header.php');
 ?>
@@ -21,13 +24,14 @@ include(__DIR__ . '/../app/_parts/_header.php');
   </div>
   <div class="form">
     <div class="form_item">
-        <!-- 登録完了画面 -->
-        <p><?=$message?></p>
-        <p>↓TEST用(後ほど削除)：このURLが記載されたメールが届きます。</p>
-        <a href="<?=$url?>"><?=$url?></a>
-      </div>
+      <p>
+      新しいメールアドレス宛に、メールアドレス再設定用のご案内メールをお送りいたしました。
+      <br>
+      24時間以内にメールに記載されたURLから再設定してください。
+      </p>
     </div>
   </div>
+</div>
 
 <?php
 

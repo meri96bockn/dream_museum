@@ -32,24 +32,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
   }
 
   if (empty($error)) {
-    $stmt = $pdo->prepare(
-      "DELETE FROM members WHERE id = :id"
-    );
-    $stmt->execute(
-      [ 'id' => $id ]
-    );
-    $stmt = $pdo->prepare(
-      "DELETE FROM posts WHERE member_id = :id"
-    );
-    $stmt->execute(
-      [ 'id' => $id ]
-    );
-    $_SESSION = array();
-    if (isset($_COOKIE["PHPSESSID"])) {
-      setcookie("PHPSESSID", '', time() - 1800, '/');
+    try{
+      $stmt = $pdo->prepare(
+        "DELETE FROM members WHERE id = :id"
+      );
+      $stmt->execute(
+        [ 'id' => $id ]
+      );
+      $stmt = $pdo->prepare(
+        "DELETE FROM posts WHERE member_id = :id"
+      );
+      $stmt->execute(
+        [ 'id' => $id ]
+      );
+      $_SESSION = array();
+      if (isset($_COOKIE["PHPSESSID"])) {
+        setcookie("PHPSESSID", '', time() - 1800, '/');
+      }
+      session_destroy();
+      header('Location: index.php');
+    } catch (PDOException $e) {
+      $pdo->rollBack();
+      $error['try'] = "failure";
+      $error_message = 'Error:'. $e->getMessage();
+      error_log($error_message, 1, "error@dreamuseum.com");
+      die();
     }
-    session_destroy();
-    header('Location: index.php');
   }
 }
 
@@ -61,6 +69,21 @@ include('../app/_parts/_header.php');
 
 ?>
 
+<?php if (isset($error['try']) && $error['try'] === 'failure'): ?>
+<div class="forms">
+  <div class="form_title">
+    <h1>退会</h1>
+  </div>
+  <div class="form">
+    <div class="form_item">
+      <div class="error">
+        <p>* お手数ですが、もう一度やり直してください</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php else: ?>
 <div class="forms">
   <div class="form_title">
     <h1>退会</h1>
@@ -87,6 +110,7 @@ include('../app/_parts/_header.php');
     </form>
   </div>
 </div>
+<?php endif; ?>
 
 
 <?php

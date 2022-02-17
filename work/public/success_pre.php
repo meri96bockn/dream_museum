@@ -4,10 +4,10 @@ require(__DIR__ . '/../app/functions.php');
 
 if (isset($_SESSION['token'])) {
   $_SESSION = array();
-      if (isset($_COOKIE["PHPSESSID"])) {
-          setcookie("PHPSESSID", '', time() - 1800, '/');
-      }
-      session_destroy();
+  if (isset($_COOKIE["PHPSESSID"])) {
+      setcookie("PHPSESSID", '', time() - 1800, '/');
+  }
+  session_destroy();
 } else {
   header("Location: pre_join.php");
 }

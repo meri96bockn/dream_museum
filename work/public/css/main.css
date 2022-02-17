@@ -124,23 +124,21 @@ a:hover {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  /* line-height: 50px; */
   text-align: center;
-  font-size: 40px;
   color: rgb(80, 100, 140);
   box-shadow: 0px 0px 10px rgb(80, 100, 140, .2);
-}
-
-.scroll-top .bi::before {
   line-height: 50px;
-}
-
-.scroll-top .bi {
+  vertical-align: 0;
   letter-spacing: 0;
 }
 
 .scroll-top:hover {
   cursor: pointer;
+}
+
+.scroll-top .bi {
+  letter-spacing: 0;
+  font-size: 40px;
 }
 
 .footer_links {

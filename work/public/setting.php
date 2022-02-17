@@ -7,7 +7,6 @@ if (!isset($_SESSION['name']) &&
   header('Location: login.php');
   exit;
 } else {
-  createToken();
   $id = $_SESSION['id'];
   $name = $_SESSION['name'];
 }

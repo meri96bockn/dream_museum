@@ -2,16 +2,14 @@
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
 
-if (!isset($_SESSION['name']) &&
-!isset($_SESSION['id'])) {
-  header('Location: login.php');
+if (!isset($_GET['urltoken'])) {
+  header("Location: change_preemail.php");
   exit;
-} elseif (isset($_GET['urltoken'])) {
+} else {
   $urltoken = isset($_GET["urltoken"]) ? $_GET["urltoken"] : NULL;
-  $id = $_SESSION['id'];
-  $name = $_SESSION['name'];
+  $error = [];
 
-  $sql = "SELECT flag FROM pre_emails WHERE urltoken=(:urltoken)";
+  $sql = "SELECT * FROM pre_emails WHERE urltoken=(:urltoken)";
   $stm = $pdo->prepare($sql);
   $stm->bindValue(':urltoken', $urltoken, PDO::PARAM_STR);
   $stm->execute();
@@ -35,80 +33,67 @@ if (!isset($_SESSION['name']) &&
       } else {
         $error['urltoken'] = "notuse";
       }
-      //データベース接続切断
-      $stm = null;
     } catch (PDOException $e) {
-      print('Error:'.$e->getMessage());
-      die();
+      $error['try'] = "failure";
+      $error_message = 'Error:'. $e->getMessage();
+      error_log($error_message, 1, "error@dreamuseum.com");
     }
   }
-} elseif (!isset($_GET['urltoken'])) {
-    header("Location: change_preemail.php");
-  }
+}
 
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['type'] === 'remail' ) {
   try{
     $stmt = $pdo->prepare(
-      "UPDATE members SET email = :remail WHERE id = :id"
+      "UPDATE members SET email = :remail WHERE id = :member_id"
     );
     $stmt->execute(
       [ 'remail' => $remail,
-      'id' => $id ]
+      'member_id' => $row['member_id'] ]
     );
 
     $sql = "UPDATE pre_emails SET flag = 1 WHERE email=:remail";
     $stm = $pdo->prepare($sql);
-    //プレースホルダへ実際の値を設定する
     $stm->bindValue(':remail', $remail, PDO::PARAM_STR);
     $stm->execute();
 
-    /*
-      * 登録ユーザと管理者へ仮登録されたメール送信
-        */
-  /* 
-      $mailTo = $mail.','.$companymail;
-        $body = <<< EOM
-        この度はご登録いただきありがとうございます。本登録致しました。
-        EOM;
-        mb_language('ja');
-        mb_internal_encoding('UTF-8');
-    
-        //Fromヘッダーを作成
-        $header = 'From: ' . mb_encode_mimeheader($companyname). ' <' . $companymail. '>';
-    
-        if(mb_send_mail($mailTo, $registation_mail_subject, $body, $header, '-f'. $companymail)){          
-            $message['success'] = "会員登録しました";
-        }else{
-            $errors['mail_error'] = "メールの送信に失敗しました。";
-      }	
-  */
-      //データベース接続切断
-      $stm = null;
+    /* メール送信 */
 
-      // //セッション変数を全て解除
-      // $_SESSION = array();
-      // //セッションクッキーの削除
-      // if (isset($_COOKIE["PHPSESSID"])) {
-      //     setcookie("PHPSESSID", '', time() - 1800, '/');
-      // }
-      // //セッションを破棄する
-      // session_destroy();
-      
-    }catch (PDOException $e){
-      //トランザクション取り消し（ロールバック）
-      $pdo->rollBack();
-      $errors['error'] = "もう一度やりなおして下さい。";
-      print('Error:'.$e->getMessage());
+    $to = $remail;
+    $subject = '【自動返信】メールアドレスの再設定が完了しました';
+    $body = <<< EOM
+    メールアドレスの再設定にご協力いただきありがとうございました。
+    下記URLからログインできます。
+    https://dreamuseum.com/login.php
+
+    また、こちらのメールにご返信いただくことはできません。
+    ご了承ください。
+    お困りの際は、本サービスの「お問い合わせ」にてご連絡ください。
+    EOM;
+    $from_name = 'DreaMuseum';
+    $from_email = 're_email@dreamuseum.com';
+    $pfrom = "-f $from_email";
+    $headers = 'From: ' . ($from_name). ' <' . $from_email. '>';
+
+    mb_language('ja');
+    mb_internal_encoding('UTF-8');
+    if (mb_send_mail($to, $subject, $body, $headers, $pfrom))
+    {
+      $stm = null;
+      $_SESSION = array();
+      if (isset($_COOKIE["PHPSESSID"])) {
+          setcookie("PHPSESSID", '', time() - 1800, '/');
+      }
+      session_destroy();
+      header('Location: login.php');
+      exit;
     }
-      $urltoken = '';
-  
-        $_SESSION['form'] = $form;
-        header('Location: change_preemail.php');
-        exit();
-        unset($_SESSION['token']);
-        $_SESSION['remail'] = $remail;
+  } catch (PDOException $e) {
+    $error['try'] = "failure";
+    $error_message = 'Error:'. $e->getMessage();
+    error_log($error_message, 1, "error@dreamuseum.com");
+  }
 }
 
 
@@ -118,6 +103,43 @@ $setting = 'select';
 include('../app/_parts/_header.php');
 
 ?>
+
+<?php if (isset($error['urltoken'])): ?>
+<div class="forms">
+  <div class="form_title">
+    <h1>メールアドレス変更</h1>
+  </div>
+  <div class="form">
+    <div class="form_item">
+      <?php if (isset($error['urltoken']) && $error['urltoken'] === "notfind"): ?>
+      <div class="error">
+        <p>* トークンがありません。</p>
+      </div>
+      <?php endif; ?>
+      <?php if (isset($error['urltoken']) && $error['urltoken'] === "notuse"): ?>
+      <div class="error">
+        <p>* このURLはご利用できません。有効期限が過ぎたかURLが間違えている可能性がございます。もう一度登録をやりなおして下さい。</p>
+      </div>
+      <?php endif; ?>
+    </div>
+  </div>
+</div>
+
+<?php elseif (isset($error['try']) && $error['try'] === 'failure'): ?>
+<div class="forms">
+  <div class="form_title">
+    <h1>メールアドレス変更</h1>
+  </div>
+  <div class="form">
+    <div class="form_item">
+      <div class="error">
+        <p>* お手数ですが、もう一度やり直してください</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php else: ?>
 <div class="forms">
   <div class="form_title">
     <h1>メールアドレス変更</h1>
@@ -132,11 +154,11 @@ include('../app/_parts/_header.php');
       <div class="button">
         <button>更新</button>
         <input type="hidden" name="type" value="remail">
-        <input type="hidden" name="token" value="<?=  h($_SESSION['token']); ?>">
       </div>
     </form>
   </div>
 </div>
+<?php endif; ?>
 
 
 <?php

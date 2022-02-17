@@ -28,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stm->bindValue(':email', $form['email'], PDO::PARAM_STR);
     $stm->execute();
 
-
     $to = $form['email'];
     $subject = '【自動返信】本登録が完了しました';
     $body = <<< EOM
@@ -50,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (mb_send_mail($to, $subject, $body, $headers, $pfrom)) {
       $urltoken = '';
       unset($_SESSION['token']);
-      unset($_SESSION['form']);
+      $_SESSION['form'] = $form;
       createToken();
       header('Location: success.php');
       exit;
@@ -58,8 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $stm = null;
   }catch (PDOException $e){
     $pdo->rollBack();
-    $errors['error'] = "もう一度やりなおして下さい。";
-    print('Error:'.$e->getMessage());
+    $error['try'] = "failure";
+    $error_message = 'Error:'. $e->getMessage();
+    error_log($error_message, 1, "error@dreamuseum.com");
+    die();
   }
 }
 
@@ -68,6 +69,21 @@ $this_css = 'form';
 include(__DIR__ . '/../app/_parts/_header.php');
 
 ?>
+<?php if (isset($error['try']) && $error['try'] === 'failure'): ?>
+<div class="forms">
+  <div class="form_title">
+    <h1>本会員登録確認</h1>
+  </div>
+  <div class="form">
+    <div class="form_item">
+      <div class="error">
+        <p>* お手数ですが、もう一度やり直してください</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php else: ?>
 <div class="forms">
   <div class="form_title">
     <h1>本会員登録確認</h1>
@@ -94,6 +110,7 @@ include(__DIR__ . '/../app/_parts/_header.php');
     </form>
   </div>
 </div>
+<?php endif; ?>
 
 <?php
 include('../app/_parts/_footer.php');

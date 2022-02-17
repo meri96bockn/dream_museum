@@ -10,6 +10,7 @@ if (!isset($_SESSION['name']) &&
   createToken();
   $id = $_SESSION['id'];
   $name = $_SESSION['name'];
+  $error = '';
   $stmt = $pdo->prepare(
     "SELECT email
     FROM members
@@ -20,8 +21,6 @@ if (!isset($_SESSION['name']) &&
     );
     $stmt->execute();
     $member = $stmt->fetch();
-
-  $error = '';
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['type'] === 'remail' ) {
@@ -29,92 +28,94 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
   $remail = filter_input(INPUT_POST, 'remail', FILTER_SANITIZE_EMAIL);
   if ($remail === '') {
     $error = 'blank';
-  // elseif (!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $email)) {
-  //   $error= 'check';
+  } elseif (!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $remail)) {
+    $error= 'check';
   } else {
     $stmt = $pdo->prepare(
       "SELECT COUNT(*)
       FROM members
       WHERE email = :email"
-      );
-      $stmt->bindvalue(
-        ':email', $remail, PDO::PARAM_STR
-      );
-      $stmt->execute();
-      $counts = $stmt->fetch();
-
-      if ($counts['COUNT(*)'] > 0) {
-        $error = 'duplicate';
-      }
+    );
+    $stmt->bindvalue(
+      ':email', $remail, PDO::PARAM_STR
+    );
+    $stmt->execute();
+    $counts = $stmt->fetch();
+    if ($counts['COUNT(*)'] > 0) {
+      $error = 'duplicate';
     }
-
-  if (empty($error)) {
-  // メール送信処理
-  $urltoken = hash('sha256',uniqid(rand(),1));
-  $url = "https://dreamuseum.com/change_email.php?urltoken=".$urltoken;
-
-  try{
-    $sql = "INSERT INTO pre_emails (member_id, urltoken, email, date, flag) VALUES (:member_id, :urltoken, :remail, now(), '0')";
-    $stm = $pdo->prepare($sql);
-    $stm->bindValue(':urltoken', $urltoken, PDO::PARAM_STR);
-    $stm->bindValue(':remail', $remail, PDO::PARAM_STR);
-    $stm->bindValue(':member_id', $id, PDO::PARAM_STR);
-    $stm->execute();
-    $pdo = null;
-    $message = "メールをお送りしました。24時間以内にメールに記載されたURLからご登録下さい。";
-    $_SESSION['message'] = $message;
-    $_SESSION['url'] = $url;
-    header("Location: success_preemail.php");
-
-  }catch (PDOException $e){
-    print('Error:'.$e->getMessage());
-    die();
   }
 
-/*
-       * メール送信処理
-       * 登録されたメールアドレスへメールをお送りする。
-       * 今回はメール送信はしないためコメント
-       */
-       /*  
-   	$mailTo = $mail;
-       $body = <<< EOM
-       この度はご登録いただきありがとうございます。
-       24時間以内に下記のURLからご登録下さい。
-       {$url}
-EOM;
-       mb_language('ja');
-       mb_internal_encoding('UTF-8');
-   
-       //Fromヘッダーを作成
-       $header = 'From: ' . mb_encode_mimeheader($companyname). ' <' . $companymail. '>';
-   
-       if(mb_send_mail($mailTo, $registation_subject, $body, $header, '-f'. $companymail)){      
-           //セッション変数を全て解除
-           $_SESSION = array();
-           //クッキーの削除
-           if (isset($_COOKIE["PHPSESSID"])) {
-               setcookie("PHPSESSID", '', time() - 1800, '/');
-           }
-           //セッションを破棄する
-           session_destroy();
-           $message = "メールをお送りしました。24時間以内にメールに記載されたURLからご登録下さい。";
-       }
-       */
+  if (empty($error)) {
+    // メール送信処理
+    $urltoken = hash('sha256',uniqid(rand(),1));
+    $url = "https://dreamuseum.com/change_email.php?urltoken=".$urltoken;
+
+    try {
+      $sql = "INSERT INTO pre_emails (member_id, urltoken, email, date, flag) VALUES (:member_id, :urltoken, :remail, now(), '0')";
+      $stm = $pdo->prepare($sql);
+      $stm->bindValue(':urltoken', $urltoken, PDO::PARAM_STR);
+      $stm->bindValue(':remail', $remail, PDO::PARAM_STR);
+      $stm->bindValue(':member_id', $id, PDO::PARAM_STR);
+      $stm->execute();
+
+      $to = $remail;
+      $subject = '【自動返信】メールアドレス再設定のご案内';
+      $body = <<< EOM
+      24時間以内に下記URLへアクセスし、メールアドレスを再設定してください。
+      {$url}
+
+      また、こちらのメールにご返信いただくことはできません。
+      ご了承ください。
+      お困りの際は、本サイト上の「お問い合わせ」にてご連絡ください。
+      EOM;
+      $from_name = 'DreaMuseum';
+      $from_email = 're_email@dreamuseum.com';
+      $pfrom = "-f $from_email";
+      $headers = 'From: ' . ($from_name). ' <' . $from_email. '>';
+      $pdo = null;
+      mb_language('ja');
+      mb_internal_encoding('UTF-8');
+      if (mb_send_mail($to ,$subject ,$body , $headers, $pfrom)) {
+        header("Location: success_preemail.php");
+      }
+    } catch (PDOException $e) {
+        $pdo->rollBack();
+        $error['try'] = "failure";
+        $error_message = 'Error:'. $e->getMessage();
+        error_log($error_message, 1, "error@dreamuseum.com");
+        die();
+    }
+  }
 }
 
-}
 
-$title = 'メールアドレス仮変更 - ';
+
+$title = 'メールアドレス変更 - ';
 $this_css = 'form';
 $setting = 'select';
 include('../app/_parts/_header.php');
 
 ?>
 
+<?php if (isset($error['try']) && $error['try'] === 'failure'): ?>
 <div class="forms">
   <div class="form_title">
-    <h1>メールアドレス仮変更</h1>
+    <h1>メールアドレス変更</h1>
+  </div>
+  <div class="form">
+    <div class="form_item">
+      <div class="error">
+        <p>* お手数ですが、もう一度やり直してください</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php else: ?>
+<div class="forms">
+  <div class="form_title">
+    <h1>メールアドレス変更</h1>
   </div>
   <div class="form">
     <form action="" method="post" enctype="multipart/form-data" autocomplete="off" onsubmit="return settings()">
@@ -139,14 +140,14 @@ include('../app/_parts/_header.php');
       </div>
       
       <div class="button">
-        <button>更新</button>
+        <button>再設定用メール送信</button>
         <input type="hidden" name="type" value="remail">
         <input type="hidden" name="token" value="<?=  h($_SESSION['token']); ?>">
       </div>
     </form>
   </div>
 </div>
-
+<?php endif; ?>
 
 <?php
 

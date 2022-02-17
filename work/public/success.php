@@ -1,15 +1,15 @@
 <?php
 require_once(__DIR__ . '/../app/config.php');
 require('../app/functions.php');
-if (!isset($_SESSION['token']) || !isset($_SESSION['form'])) {
-  header('Location: index.php');
-  exit;
-} else {
+if (isset($_SESSION['token']) && isset($_SESSION['form'])) {
   $_SESSION = array();
   if (isset($_COOKIE["PHPSESSID"])) {
-      setcookie("PHPSESSID", '', time() - 1800, '/');
+    setcookie("PHPSESSID", '', time() - 1800, '/');
   }
   session_destroy();
+} else {
+  header('Location: index.php');
+  exit;
 }
 
 $title = '登録完了 - ';

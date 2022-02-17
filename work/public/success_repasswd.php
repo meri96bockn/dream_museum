@@ -24,14 +24,14 @@ include(__DIR__ . '/../app/_parts/_header.php');
   </div>
   <div class="form">
     <div class="form_item">
-        <p>
-        パスワード再設定用のご案内メールをお送りいたしました。
-        <br>
-        24時間以内にメールに記載されたURLから再設定してください。
+      <p>
+      パスワード再設定用のご案内メールをお送りいたしました。
+      <br>
+      24時間以内にメールに記載されたURLから再設定してください。
       </p>
-      </div>
     </div>
   </div>
+</div>
 
 <?php
 

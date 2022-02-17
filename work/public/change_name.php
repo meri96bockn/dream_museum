@@ -10,7 +10,7 @@ if (!isset($_SESSION['name']) &&
   createToken();
   $id = $_SESSION['id'];
   $name = $_SESSION['name'];
-  $error = '';
+  $error = [];
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['type'] === 'rename' ) {
@@ -22,15 +22,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
   }
 
   if (empty($error)) {
-    $stmt = $pdo->prepare(
-      "UPDATE members SET username = :username WHERE id = :id"
-    );
-    $stmt->execute(
-      [ 'username' => $rename,
-      'id' => $id ]
-    );
-    unset($_SESSION['token']);
-    $_SESSION['name'] = $rename;
+    try {
+      $pdo->beginTransaction();
+      $stmt = $pdo->prepare(
+        "UPDATE members SET username = :username WHERE id = :id"
+      );
+      $res = $stmt->execute(
+        [ 'username' => $rename,
+        'id' => $id ]
+      );
+      if( $res ) {
+        $pdo->commit();
+        unset($_SESSION['token']);
+        $_SESSION['name'] = $rename;
+      }
+    } catch (PDOException $e) {
+      $pdo->rollBack();
+      $error['try'] = "failure";
+      $error_message = 'Error:'. $e->getMessage();
+      error_log($error_message, 1, "error@dreamuseum.com");
+    } finally {
+      $pdo = null;
+    }
   }
 }
 
@@ -42,6 +55,21 @@ include('../app/_parts/_header.php');
 
 ?>
 
+<?php if (isset($error['try']) && $error['try'] === 'failure'): ?>
+<div class="forms">
+  <div class="form_title">
+    <h1>ユーザーネーム変更</h1>
+  </div>
+  <div class="form">
+    <div class="form_item">
+      <div class="error">
+        <p>* お手数ですが、もう一度やり直してください</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<?php else: ?>
 <div class="forms">
   <div class="form_title">
     <h1>ユーザーネーム変更</h1>
@@ -61,7 +89,7 @@ include('../app/_parts/_header.php');
           <p>* ユーザーネームは半角英数字で入力してください</p>
         <?php endif; ?>
       </div>
-      
+
       <div class="button">
         <button>更新</button>
         <input type="hidden" name="type" value="rename">
@@ -70,7 +98,7 @@ include('../app/_parts/_header.php');
     </form>
   </div>
 </div>
-
+<?php endif; ?>
 
 <?php
 
