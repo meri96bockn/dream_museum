@@ -17,7 +17,7 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
 
-  border: ridge rgb(179, 176, 140);
+  border: ridge 1.5px rgba(179, 176, 140, .8);
   border-radius: 8px;
 
   font-size: 16px;
@@ -50,7 +50,7 @@
 
 .howto img {
   width: 100%;
-  border: ridge rgb(179, 176, 140);
+  border: ridge 1.5px rgba(179, 176, 140, .8);
   border-radius: 8px;
 }
 

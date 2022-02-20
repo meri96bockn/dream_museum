@@ -31,11 +31,11 @@ include('../app/_parts/_header.php');
     </div>
       <p>会員登録されるとマイページが開設され、夢日記を記録できます。</p>
       <img src="img/my_page.png" alt="夢日記を記録できるマイページの画像">
-      <p>記録した夢日記は「むかしの夢を見る」で閲覧できます。</p>
+      <p>記録した夢日記は「むかしの夢を見る」で鑑賞できます。</p>
       <img src="img/past_dream.png" alt="夢日記を閲覧できるマイページの画像">
       <p>もちろん「きょうの夢」をご覧になることもできます。</p>
       <?php if (!isset($_SESSION['name']) && !isset($_SESSION['id'])) :?>
-        <a href="pre_join.php">新規登録する</a>
+        <a href="pre_join.php">新規登録</a>
       <?php endif; ?>
   </div>
 
@@ -60,10 +60,10 @@ include('../app/_parts/_header.php');
     その際、ログインしている必要があるのでご注意ください。
     </p>
     <?php if (!isset($_SESSION['name']) && !isset($_SESSION['id'])) :?>
-        <a href="login.php">ログインする</a>
+        <a href="login.php">ログイン</a>
       <?php endif; ?>
     <?php if (isset($_SESSION['name']) && isset($_SESSION['id'])) :?>
-        <a href="my_page.php">マイページへ</a>
+        <a href="my_page.php">マイページ</a>
       <?php endif; ?>
   </div>
   <div class="howto">

@@ -20,7 +20,7 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
 
-  border: ridge rgb(179, 176, 140);
+  border: ridge rgba(179, 176, 140, .8);
   border-radius: 8px;
 
   font-size: 16px;
@@ -48,7 +48,7 @@
 .tab1, .tab2 {
   display: block;
   padding: 16px 32px;
-  border: ridge rgba(179, 176, 140, 0.9);
+  border: ridge rgba(179, 176, 140, .8);
   margin-bottom: -2px;
   transition: unset;
   transition: color .3s;
@@ -73,17 +73,17 @@
 }
 
 .tab1.active {
-  border-right: ridge rgba(179, 176, 140, 0.9);
+  border-right: ridge rgba(179, 176, 140, .8);
 }
 
 .tab2.active {
-  border-left: ridge rgba(179, 176, 140, 0.9);
+  border-left: ridge rgba(179, 176, 140, .8);
 }
 
 .content1, .content2 {
   display: none;
   border-radius: 8px;
-  border: ridge rgba(179, 176, 140, 0.9);
+  border: ridge rgba(179, 176, 140, .8);
   background-color: rgb(186, 202, 219);
 }
 
@@ -161,7 +161,11 @@ input:focus, textarea:focus {
   display: flex;
   flex-direction: column;
   margin: 0 auto 48px;
-  max-width: 240px;
+  max-width: 320px;
+}
+
+.radio_label {
+  margin: 0 auto;
 }
 
 .radio_label label {
@@ -172,9 +176,9 @@ input:focus, textarea:focus {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 200px;
+  min-width: 200px;
   gap: 8px;
-  margin-left: 2vh;
+  margin: 0 auto;
 }
 
 .radio_item {
@@ -257,7 +261,7 @@ button:hover {
   max-width: 480px;
   margin: 0 auto;
 
-  border: ridge rgba(179, 176, 140, 0.9);
+  border: ridge rgba(179, 176, 140, .8);
   border-radius: 16px;
   background-color: rgb(80, 100, 140);
 }
@@ -270,7 +274,7 @@ button:hover {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
 
-  border: ridge rgba(179, 176, 140);
+  border: ridge rgba(179, 176, 140, .8);
   border-radius: 8px;
   background-color: rgb(140, 90, 140, .7);
   padding: 16px;
@@ -335,7 +339,7 @@ button:hover {
   font-size: 40px;
   color: rgba(243, 232, 220);
   background: rgb(140, 90, 140, .7);
-  box-shadow: 0px 0px 10px rgba(179, 176, 140, 0.9);
+  box-shadow: 0px 0px 10px rgba(179, 176, 140, .8);
   border-radius: 50%;
   width: 72px;
   height: 72px;
@@ -480,7 +484,7 @@ button:hover {
   }
 
   .form_item.radio, .form_item.radio.show {
-    max-width: 480px;
+    max-width: 560px;
     flex-direction: row;
     align-items: flex-start;
   }

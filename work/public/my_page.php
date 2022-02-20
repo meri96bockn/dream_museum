@@ -130,7 +130,7 @@ include('../app/_parts/_header.php');
       
         <div class="form_item">
           <label for="content">夢の内容</label>
-          <textarea name="content" id="content" rows="15"><?= h($form['content']); ?></textarea>
+          <textarea name="content" id="content" rows="20"><?= h($form['content']); ?></textarea>
         </div>
         <div class="error">
         <?php if (isset($error['content']) && $error['content'] === 'blank'):?>
