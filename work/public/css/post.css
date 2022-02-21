@@ -128,7 +128,7 @@ input:focus, textarea:focus {
   display: flex;
   flex-direction: column;
   margin: 0 auto 48px;
-  max-width: 240px;
+  max-width: 320px;
 }
 
 .radio_label label {
@@ -141,11 +141,13 @@ input:focus, textarea:focus {
   justify-content: center;
   max-width: 200px;
   gap: 8px;
+  margin-top: 0;
   margin-left: 2vh;
 }
 
 .radio_item {
   text-align: start;
+  margin: 0;
 }
 
 .radio_item input {
@@ -177,6 +179,14 @@ input:focus, textarea:focus {
   animation-duration: .6s;
 }
 
+#tags.show.release {
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  background-color:rgb(211,222,232);
+}
+
 .button {
   display: flex;
   justify-content: center;
@@ -201,6 +211,38 @@ button:hover {
   color: rgb(180, 100, 140);
   box-shadow: none;
   transform: translate(4px, 2px);
+}
+
+.release_button {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+#release {
+  width: 300px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+}
+
+.icon {
+  display: inline-block;
+  width: 16px;
+}
+
+.icon.cancel {
+  transform: rotate(45deg);
+  color: rgb(180, 100, 140);
+  animation-name: fade-in;
+  animation-duration: .6s;
+}
+
+.success {
+  display: flex;
+  margin: 8px auto;
+  animation-name: fade-in;
+  animation-duration: .6s;
 }
 
 
