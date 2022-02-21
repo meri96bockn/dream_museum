@@ -13,17 +13,11 @@
   <header>
     <div class="topbar_container_mobile">
       <ul class="topbar_nav_mobile">
-        <li class="top">
-          <a href="index.php">DreaMuseum</a>
-        </li>
+        <li class="top"><a href="index.php">DreaMuseum</a></li>
         <?php if (isset($_SESSION['name']) && isset($_SESSION['id'])): ?>
-        <li>
-          <a href="setting.php"><i class="bi bi-gear"></i></a>
-        </li>
+        <li><a href="setting.php"><i class="bi bi-gear"></i></a></li>
         <?php endif; ?>
-        <li>
-          <i class="bi bi-list" id="open"></i>
-        </li>
+        <li><i class="bi bi-list" id="open"></i></li>
       </ul>
     </div>
     <div class="overlay">
@@ -32,8 +26,6 @@
         <ul>
           <li><a href="dreams.php">きょうの夢</a></li>
           <li><a href="my_page.php">マイページ</a></li>
-        </ul>
-        <ul>
           <li><a href="howto.php">使い方</a></li>
           <li><a href="user_policy.php">利用規約</a></li>
           <li><a href="privacy.php">プライバシーポリシー</a></li>
@@ -45,34 +37,26 @@
     <nav class="topbar_container_pc">
       <ul class="topbar_nav">
         <li>
-          <a id="<?php
-            if(isset($index) && $index === 'select') {
-              echo h($index); 
-            }
-          ?>" href="index.php">DreaMuseum</a>
+          <a id="<?php if (isset($index) && $index === 'select') { echo h($index); } ?>" href="index.php">
+            DreaMuseum
+          </a>
         </li>
         <li>
-          <a id="<?php
-            if(isset($dreams) && $dreams === 'select') {
-              echo h($dreams); 
-            }
-          ?>" href="dreams.php">きょうの夢</a>
+          <a id="<?php if (isset($dreams) && $dreams === 'select') { echo h($dreams); } ?>" href="dreams.php">
+            きょうの夢
+          </a>
         </li>
         <li>
-          <a id="<?php
-            if (isset($my_page) && $my_page === 'select') {
-              echo h($my_page); 
-            }
-          ?>" href="my_page.php">マイページ</a>
+          <a id="<?php if (isset($my_page) && $my_page === 'select') { echo h($my_page); } ?>" href="my_page.php">
+            マイページ
+          </a>
         </li>
         <?php if (isset($_SESSION['name']) && isset($_SESSION['id'])): ?>
-        <li>
-          <a class="setting" id="<?php
-            if(isset($setting) && $setting === 'select') {
-              echo h($setting); 
-            }
-          ?>" href="setting.php"><i class="bi bi-gear"></i></a>
-        </li>
+          <li>
+            <a class="setting" id="<?php if (isset($setting) && $setting === 'select') { echo h($setting); } ?>" href="setting.php">
+              <i class="bi bi-gear"></i>
+            </a>
+          </li>
         <?php endif;?>
       </ul>
     </nav>
