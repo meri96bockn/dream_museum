@@ -15,10 +15,10 @@
 </footer>
 <script>
   const PageTopBtn = document.getElementById('scroll-top');
-PageTopBtn.addEventListener('click', () =>{
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
+  PageTopBtn.addEventListener('click', () =>{
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   });
-});
 </script>

@@ -20,7 +20,7 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
 
-  border: ridge rgba(179, 176, 140, .8);
+  border: ridge rgb(179, 176, 140);
   border-radius: 8px;
 
   font-size: 16px;
@@ -48,10 +48,30 @@
 .tab1, .tab2 {
   display: block;
   padding: 16px 32px;
-  border: ridge rgba(179, 176, 140, .8);
+  border: ridge rgba(179, 176, 140, 0.9);
   margin-bottom: -2px;
   transition: unset;
   transition: color .3s;
+}
+/* safari */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  _::-webkit-full-page-media, _:future, :root
+  .tab1, .tab2
+  {
+    border: 1.5px ridge hsla(45, 60%, 30%, .4);
+  }
+
+  _::-webkit-full-page-media, _:future, :root
+  .tab1 {
+    border-bottom: hidden;
+    border-right: hidden;
+  }
+
+  _::-webkit-full-page-media, _:future, :root
+  .tab2 {
+    border-bottom: hidden;
+    border-left: hidden;
+  }
 }
 
 .tab1 {
@@ -73,18 +93,42 @@
 }
 
 .tab1.active {
-  border-right: ridge rgba(179, 176, 140, .8);
+  border-right: ridge rgba(179, 176, 140, 0.9);
+}
+/* safari */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  _::-webkit-full-page-media, _:future, :root
+  .tab1.active
+  {
+    border-right: 1.5px ridge hsla(45, 60%, 30%, .4);
+  }
 }
 
 .tab2.active {
-  border-left: ridge rgba(179, 176, 140, .8);
+  border-left: ridge rgba(179, 176, 140, 0.9);
+}
+/* safari */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  _::-webkit-full-page-media, _:future, :root
+  .tab2.active 
+  {
+    border-left: 1.5px ridge hsla(45, 60%, 30%, .4);
+  }
 }
 
 .content1, .content2 {
   display: none;
   border-radius: 8px;
-  border: ridge rgba(179, 176, 140, .8);
+  border: ridge rgba(179, 176, 140, 0.9);
   background-color: rgb(186, 202, 219);
+}
+/* safari */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  _::-webkit-full-page-media, _:future, :root
+  .content1, .content2
+  {
+    border: 1.5px ridge hsla(45, 60%, 30%, .4);
+  }
 }
 
 
@@ -261,7 +305,7 @@ button:hover {
   max-width: 480px;
   margin: 0 auto;
 
-  border: ridge rgba(179, 176, 140, .8);
+  border: ridge rgba(179, 176, 140, 0.9);
   border-radius: 16px;
   background-color: rgb(80, 100, 140);
 }
@@ -274,7 +318,7 @@ button:hover {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
 
-  border: ridge rgba(179, 176, 140, .8);
+  border: ridge rgba(179, 176, 140);
   border-radius: 8px;
   background-color: rgb(140, 90, 140, .7);
   padding: 16px;
@@ -339,7 +383,7 @@ button:hover {
   font-size: 40px;
   color: rgba(243, 232, 220);
   background: rgb(140, 90, 140, .7);
-  box-shadow: 0px 0px 10px rgba(179, 176, 140, .8);
+  box-shadow: 0px 0px 10px rgba(179, 176, 140, 0.9);
   border-radius: 50%;
   width: 72px;
   height: 72px;
@@ -516,6 +560,27 @@ button:hover {
 
   .radio_items label {
     margin-right: 16px;
+  }
+
+}
+
+
+
+/* safari */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  _::-webkit-full-page-media, _:future, :root
+  .container_title h1 {
+    border: 1.5px ridge hsla(44, 90%, 40%, .4);
+  }
+
+  _::-webkit-full-page-media, _:future, :root
+  .dreams_container {
+    border: 1.5px ridge hsla(50, 60%, 40%, .4);
+  }
+
+  _::-webkit-full-page-media, _:future, :root
+  .dreams_title {
+    border: 1.5px ridge hsla(69, 60%, 40%, .4);
   }
 
 }

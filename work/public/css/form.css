@@ -312,3 +312,12 @@ a.re_passwd {
     flex-direction: row;
   }
 }
+
+/* safari */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  _::-webkit-full-page-media, _:future, :root
+  .form_title h1 {
+    border: 1.5px ridge hsla(44, 90%, 40%, .4);
+  }
+
+}

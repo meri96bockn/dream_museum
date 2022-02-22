@@ -243,3 +243,17 @@ a:hover {
     gap: 40px;
   }
 }
+
+
+/* safari */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  _::-webkit-full-page-media, _:future, :root
+  .footer_links a + a {
+      margin-left: 40px;
+  }
+
+  .topbar_nav > li > a {
+    margin-left: 40px;
+  }
+
+}

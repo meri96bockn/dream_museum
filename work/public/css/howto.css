@@ -17,7 +17,7 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translateX(-50%, -50%);
 
-  border: ridge 1.5px rgba(179, 176, 140, .8);
+  border: ridge 1.5px rgb(179, 176, 140);
   border-radius: 8px;
 
   font-size: 16px;
@@ -50,7 +50,7 @@
 
 .howto img {
   width: 100%;
-  border: ridge 1.5px rgba(179, 176, 140, .8);
+  border: ridge 1.5px rgb(179, 176, 140);
   border-radius: 8px;
 }
 
@@ -101,13 +101,31 @@
   }
 
   .howto {
-    max-width: 720px;
+    max-width: 800px;
     margin: 0 auto;
   }
 
   .form_item {
     flex-direction: row;
     align-items: baseline;
+  }
+
+}
+
+
+/* safari */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+
+  _::-webkit-full-page-media, _:future, :root
+  .container_title h1
+  {
+      border: 1.5px ridge hsla(44, 90%, 40%, .4);
+  }
+
+  _::-webkit-full-page-media, _:future, :root
+  .howto img
+  {
+      border: 1.5px ridge hsla(50, 70%, 30%, .4);
   }
 
 }

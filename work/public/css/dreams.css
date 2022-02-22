@@ -110,3 +110,20 @@
     align-content: center;
   }
 }
+
+/* safari */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  _::-webkit-full-page-media, _:future, :root
+  .dreams_container h1,
+  .emotion_dreams
+  {
+    border: 1.5px ridge hsla(44, 90%, 40%, .4);
+  }
+
+  _::-webkit-full-page-media, _:future, :root
+  .emotion
+  {
+    border: 1.5px ridge hsla(69, 60%, 40%, .4);
+  }
+  
+}
