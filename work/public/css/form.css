@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  background-color:rgb(211,222,232);
+  background-color:rgb(211, 222, 232);
 }
 
 .form_title h1 {
@@ -21,10 +21,10 @@
   border-radius: 8px;
 
   font-size: 16px;
-  color: rgba(243, 232, 220);
+  color: rgb(243, 232, 220);
 
   padding: 16px;
-  background-color: rgba(30, 90, 140 , .7) ;
+  background-color: rgba(30, 90, 140, .7) ;
 }
 
 .form {
@@ -140,7 +140,7 @@ input:focus, textarea:focus {
 
 .error {
   margin: 8px auto 48px;
-  color: rgb(140, 90, 140, .7);
+  color: rgba(140, 90, 140, .7);
   width: 80%;
 }
 
@@ -315,9 +315,24 @@ a.re_passwd {
 
 /* safari */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
+    /* 額縁カラー調整 */
   _::-webkit-full-page-media, _:future, :root
-  .form_title h1 {
+  .form_title h1
+  {
     border: 1.5px ridge hsla(44, 90%, 40%, .4);
+  }
+
+    /* gap調整 */
+  _::-webkit-full-page-media, _:future, :root
+  .radio_items > div + div
+  {
+    margin-top: 8px;
+  }
+
+  _::-webkit-full-page-media, _:future, :root
+  .button > button + button
+  {
+    margin-left: 3vh;
   }
 
 }

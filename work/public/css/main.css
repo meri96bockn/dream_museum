@@ -227,8 +227,6 @@ a:hover {
 
 
   /* footer */
-
-  
   .footer {
     padding-top: 80px;
   }
@@ -247,13 +245,39 @@ a:hover {
 
 /* safari */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
+  /* gap調整 */
+  /* mobileTop */
   _::-webkit-full-page-media, _:future, :root
-  .footer_links a + a {
-      margin-left: 40px;
+  .topbar_nav_mobile
+  {
+    padding: 5vh;
   }
 
-  .topbar_nav > li > a {
+  _::-webkit-full-page-media, _:future, :root
+  .topbar_nav_mobile > li + li
+  {
+    margin-left: 3vh;
+  }
+
+
+  /* pcTop */
+  _::-webkit-full-page-media, _:future, :root 
+  .topbar_nav > li + li {
     margin-left: 40px;
   }
 
+
+  /* footer */
+  _::-webkit-full-page-media, _:future, :root 
+  .footer_container div
+  {
+    margin-bottom: 40px;
+  }
+
+  _::-webkit-full-page-media, _:future, :root 
+  .footer_links a + a
+  {
+    margin-left: 40px;
+  }
+  
 }
