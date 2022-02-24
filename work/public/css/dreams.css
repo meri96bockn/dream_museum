@@ -135,7 +135,7 @@
 
   /* gap調整 */
   _::-webkit-full-page-media, _:future, :root
-  .emotions_area > div + div
+  .emotions_area > div
   {
     margin-top: 80px;
   }
