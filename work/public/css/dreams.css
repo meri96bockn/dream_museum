@@ -115,6 +115,12 @@
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   /* 額縁カラー調整 */
   _::-webkit-full-page-media, _:future, :root
+  .emotions_area
+  {
+    padding: 60px;
+  }
+
+  _::-webkit-full-page-media, _:future, :root
   .dreams_container h1,
   .emotion_dreams
   {
