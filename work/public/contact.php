@@ -16,7 +16,7 @@ $error = [];
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
-  validateToken();
+  // validateToken();
 
   $form['name'] = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
   if ($form['name'] === '') {
@@ -26,6 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
   $form['email'] = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
   if ($form['email'] === '') {
     $error['email'] = 'blank';
+  } elseif (!preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $form['email'])) {
+    $error['email']= 'check';
   }
 
   $form['message'] = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
@@ -69,6 +71,9 @@ include(__DIR__ . '/../app/_parts/_header.php');
         <div class="error">
         <?php if (isset($error['email']) && $error['email'] === 'blank'): ?>
           <p>* メールアドレスを入力してください</p>
+        <?php endif; ?>
+        <?php if (isset($error['email']) && $error['email'] === 'check'): ?>
+        <p>* メールアドレスを正しい形式で入力してください</p>
         <?php endif; ?>
         </div>
         <div class="form_item">
