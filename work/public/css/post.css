@@ -15,12 +15,29 @@
   width: 80%;
 }
 
-.form_item.radio, .form_item.radio.show {
+#tags {
+  display: none;
+}
+
+#tags.show {
   display: flex;
   flex-direction: column;
+  gap: 16px;
   margin: 0 auto 48px;
+  padding: 16px;
   max-width: 320px;
-  text-align: center;
+  background-color:rgb(211, 222, 232);
+  border-radius: 8px;
+  animation-name: fade-in;
+  animation-duration: .6s;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4vh;
+  margin-top: 8vh;
 }
 
 .radio_label label {
@@ -65,31 +82,6 @@
   to {opacity: 1;}
 }
 
-#tags {
-  display: none;
-}
-
-#tags.show {
-  display: flex;
-  animation-name: fade-in;
-  animation-duration: .6s;
-}
-
-#tags.show.release {
-  flex-direction: column;
-  gap: 16px;
-  padding: 16px;
-  border-radius: 8px;
-  background-color:rgb(211, 222, 232);
-}
-
-.button {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2vh;
-  margin-top: 8vh;
-}
 
 button {
   font-size: 16px;
@@ -208,17 +200,6 @@ div + div {
     margin-right: 0;
   }
 
-  .form_item.radio, .form_item.radio.show {
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    gap: 16px;
-    margin-right: 32px;
-    max-width: 480px;
-    flex-direction: row;
-    align-items: flex-start;
-  }
-
   .radio_label {
     flex: 1;
     margin: 0;
@@ -231,6 +212,47 @@ div + div {
 
   .radio_items label {
     margin-right: 16px;
+  }
+
+}
+
+
+/* safari */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  _::-webkit-full-page-media, _:future, :root
+  .radio_items > div + div
+  {
+    margin-top: 8px;
+  }
+
+  _::-webkit-full-page-media, _:future, :root
+  .info > p
+  {
+    margin-right: 3vh;
+  }
+
+  _::-webkit-full-page-media, _:future, :root
+  .radio_items > div + div
+  {
+    margin-top: 8px;
+  }
+  
+  _::-webkit-full-page-media, _:future, :root
+  #tags.show.release > div + div
+  {
+    margin-top: 16px;
+  }
+
+  _::-webkit-full-page-media, _:future, :root
+  .button button + button
+  {
+    margin-left: 5vh;
+  }
+
+  _::-webkit-full-page-media, _:future, :root
+  .button form + form
+  {
+    margin-left: 5vh;
   }
 
 }

@@ -148,3 +148,14 @@
     margin: 16px;
   }
 }
+
+
+/* safari */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  /* gap調整 */
+  _::-webkit-full-page-media, _:future, :root
+  .top_features > div + div {
+    margin-top: 40px;
+  }
+
+}
