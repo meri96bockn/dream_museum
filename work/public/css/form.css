@@ -77,7 +77,8 @@
 }
 
 .form_item.policy a {
-  text-decoration-line: underline;
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
 }
 
 .success {
@@ -181,7 +182,15 @@ input:focus, textarea:focus {
 }
 
 .radio_title {
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+@-webkit-keyframes fade-in {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 
 @keyframes fade-in {
@@ -196,8 +205,10 @@ input:focus, textarea:focus {
 #tags.show {
   display: flex;
   flex-direction: column;
-  animation-name: fade-in;
-  animation-duration: .6s;
+  -webkit-animation-name: fade-in;
+          animation-name: fade-in;
+  -webkit-animation-duration: .6s;
+          animation-duration: .6s;
 }
 
 .button {
