@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . '/../app/config.php');
-require('../app/functions.php');
+require(__DIR__ . '/../app/functions.php');
 
 if (!isset($_SESSION['token'])) {
   header('Location: index.php');
@@ -13,7 +13,6 @@ $title = '記録完了 - ';
 $this_css = 'form';
 $my_page = 'select';
 include(__DIR__ . '/../app/_parts/_header.php');
-
 ?>
 
 <div class="forms">
@@ -29,11 +28,8 @@ include(__DIR__ . '/../app/_parts/_header.php');
   </div>
 </div>
 
-
 <?php
-
-include('../app/_parts/_footer.php');
-
+include(__DIR__ . '/../app/_parts/_footer.php');
 ?>
 <script src="js/main.js"></script>
 </body>

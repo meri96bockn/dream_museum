@@ -41,10 +41,8 @@ if (!isset($_GET['urltoken'])) {
   }
 }
 
-
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['type'] === 'remail' ) {
-  try{
+  try {
     $stmt = $pdo->prepare(
       "UPDATE members SET email = :remail WHERE id = :member_id"
     );
@@ -52,14 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
       [ 'remail' => $remail,
       'member_id' => $row['member_id'] ]
     );
-
     $sql = "UPDATE pre_emails SET flag = 1 WHERE email=:remail";
     $stm = $pdo->prepare($sql);
     $stm->bindValue(':remail', $remail, PDO::PARAM_STR);
     $stm->execute();
 
     /* メール送信 */
-
     $to = $remail;
     $subject = '【自動返信】メールアドレスの再設定が完了しました';
     $body = <<< EOM
@@ -75,12 +71,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
     $from_email = 're_email@dreamuseum.com';
     $pfrom = "-f $from_email";
     $headers = 'From: ' . ($from_name). ' <' . $from_email. '>';
-
     mb_language('ja');
     mb_internal_encoding('UTF-8');
-    if (mb_send_mail($to, $subject, $body, $headers, $pfrom))
-    {
-      $stm = null;
+    if (mb_send_mail($to, $subject, $body, $headers, $pfrom)) {
+      $pdo = null;
       $_SESSION = array();
       if (isset($_COOKIE["PHPSESSID"])) {
           setcookie("PHPSESSID", '', time() - 1800, '/');
@@ -96,75 +90,69 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
   }
 }
 
-
 $title = 'メールアドレス変更 - ';
 $this_css = 'form';
 $setting = 'select';
-include('../app/_parts/_header.php');
-
+include(__DIR__ . '/../app/_parts/_header.php');
 ?>
 
 <?php if (isset($error['urltoken'])): ?>
-<div class="forms">
-  <div class="form_title">
-    <h1>メールアドレス変更</h1>
-  </div>
-  <div class="form">
-    <div class="form_item">
-      <?php if (isset($error['urltoken']) && $error['urltoken'] === "notfind"): ?>
-      <div class="error">
-        <p>* トークンがありません。</p>
+  <div class="forms">
+    <div class="form_title">
+      <h1>メールアドレス変更</h1>
+    </div>
+    <div class="form">
+      <div class="form_item">
+        <?php if (isset($error['urltoken']) && $error['urltoken'] === "notfind"): ?>
+          <div class="error">
+            <p>* トークンがありません。</p>
+          </div>
+        <?php endif; ?>
+        <?php if (isset($error['urltoken']) && $error['urltoken'] === "notuse"): ?>
+          <div class="error">
+            <p>* このURLはご利用できません。有効期限が過ぎたかURLが間違えている可能性がございます。<br>もう一度登録をやりなおして下さい。</p>
+          </div>
+        <?php endif; ?>
       </div>
-      <?php endif; ?>
-      <?php if (isset($error['urltoken']) && $error['urltoken'] === "notuse"): ?>
-      <div class="error">
-        <p>* このURLはご利用できません。有効期限が過ぎたかURLが間違えている可能性がございます。もう一度登録をやりなおして下さい。</p>
-      </div>
-      <?php endif; ?>
     </div>
   </div>
-</div>
 
 <?php elseif (isset($error['try']) && $error['try'] === 'failure'): ?>
-<div class="forms">
-  <div class="form_title">
-    <h1>メールアドレス変更</h1>
-  </div>
-  <div class="form">
-    <div class="form_item">
-      <div class="error">
-        <p>* お手数ですが、もう一度やり直してください</p>
+  <div class="forms">
+    <div class="form_title">
+      <h1>メールアドレス変更</h1>
+    </div>
+    <div class="form">
+      <div class="form_item">
+        <div class="error">
+          <p>* お手数ですが、もう一度やり直してください</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 <?php else: ?>
-<div class="forms">
-  <div class="form_title">
-    <h1>メールアドレス変更</h1>
+  <div class="forms">
+    <div class="form_title">
+      <h1>メールアドレス変更</h1>
+    </div>
+    <div class="form">
+      <form action="" method="post" enctype="multipart/form-data" autocomplete="off" onsubmit="return settings()">
+        <dl class="form_item check">
+          <dt>新しいメールアドレス</dt>
+          <dd><i class="bi bi-chevron-double-right"></i><?= h($remail); ?></dd>
+        </dl>
+        <div class="button">
+          <button>更新</button>
+          <input type="hidden" name="type" value="remail">
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="form">
-    <form action="" method="post" enctype="multipart/form-data" autocomplete="off" onsubmit="return settings()">
-      <dl class="form_item check">
-        <dt>新しいメールアドレス</dt>
-        <dd><i class="bi bi-chevron-double-right"></i><?= h($remail); ?></dd>
-      </dl>
-      
-      <div class="button">
-        <button>更新</button>
-        <input type="hidden" name="type" value="remail">
-      </div>
-    </form>
-  </div>
-</div>
 <?php endif; ?>
 
-
 <?php
-
-include('../app/_parts/_footer.php');
-
+include(__DIR__ . '/../app/_parts/_footer.php');
 ?>
 <script>
   function settings() {

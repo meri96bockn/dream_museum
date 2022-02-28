@@ -20,8 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute(
       [ 'username' => $form['name'],
       'email' => $form['email'],
-      'password' => password_hash($form['password'], PASSWORD_DEFAULT)
-      ]
+      'password' => password_hash($form['password'], PASSWORD_DEFAULT) ]
     );
     $sql = "UPDATE pre_members SET flag = 1 WHERE email=:email";
     $stm = $pdo->prepare($sql);
@@ -43,7 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $from_email = 'join@dreamuseum.com';
     $pfrom = "-f $from_email";
     $headers = 'From: ' . ($from_name). ' <' . $from_email. '>';
-  
     mb_language('ja');
     mb_internal_encoding('UTF-8');
     if (mb_send_mail($to, $subject, $body, $headers, $pfrom)) {
@@ -54,67 +52,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       header('Location: success.php');
       exit;
     }
-      $stm = null;
-  }catch (PDOException $e){
+      $pdo = null;
+  } catch (PDOException $e) {
     $pdo->rollBack();
     $error['try'] = "failure";
     $error_message = 'Error:'. $e->getMessage();
     error_log($error_message, 1, "error@dreamuseum.com");
-    die();
   }
 }
 
 $title = '本会員登録確認 - ';
 $this_css = 'form';
 include(__DIR__ . '/../app/_parts/_header.php');
-
 ?>
+
 <?php if (isset($error['try']) && $error['try'] === 'failure'): ?>
-<div class="forms">
-  <div class="form_title">
-    <h1>本会員登録確認</h1>
-  </div>
-  <div class="form">
-    <div class="form_item">
-      <div class="error">
-        <p>* お手数ですが、もう一度やり直してください</p>
+  <div class="forms">
+    <div class="form_title">
+      <h1>本会員登録確認</h1>
+    </div>
+    <div class="form">
+      <div class="form_item">
+        <div class="error">
+          <p>* お手数ですが、もう一度やり直してください</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 <?php else: ?>
-<div class="forms">
-  <div class="form_title">
-    <h1>本会員登録確認</h1>
+  <div class="forms">
+    <div class="form_title">
+      <h1>本会員登録確認</h1>
+    </div>
+    <div class="form">
+      <form action="" method="post" enctype="multipart/form-data">
+        <dl class="form_item check">
+          <dt>ユーザーネーム</dt>
+          <dd><i class="bi bi-chevron-double-right"></i><?= h($form['name']); ?></dd>
+        </dl>
+        <dl class="form_item check">
+          <dt>メールアドレス</dt>
+          <dd><i class="bi bi-chevron-double-right"></i><?= h($form['email']); ?></dd>
+        </dl>
+        <dl class="form_item check">
+          <dt>パスワード</dt>
+          <dd><i class="bi bi-chevron-double-right"></i>非表示</dd>
+        </dl>
+        <div class="button">
+          <button type="button" onclick=location.href="join.php?urltoken=<?= h($urltoken) ?>">変更</button>
+          <button>登録</button>
+          <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="form">
-    <form action="" method="post" enctype="multipart/form-data">
-      <dl class="form_item check">
-        <dt>ユーザーネーム</dt>
-        <dd><i class="bi bi-chevron-double-right"></i><?= h($form['name']); ?></dd>
-      </dl>
-      <dl class="form_item check">
-        <dt>メールアドレス</dt>
-        <dd><i class="bi bi-chevron-double-right"></i><?= h($form['email']); ?></dd>
-      </dl>
-      <dl class="form_item check">
-        <dt>パスワード</dt>
-        <dd><i class="bi bi-chevron-double-right"></i>非表示</dd>
-      </dl>
-      <div class="button">
-        <button type="button" onclick=location.href="join.php?urltoken=<?= h($urltoken) ?>">変更</button>
-        <button>登録</button>
-        <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-      </div>
-    </form>
-  </div>
-</div>
 <?php endif; ?>
 
 <?php
-include('../app/_parts/_footer.php');
-
+include(__DIR__ . '/../app/_parts/_footer.php');
 ?>
 <script src="js/main.js"></script>
 </body>

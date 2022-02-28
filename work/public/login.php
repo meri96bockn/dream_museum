@@ -2,23 +2,20 @@
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
 createToken();
-
 $email = '';
 $error = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   validateToken();
-
   $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
   $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-  
   if ($email === '') {
     $error['email'] = 'blank';
   }
   if ($password === '') {
     $error['password'] = 'blank';
   }
-  
+
   if (empty($error)) {
     $stmt = $pdo->prepare(
       "SELECT *
@@ -32,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
     $stmt->execute();
     $row = $stmt->fetch();
-    
+
     if (password_verify($password, $row["password"])) {
       session_regenerate_id();
       $_SESSION['id'] = $row['id'];
@@ -48,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $title = 'ログイン - ';
 $this_css = 'form';
 include(__DIR__ . '/../app/_parts/_header.php');
-
 ?>
 <div class="forms">
   <div class="form_title">
@@ -63,7 +59,7 @@ include(__DIR__ . '/../app/_parts/_header.php');
       </div>
       <div class="error">
         <?php if (isset($error['email']) && $error['email'] === 'blank'):?>
-            <p>* メールアドレスを入力してください</p>
+          <p>* メールアドレスを入力してください</p>
         <?php endif; ?>
       </div>
       <div class="form_item">
@@ -90,9 +86,7 @@ include(__DIR__ . '/../app/_parts/_header.php');
 </div>
 
 <?php
-
-include('../app/_parts/_footer.php');
-
+include(__DIR__ . '/../app/_parts/_footer.php');
 ?>
 <script src="js/main.js"></script>
 </body>

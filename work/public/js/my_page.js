@@ -28,7 +28,6 @@
   }
 
 
-
   // マイページタブメニュー 切り替え
   const tab_titles = document.querySelectorAll('a.tab1, a.tab2');
   const contents = document.querySelectorAll('.content1, .content2')
@@ -52,9 +51,8 @@
 
 
   // むかしの夢 揺れる矢印
-  window.onload=function(){
+  window.onload = function() {
     const scroll = document.querySelector('.scroll');
-
     const Animation = function() {
       const triggerMargin = 100;
       if (window.innerHeight > scroll.getBoundingClientRect().top + triggerMargin) {
@@ -63,7 +61,6 @@
     }
 
     window.addEventListener('scroll', Animation);
-
     function fadeOut() {
       scroll.classList.add('fade-out');
     }

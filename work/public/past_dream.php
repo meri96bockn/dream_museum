@@ -3,14 +3,15 @@ require_once(__DIR__ . '/../app/config.php');
 require('../app/functions.php');
 
 $post_id = filter_input(INPUT_GET, 'post_id', FILTER_SANITIZE_NUMBER_INT);
-if (isset($_SESSION['name']) && isset($_SESSION['id']) && isset($post_id)) {
-  createToken();
-  $id = $_SESSION['id'];
-  $name = $_SESSION['name'];
-} else {
-  header('Location: login.php');
-  exit;
-}
+// if (isset($_SESSION['name']) && isset($_SESSION['id']) && isset($post_id)) {
+//   createToken();
+//   $id = $_SESSION['id'];
+//   $name = $_SESSION['name'];
+// } else {
+//   header('Location: login.php');
+//   exit;
+// }
+$id = '1';
 
 
 $stmt = $pdo->prepare(
@@ -36,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) && $_POST['ty
     $url = "past_dream.php?post_id=" . $id;
     header('Location:' . $url);
     exit;
-  } catch (PDOException $e) {
+    } catch (PDOException $e) {
     $pdo->rollBack();
     $error['try'] = "failure";
     $error_message = 'Error:'. $e->getMessage();
@@ -47,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) && $_POST['ty
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) && $_POST['type'] === 'yes') {
   $emotion = filter_input(INPUT_POST, 'emotion', FILTER_SANITIZE_STRING);
-  try {
+  // try {
     $stmt = $pdo->prepare(
       "UPDATE posts SET tag = 'yes_tag', emotion = :emotion WHERE id = :post_id AND member_id = :members_id"
     );
@@ -60,13 +61,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) && $_POST['ty
     $url = "past_dream.php?post_id=" . $id;
     header('Location:' . $url);
     exit;
-  } catch (PDOException $e) {
-    $pdo->rollBack();
-    $error['try'] = "failure";
-    $error_message = 'Error:'. $e->getMessage();
-    error_log($error_message, 1, "error@dreamuseum.com");
-    die();
-  }
+  // } catch (PDOException $e) {
+  //   $pdo->rollBack();
+  //   $error['try'] = "failure";
+  //   $error_message = 'Error:'. $e->getMessage();
+  //   error_log($error_message, 1, "error@dreamuseum.com");
+  //   die();
+
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['type'] === 'bye') {
@@ -96,11 +97,11 @@ include('../app/_parts/_header.php');
 ?>
 
 <?php if (isset($error['try']) && $error['try'] === 'failure'): ?>
-<div class="container">
-    <div class="error">
-      <p>* お手数ですが、もう一度やり直してください</p>
-    </div>
-</div>
+  <div class="container">
+      <div class="error">
+        <p>* お手数ですが、もう一度やり直してください</p>
+      </div>
+  </div>
 
 <?php else: ?>
   <div class="container">
@@ -152,13 +153,13 @@ include('../app/_parts/_header.php');
                 </span>
                 タグをつけて公開する
               </dt>
-              <dd class="form_item radio release" id="tags">
-                <div class="radio_label">
-                  <label>どんな夢ですか？<br>合うタグを1つ選んでください。</label>
-                </div>
-                <div class="radio_items">
-                  <div class="radio_item">
-                      <form action="" method="POST" id="yes" onsubmit="return emo()">
+              <form action="" method="POST" id="yes" onsubmit="return emo()">
+                <dd class="form_item" id="tags">
+                  <div class="radio_label">
+                    <label>どんな夢ですか？<br>合うタグを1つ選んでください。</label>
+                  </div>
+                  <div class="radio_items">
+                    <div class="radio_item">
                       <input type="radio" name="emotion" id="emotion_1" value="fun" checked>
                       <label for="emotion_1" class="radio_title">たのしい</label>
                     </div>
@@ -198,17 +199,15 @@ include('../app/_parts/_header.php');
   </div>
 <?php endif; ?>
 
-
 <?php
-include('../app/_parts/_footer.php');
-
+include(__DIR__ . '/../app/_parts/_footer.php');
 ?>
 <script>
   function tag() {
     const select = confirm('タグを外して非公開にしますか？');
     return select;
   }
-  
+
   function emo() {
     const select = confirm('本当に公開しますか？');
     return select;

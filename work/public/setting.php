@@ -2,8 +2,7 @@
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
 
-if (!isset($_SESSION['name']) &&
-!isset($_SESSION['id'])) {
+if (!isset($_SESSION['name']) && !isset($_SESSION['id'])) {
   header('Location: login.php');
   exit;
 } else {
@@ -14,8 +13,7 @@ if (!isset($_SESSION['name']) &&
 $title = '各種設定一覧 - ';
 $this_css = 'tab';
 $setting = 'select';
-include('../app/_parts/_header.php');
-
+include(__DIR__ . '/../app/_parts/_header.php');
 ?>
 
 <div class="container">
@@ -37,9 +35,7 @@ include('../app/_parts/_header.php');
 </div>
 
 <?php
-
-include('../app/_parts/_footer.php');
-
+include(__DIR__ . '/../app/_parts/_footer.php');
 ?>
 <script src="js/main.js"></script>
 </body>

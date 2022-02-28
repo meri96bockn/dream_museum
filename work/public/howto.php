@@ -1,13 +1,10 @@
 <?php
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
-
 $title = '使い方 - ';
 $this_css = 'howto';
-include('../app/_parts/_header.php');
-
+include(__DIR__ . '/../app/_parts/_header.php');
 ?>
-
 
 <div class="container">
   <div class="container_title">
@@ -18,9 +15,10 @@ include('../app/_parts/_header.php');
       <i class="bi bi-person"></i>
       <h2>ゲストユーザーの楽しみ方</h2>
     </div>
-    <p>会員登録せずゲストユーザーとしてご利用される方は、「きょうの夢」をご覧になれます。
-    <br>
-    これまで寄贈された夢がランダムに展示されていますので、お楽しみください。
+    <p>
+      会員登録せずゲストユーザーとしてご利用される方は、「きょうの夢」をご覧になれます。
+      <br>
+      これまで寄贈された夢がランダムに展示されていますので、お楽しみください。
     </p>
     <a href="dreams.php">「きょうの夢」を見る</a>
   </div>
@@ -38,33 +36,31 @@ include('../app/_parts/_header.php');
         <a href="pre_join.php">新規登録</a>
       <?php endif; ?>
   </div>
-
-
   <div class="howto">
     <div class="title">
       <i class="bi bi-image-fill"></i>
       <h2>夢日記を寄贈する方法</h2>
     </div>
     <p>
-    記録した夢日記は、「きょうの夢」に寄贈することで公開できます。
-    <br>
-    公開したいときは、夢日記を記録するときに「タグをつけて寄贈する」を選択します。
-    <br>
-    同時に、記録した夢に合うタグも選択してください。
+      記録した夢日記は、「きょうの夢」に寄贈することで公開できます。
+      <br>
+      公開したいときは、夢日記を記録するときに「タグをつけて寄贈する」を選択します。
+      <br>
+      同時に、記録した夢に合うタグも選択してください。
     </p>
     <img src="img/tag.png" alt="夢を寄贈するか選択するラジオボタンの画像">
     <p>寄贈した夢を非公開にしたくなったときも、マイページから変更できます。
-    <br>
-    また、「きょうの夢」でご自身の夢日記を見つけられたときも非公開に変更できます。
-    <br>
-    その際、ログインしている必要があるのでご注意ください。
+      <br>
+      また、「きょうの夢」でご自身の夢日記を見つけられたときも非公開に変更できます。
+      <br>
+      その際、ログインしている必要があるのでご注意ください。
     </p>
     <?php if (!isset($_SESSION['name']) && !isset($_SESSION['id'])) :?>
-        <a href="login.php">ログイン</a>
-      <?php endif; ?>
+      <a href="login.php">ログイン</a>
+    <?php endif; ?>
     <?php if (isset($_SESSION['name']) && isset($_SESSION['id'])) :?>
-        <a href="my_page.php">マイページ</a>
-      <?php endif; ?>
+      <a href="my_page.php">マイページ</a>
+    <?php endif; ?>
   </div>
   <div class="howto">
     <div class="title">
@@ -78,8 +74,8 @@ include('../app/_parts/_header.php');
   </div>
   <div class="howto">
     <div class="title">
-    <i class="bi bi-moon-stars"></i>
-    <h2>DreaMuseumへようこそ</h2>
+      <i class="bi bi-moon-stars"></i>
+      <h2>DreaMuseumへようこそ</h2>
     </div>
     <p>夢の博物館を楽しめますように！</p>
     <?php if (!isset($_SESSION['name']) && !isset($_SESSION['id'])) :?>
@@ -87,18 +83,15 @@ include('../app/_parts/_header.php');
         <a href="pre_join.php">新規登録</a>
         <a href="login.php">ログイン</a>
       </div>
-      <?php endif; ?>
+    <?php endif; ?>
     <?php if (isset($_SESSION['name']) && isset($_SESSION['id'])) :?>
-        <a href="my_page.php">マイページへ</a>
-      <?php endif; ?>
+      <a href="my_page.php">マイページへ</a>
+    <?php endif; ?>
   </div>
 </div>
 
-
 <?php
-
-include('../app/_parts/_footer.php');
-
+include(__DIR__ . '/../app/_parts/_footer.php');
 ?>
 <script src="js/main.js"></script>
 </body>

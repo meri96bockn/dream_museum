@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '/../app/config.php');
-require('../app/functions.php');
+require(__DIR__ . '/../app/functions.php');
+
 if (isset($_SESSION['token']) && isset($_SESSION['form'])) {
   $_SESSION = array();
   if (isset($_COOKIE["PHPSESSID"])) {
@@ -15,7 +16,6 @@ if (isset($_SESSION['token']) && isset($_SESSION['form'])) {
 $title = '登録完了 - ';
 $this_css = 'form';
 include(__DIR__ . '/../app/_parts/_header.php');
-
 ?>
 
 <div class="forms">
@@ -31,11 +31,8 @@ include(__DIR__ . '/../app/_parts/_header.php');
   </div>
 </div>
 
-
 <?php
-
-include('../app/_parts/_footer.php');
-
+include(__DIR__ . '/../app/_parts/_footer.php');
 ?>
 <script src="js/main.js"></script>
 </body>

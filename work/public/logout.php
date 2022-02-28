@@ -2,8 +2,7 @@
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
 
-if (!isset($_SESSION['name']) &&
-!isset($_SESSION['id'])) {
+if (!isset($_SESSION['name']) && !isset($_SESSION['id'])) {
   header('Location: login.php');
   exit;
 } else {
@@ -19,14 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['type']) &&  $_POST['t
   }
   session_destroy();
   header('Location: index.php');
+  exit;
 }
-
 
 $title = 'ログアウト - ';
 $this_css = 'form';
 $setting = 'select';
-include('../app/_parts/_header.php');
-
+include(__DIR__ . '/../app/_parts/_header.php');
 ?>
 
 <div class="forms">
@@ -36,9 +34,10 @@ include('../app/_parts/_header.php');
   <div class="form">
     <form action="" method="post" enctype="multipart/form-data" autocomplete="off" onsubmit="return settings()">
       <div class="form_item caution">
-      <p>ログアウトしてよろしければ、<br>下のボタンをタップしてください。</p>
+        <p>ログアウトしてよろしければ、
+          <br>下のボタンをタップしてください。
+        </p>
       </div>
-      
       <div class="button">
         <button>ログアウト</button>
         <input type="hidden" name="type" value="logout">
@@ -47,11 +46,8 @@ include('../app/_parts/_header.php');
   </div>
 </div>
 
-
 <?php
-
-include('../app/_parts/_footer.php');
-
+include(__DIR__ . '/../app/_parts/_footer.php');
 ?>
 <script>
   function settings() {

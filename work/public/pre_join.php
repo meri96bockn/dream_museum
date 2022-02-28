@@ -2,10 +2,8 @@
 require_once(__DIR__ . '/../app/config.php');
 require(__DIR__ . '/../app/functions.php');
 createToken();
-
 $email = '';
 $error = '';
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
   validateToken();
@@ -30,11 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
     }
   }
 
-
   if (empty($error)) {
     $urltoken = hash('sha256',uniqid(rand(),1));
     $url = "https://dreamuseum.com/join.php?urltoken=".$urltoken;
-
     try{
       $sql = "INSERT INTO pre_members (urltoken, email, date, flag) VALUES (:urltoken, :email, now(), '0')";
       $stm = $pdo->prepare($sql);
@@ -43,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
       $stm->execute();
       $pdo = null;
 
-      /* メール送信処理 */
+      /* メール送信 */
       $to = $email;
       $subject = '【自動返信】本会員登録のご案内';
       $body = <<< EOM
@@ -59,22 +55,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
       $from_email = 'join@dreamuseum.com';
       $pfrom = "-f $from_email";
       $headers = 'From: ' . ($from_name). ' <' . $from_email. '>';
-
       mb_language('ja');
       mb_internal_encoding('UTF-8');
       if (mb_send_mail($to ,$subject ,$body , $headers, $pfrom)) {
         header("Location: success_pre.php");
+        exit;
       }
     } catch (PDOException $e) {
       $pdo->rollBack();
       $error['try'] = "failure";
       $error_message = 'Error:'. $e->getMessage();
       error_log($error_message, 1, "error@dreamuseum.com");
-      die();
     }
   }
 }
-
 
 $title = '仮会員登録 - ';
 $this_css = 'form';
@@ -82,55 +76,52 @@ include(__DIR__ . '/../app/_parts/_header.php');
 ?>
 
 <?php if (isset($error['try']) && $error['try'] === 'failure'): ?>
-<div class="forms">
-  <div class="form_title">
-    <h1>仮会員登録</h1>
-  </div>
-  <div class="form">
-    <div class="form_item">
-      <div class="error">
-        <p>* お手数ですが、もう一度やり直してください</p>
+  <div class="forms">
+    <div class="form_title">
+      <h1>仮会員登録</h1>
+    </div>
+    <div class="form">
+      <div class="form_item">
+        <div class="error">
+          <p>* お手数ですが、もう一度やり直してください</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 <?php else: ?>
-<div class="forms">
-  <div class="form_title">
-    <h1>仮会員登録</h1>
+  <div class="forms">
+    <div class="form_title">
+      <h1>仮会員登録</h1>
+    </div>
+    <div class="form">
+      <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+        <div class="form_item">
+          <label for="email">メールアドレス</label>
+          <input type="email" name="email" id="email" maxlength="255" placeholder="（例）yumemi@gmail.com" value="<?= h($email); ?>">
+        </div>
+        <div class="error">
+          <?php if (isset($error) && $error === 'blank'): ?>
+            <p>* メールアドレスを入力してください</p>
+          <?php endif; ?>
+          <?php if (isset($error) && $error === 'check'): ?>
+            <p>* メールアドレスを正しい形式で入力してください</p>
+          <?php endif; ?>
+          <?php if (isset($error) && $error === 'duplicate'):?>
+            <p>* ご指定のメールアドレスはすでに登録されています</p>
+          <?php endif; ?>
+        </div>
+        <div class="button">
+          <button>本登録用のメールを送信する</button>
+          <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="form">
-    <form action="" method="post" enctype="multipart/form-data" autocomplete="off">
-      <div class="form_item">
-        <label for="email">メールアドレス</label>
-        <input type="email" name="email" id="email" maxlength="255" placeholder="（例）yumemi@gmail.com" value="<?= h($email); ?>">
-      </div>
-      <div class="error">
-        <?php if (isset($error) && $error === 'blank'): ?>
-        <p>* メールアドレスを入力してください</p>
-        <?php endif; ?>
-        <?php if (isset($error) && $error === 'check'): ?>
-        <p>* メールアドレスを正しい形式で入力してください</p>
-        <?php endif; ?>
-        <?php if (isset($error) && $error === 'duplicate'):?>
-        <p>* ご指定のメールアドレスはすでに登録されています</p>
-        <?php endif; ?>
-      </div>
-      <div class="button">
-        <button>本登録用のメールを送信する</button>
-        <input type="hidden" name="token" value="<?= h($_SESSION['token']); ?>">
-      </div>
-    </form>
-  </div>
-</div>
 <?php endif; ?>
 
-
 <?php
-
-include('../app/_parts/_footer.php');
-
+include(__DIR__ . '/../app/_parts/_footer.php');
 ?>
 <script src="js/main.js"></script>
 </body>
